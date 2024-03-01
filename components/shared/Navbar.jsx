@@ -1,20 +1,23 @@
+"use client";
+
 import Image from "next/image";
-import LogoLight from "public/images/melee-white-transparent.png";
-import { ModeToggle } from "./ModeToggle";
 import Container from "./Container";
-// import { LogoDark } from "@public/images/melee-black-transparent.png";
+import { useTheme } from "next-themes";
+import LightDark from "public/images/melee-white-transparent.png";
 
 export default function Navbar() {
+  const { theme } = useTheme();
   return (
-    <Container className="">
-      <div className="flex items-center justify-between">
+    <Container className="border-b-2 border">
+      <div className="flex items-center justify-between max-w-[120rem]">
         <Image
-          src={LogoLight}
+          src={LightDark}
           alt="MELEE LOGO LIGHT"
           placeholder="blur"
           className="w-3/12"
         />
-        <ModeToggle />
+
+        <div></div>
       </div>
     </Container>
   );
