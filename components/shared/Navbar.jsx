@@ -10,7 +10,6 @@ import { LeftSideDrawer } from "./LeftSideDrawer";
 import Link from "next/link";
 import { AuthRoutes, ProductRoutes, SupportRoutes } from "@/common/KeyChain";
 import { usePathname } from "next/navigation";
-import SidebarLogo from "public/images/sidebar-logo.png";
 
 export default function Navbar() {
   const pathname = usePathname();
