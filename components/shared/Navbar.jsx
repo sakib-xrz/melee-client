@@ -78,6 +78,7 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
+                onClick={() => setMenuDrawerOpen(false)}
                 className={`flex items-center justify-between py-2 px-4 rounded-md transition-colors whitespace-nowrap ${
                   pathname === link.href
                     ? "bg-white text-background"
@@ -94,6 +95,7 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
+                onClick={() => setMenuDrawerOpen(false)}
                 className={`flex items-center justify-between py-2 px-4 rounded-md transition-colors whitespace-nowrap ${
                   pathname === link.href
                     ? "bg-white text-background"
@@ -110,6 +112,7 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
+                onClick={() => setMenuDrawerOpen(false)}
                 className={`flex items-center justify-between py-2 px-4 rounded-md transition-colors whitespace-nowrap ${
                   pathname === link.href
                     ? "bg-white text-background"
