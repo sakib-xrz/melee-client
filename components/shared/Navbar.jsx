@@ -10,6 +10,7 @@ import { LeftSideDrawer } from "./LeftSideDrawer";
 import Link from "next/link";
 import { AuthRoutes, ProductRoutes, SupportRoutes } from "@/common/KeyChain";
 import { usePathname } from "next/navigation";
+import SidebarLogo from "public/images/sidebar-logo.png";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -61,7 +62,14 @@ export default function Navbar() {
       <LeftSideDrawer
         open={menuDrawerOpen}
         setOpen={setMenuDrawerOpen}
-        title={"My Cart"}
+        title={
+          <Image
+            src={SidebarLogo}
+            alt="MELEE LOGO DARK"
+            placeholder="blur"
+            quality={100}
+          />
+        }
       >
         <nav className="grid gap-2 space-y-5">
           <div className="space-y-2">
