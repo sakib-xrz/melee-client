@@ -63,12 +63,15 @@ export default function Navbar() {
         open={menuDrawerOpen}
         setOpen={setMenuDrawerOpen}
         title={
-          <Image
-            src={SidebarLogo}
-            alt="MELEE LOGO DARK"
-            placeholder="blur"
-            quality={100}
-          />
+          <div className="h-16">
+            <Image
+              src={Logo}
+              alt="MELEE LOGO DARK"
+              placeholder="blur"
+              quality={100}
+              className="h-16 w-auto object-contain"
+            />
+          </div>
         }
       >
         <nav className="grid gap-2 space-y-5">
