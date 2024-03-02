@@ -1,4 +1,6 @@
 import Marquee from "react-fast-marquee";
+import ProductCard from "./components/ProductCard";
+import Container from "@/components/shared/Container";
 
 export default function ProductsPage() {
   return (
@@ -6,6 +8,22 @@ export default function ProductsPage() {
       <Marquee className="bg-white text-black font-bold ">
         NEW DROP! This is your animated alert bar, (Your text here!)
       </Marquee>
+      <Container>
+        <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-5">
+          <div className="xs:flex justify-center items-center">
+            <ProductCard />
+          </div>
+          <div className="xs:flex justify-center items-center">
+            <ProductCard />
+          </div>
+          <div className="xs:flex justify-center items-center">
+            <ProductCard />
+          </div>
+          <div className="xs:flex justify-center items-center">
+            <ProductCard />
+          </div>
+        </div>
+      </Container>
     </div>
   );
 }
