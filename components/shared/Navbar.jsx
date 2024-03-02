@@ -26,14 +26,14 @@ export default function Navbar() {
             />
           </div>
 
-          <div className="w-6/12 md:w-4/12 lg:w-3/12">
+          <Link href={"/products"} className="w-6/12 md:w-4/12 lg:w-3/12">
             <Image
               src={Logo}
               alt="MELEE LOGO DARK"
               placeholder="blur"
               className="w-full"
             />
-          </div>
+          </Link>
 
           <div
             onClick={() => setCartDrawerOpen(true)}
@@ -61,13 +61,13 @@ export default function Navbar() {
         open={menuDrawerOpen}
         setOpen={setMenuDrawerOpen}
         title={
-          <div className="h-16">
+          <div className="h-12">
             <Image
               src={Logo}
               alt="MELEE LOGO DARK"
               placeholder="blur"
               quality={100}
-              className="h-16 w-auto object-contain"
+              className="h-12 w-auto object-contain"
             />
           </div>
         }
