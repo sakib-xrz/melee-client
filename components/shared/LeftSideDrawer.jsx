@@ -16,7 +16,7 @@ export function LeftSideDrawer({ open, setOpen, children, title }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-foreground/20 transition-opacity" />
+            <div className="fixed inset-0 shadow backdrop-blur-sm supports-[backdrop-filter]:bg-zinc-700/50 transition-opacity" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-hidden">
