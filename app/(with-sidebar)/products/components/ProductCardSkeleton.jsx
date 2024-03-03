@@ -3,7 +3,7 @@ import PhotoPlaceholder from "./PhotoPlaceholder";
 export default function ProductCardSkeleton() {
   return (
     <div className="product-card skeleton-card xl:w-64 border rounded-md shadow-sm overflow-hidden">
-      <div className="flex justify-center px-4">
+      <div className="flex justify-center p-4">
         <PhotoPlaceholder />
       </div>
       <div className="product-info px-4 py-3 flex flex-col space-y-2">
