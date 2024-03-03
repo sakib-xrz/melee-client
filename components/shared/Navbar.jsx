@@ -16,7 +16,7 @@ export default function Navbar() {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   return (
-    <div className="border-b-2 border-border">
+    <div className="border-b-2 border-border sticky top-0 z-50 bg-background">
       <Container extraClassName="max-w-[115rem]">
         <div className="flex items-center justify-between lg:h-36">
           <div className=" lg:hidden ">

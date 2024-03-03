@@ -10,15 +10,17 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="sticky top-20 min-h-[calc(100vh-8.2rem)] border-r-2 border-border bg-background">
+    <div className="sticky top-52 min-h-[calc(100vh-13.1rem)] border-r-2 border-border bg-background">
       <nav className="grid gap-2 py-2 space-y-5">
         <div className="space-y-2">
           {AuthRoutes.map((link, index) => (
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
-                pathname === link.href ? "border-t border-b border-white" : ""
+              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-black ${
+                pathname === link.href
+                  ? "border-y border-white hover:border-y-0"
+                  : ""
               }`}
             >
               {pathname === link.href ? (
@@ -49,8 +51,10 @@ export default function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
-                pathname === link.href ? "border-t border-b border-white" : ""
+              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-black ${
+                pathname === link.href
+                  ? "border-y border-white hover:border-transparent"
+                  : ""
               }`}
             >
               {pathname === link.href ? (
@@ -81,8 +85,10 @@ export default function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
-                pathname === link.href ? "border-t border-b border-white" : ""
+              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-black ${
+                pathname === link.href
+                  ? "border-y border-white hover:border-y-0"
+                  : ""
               }`}
             >
               {pathname === link.href ? (
