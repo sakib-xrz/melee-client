@@ -4,7 +4,7 @@ import dress1 from "public/images/dress.png";
 
 export default function ProductCard() {
   return (
-    <div className="product-card xl:w-64 border border-border rounded-md shadow-sm">
+    <div className="product-card xl:w-64 border border-border rounded-md shadow-sm hover:bg-accent transition-colors duration-300">
       <Link href={"#"}>
         <div className=" flex justify-center">
           <Image
