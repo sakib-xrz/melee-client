@@ -1,4 +1,3 @@
-import React from "react";
 import PhotoPlaceholder from "./PhotoPlaceholder";
 
 export default function ProductCardSkeleton() {
@@ -13,9 +12,9 @@ export default function ProductCardSkeleton() {
           <p className="skeleton-line price-skeleton text-sm w-1/3 h-4 bg-gray-200 animate-pulse rounded" />
         </div>
       </div>
-      <button className="product-action skeleton-button w-full flex items-center justify-center py-2 bg-gray-200 rounded-b-md animate-pulse hover:bg-gray-300">
+      {/* <button className="product-action skeleton-button w-full flex items-center justify-center py-2 bg-gray-200 rounded-b-md animate-pulse hover:bg-gray-300">
         <p className="skeleton-line button-text-skeleton text-sm h-4 bg-gray-200 animate-pulse rounded" />
-      </button>
+      </button> */}
     </div>
   );
 }

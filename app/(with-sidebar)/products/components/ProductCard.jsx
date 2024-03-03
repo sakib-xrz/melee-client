@@ -1,12 +1,11 @@
-import { ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import dress1 from "public/images/dress.png";
 
 export default function ProductCard() {
   return (
-    <div className="product-card xl:w-64 border rounded-md shadow-sm overflow-hidden">
-      <Link href="#">
+    <div className="product-card xl:w-64 border border-border rounded-md shadow-sm">
+      <Link href={"#"}>
         <div className=" flex justify-center">
           <Image
             className="w-28 h-28 xs:w-40 xs:h-40 lg:h-60 lg:w-60 rounded-t-md object-contain p-2 mx-auto"
@@ -24,12 +23,12 @@ export default function ProductCard() {
           </div>
         </div>
       </Link>
-      <button className="product-action w-full flex items-center justify-center font-medium hover:text-white text-background bg-primary rounded-b-md py-2 hover:bg-secondary transition-colors duration-300 text-sm">
+      {/* <button className="product-action w-full flex items-center justify-center font-medium hover:text-white text-background bg-primary rounded-b-md py-2 hover:bg-secondary transition-colors duration-300 text-sm">
         <div className="mr-2 flex items-center">
           <ShoppingCart className="h-5 w-5 fill-current" />
         </div>
         <p>Add to Cart</p>
-      </button>
+      </button> */}
     </div>
   );
 }
