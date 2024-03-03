@@ -81,7 +81,14 @@ export default function RegisterPage() {
       <div className="mx-auto w-full sm:w-2/3 xl:w-1/3">
         <div className="space-y-8 rounded-md bg-background px-8 py-10 border">
           <Link href={"/products"} className="flex justify-center">
-            <Image src={Logo} width={200} height={50} alt="MELEE Logo" />
+            <Image
+              src={Logo}
+              width={200}
+              height={50}
+              alt="MELEE Logo"
+              placeholder="blur"
+              priority
+            />
           </Link>
           <h2 className=" text-center text-2xl md:text-3xl font-semibold tracking-tight first:mt-0">
             Create an Account

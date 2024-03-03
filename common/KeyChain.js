@@ -1,6 +1,6 @@
 export const AuthRoutes = [
   {
-    title: "Log in",
+    title: "Login",
     href: "/login",
   },
   {
