@@ -68,7 +68,9 @@
   .productCarousel.carousel-root .carousel .thumbs {
     transform: none !important;
     display: flex;
+    /* flex-direction: column; */
     gap: 10px;
+    overflow: hidden;
   }
   .productCarousel.carousel-root .carousel .thumb {
     border: 0;
