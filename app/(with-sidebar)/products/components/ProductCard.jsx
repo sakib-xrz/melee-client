@@ -12,6 +12,7 @@ export default function ProductCard() {
             className="w-28 h-28 xs:w-40 xs:h-40 lg:h-60 lg:w-60 rounded-t-md object-contain p-2 mx-auto"
             src={dress1}
             alt="dress"
+            priority
           />
         </div>
         <div className="product-info px-4 py-3 flex flex-col space-y-2">

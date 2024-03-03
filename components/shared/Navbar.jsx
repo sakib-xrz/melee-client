@@ -32,6 +32,7 @@ export default function Navbar() {
               alt="MELEE LOGO DARK"
               placeholder="blur"
               className="w-full"
+              priority
             />
           </Link>
 
@@ -68,6 +69,7 @@ export default function Navbar() {
               placeholder="blur"
               quality={100}
               className="h-12 w-auto object-contain"
+              priority
             />
           </div>
         }
