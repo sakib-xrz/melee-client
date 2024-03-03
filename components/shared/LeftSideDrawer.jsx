@@ -65,7 +65,7 @@ export function LeftSideDrawer({ open, setOpen, children, title }) {
                           </div>
                         </div>
                         <hr />
-                        <div className="p-4 ">{children}</div>
+                        <div>{children}</div>
                       </div>
                     </div>
                   </Dialog.Panel>

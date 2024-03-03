@@ -10,6 +10,7 @@ import { LeftSideDrawer } from "./LeftSideDrawer";
 import Link from "next/link";
 import { AuthRoutes, ProductRoutes, SupportRoutes } from "@/common/KeyChain";
 import { usePathname } from "next/navigation";
+import active from "public/images/indicator.png";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -74,19 +75,36 @@ export default function Navbar() {
           </div>
         }
       >
-        <nav className="grid gap-2 space-y-5">
+        <nav className="grid gap-2 py-2 space-y-5">
           <div className="space-y-2">
             {AuthRoutes.map((link, index) => (
               <Link
                 key={index}
                 href={link.href}
-                onClick={() => setMenuDrawerOpen(false)}
-                className={`flex items-center justify-between py-2 px-4 rounded-md transition-colors whitespace-nowrap ${
+                className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
                   pathname === link.href
-                    ? "bg-white text-background"
-                    : "hover:bg-accent"
+                    ? "border-y border-white hover:border-y-0"
+                    : ""
                 }`}
               >
+                {pathname === link.href ? (
+                  <Image
+                    src={active}
+                    alt={""}
+                    width={40}
+                    height={20}
+                    quality={100}
+                  />
+                ) : (
+                  <Image
+                    src={active}
+                    alt={""}
+                    width={40}
+                    height={20}
+                    quality={100}
+                    className="opacity-0"
+                  />
+                )}
                 {link.title}
               </Link>
             ))}
@@ -97,13 +115,30 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
-                onClick={() => setMenuDrawerOpen(false)}
-                className={`flex items-center justify-between py-2 px-4 rounded-md transition-colors whitespace-nowrap ${
+                className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
                   pathname === link.href
-                    ? "bg-white text-background"
-                    : "hover:bg-accent"
+                    ? "border-y border-white hover:border-transparent"
+                    : ""
                 }`}
               >
+                {pathname === link.href ? (
+                  <Image
+                    src={active}
+                    alt={""}
+                    width={40}
+                    height={20}
+                    quality={100}
+                  />
+                ) : (
+                  <Image
+                    src={active}
+                    alt={""}
+                    width={40}
+                    height={20}
+                    quality={100}
+                    className="opacity-0"
+                  />
+                )}
                 {link.title}
               </Link>
             ))}
@@ -114,13 +149,30 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
-                onClick={() => setMenuDrawerOpen(false)}
-                className={`flex items-center justify-between py-2 px-4 rounded-md transition-colors whitespace-nowrap ${
+                className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
                   pathname === link.href
-                    ? "bg-white text-background"
-                    : "hover:bg-accent"
+                    ? "border-y border-white hover:border-y-0"
+                    : ""
                 }`}
               >
+                {pathname === link.href ? (
+                  <Image
+                    src={active}
+                    alt={""}
+                    width={40}
+                    height={20}
+                    quality={100}
+                  />
+                ) : (
+                  <Image
+                    src={active}
+                    alt={""}
+                    width={40}
+                    height={20}
+                    quality={100}
+                    className="opacity-0"
+                  />
+                )}
                 {link.title}
               </Link>
             ))}
