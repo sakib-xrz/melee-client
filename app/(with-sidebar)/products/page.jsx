@@ -1,6 +1,7 @@
 import Marquee from "react-fast-marquee";
 import ProductCard from "./components/ProductCard";
 import Container from "@/components/shared/Container";
+import ProductCardSkeleton from "./components/ProductCardSkeleton";
 
 export default function ProductsPage() {
   return (
@@ -21,6 +22,18 @@ export default function ProductsPage() {
           </div>
           <div className="xs:flex justify-center items-center">
             <ProductCard />
+          </div>
+          <div className="xs:flex justify-center items-center">
+            <ProductCardSkeleton />
+          </div>
+          <div className="xs:flex justify-center items-center">
+            <ProductCardSkeleton />
+          </div>
+          <div className="xs:flex justify-center items-center">
+            <ProductCardSkeleton />
+          </div>
+          <div className="xs:flex justify-center items-center">
+            <ProductCardSkeleton />
           </div>
         </div>
       </Container>
