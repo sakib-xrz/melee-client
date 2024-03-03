@@ -17,7 +17,7 @@ export default function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-black ${
+              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
                 pathname === link.href
                   ? "border-y border-white hover:border-y-0"
                   : ""
@@ -51,7 +51,7 @@ export default function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-black ${
+              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
                 pathname === link.href
                   ? "border-y border-white hover:border-transparent"
                   : ""
@@ -85,7 +85,7 @@ export default function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-black ${
+              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
                 pathname === link.href
                   ? "border-y border-white hover:border-y-0"
                   : ""
