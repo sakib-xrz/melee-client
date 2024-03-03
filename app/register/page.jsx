@@ -77,7 +77,7 @@ export default function RegisterPage() {
   });
 
   return (
-    <div className="flex min-h-screen items-center">
+    <div className="flex min-h-screen items-center px-5">
       <div className="mx-auto w-full sm:w-2/3 xl:w-1/3">
         <div className="space-y-8 rounded-md bg-background px-8 py-10 border">
           <Link href={"/products"} className="flex justify-center">
