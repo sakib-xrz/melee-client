@@ -1,10 +1,9 @@
 "use client";
 
 import { AuthRoutes, ProductRoutes, SupportRoutes } from "@/common/KeyChain";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import active from "public/images/indicator.png";
+import ActiveIcon from "./ActiveIcon";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -24,22 +23,13 @@ export default function Sidebar() {
               }`}
             >
               {pathname === link.href ? (
-                <Image
-                  src={active}
-                  alt={""}
-                  width={40}
-                  height={20}
-                  quality={100}
-                />
+                <div>
+                  <ActiveIcon />
+                </div>
               ) : (
-                <Image
-                  src={active}
-                  alt={""}
-                  width={40}
-                  height={20}
-                  quality={100}
-                  className="opacity-0"
-                />
+                <div className="opacity-0">
+                  <ActiveIcon />
+                </div>
               )}
               {link.title}
             </Link>
@@ -58,22 +48,13 @@ export default function Sidebar() {
               }`}
             >
               {pathname === link.href ? (
-                <Image
-                  src={active}
-                  alt={""}
-                  width={40}
-                  height={20}
-                  quality={100}
-                />
+                <div>
+                  <ActiveIcon />
+                </div>
               ) : (
-                <Image
-                  src={active}
-                  alt={""}
-                  width={40}
-                  height={20}
-                  quality={100}
-                  className="opacity-0"
-                />
+                <div className="opacity-0">
+                  <ActiveIcon />
+                </div>
               )}
               {link.title}
             </Link>
@@ -92,22 +73,13 @@ export default function Sidebar() {
               }`}
             >
               {pathname === link.href ? (
-                <Image
-                  src={active}
-                  alt={""}
-                  width={40}
-                  height={20}
-                  quality={100}
-                />
+                <div>
+                  <ActiveIcon />
+                </div>
               ) : (
-                <Image
-                  src={active}
-                  alt={""}
-                  width={40}
-                  height={20}
-                  quality={100}
-                  className="opacity-0"
-                />
+                <div className="opacity-0">
+                  <ActiveIcon />
+                </div>
               )}
               {link.title}
             </Link>
