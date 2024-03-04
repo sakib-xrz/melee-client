@@ -12,7 +12,7 @@ export default function CartItem() {
             Women Floral Midi Dress
           </p>
           <p class="text-xs md:text-sm ">Price: $54.00</p>
-          <p class="text-xs md:text-sm ">Quantity: 7</p>
+          <p class="text-xs md:text-sm ">Stock: 60</p>
         </div>
 
         <Image
@@ -22,16 +22,7 @@ export default function CartItem() {
         />
       </div>
       <div className="flex justify-between items-center">
-        <Button
-          size="icon"
-          variant="secondary"
-          className={"rounded-sm h-8 w-8 p-1.5"}
-        >
-          <Trash />
-        </Button>
-
         <div className="flex gap-4 items-center">
-          $378.00
           <div>
             <Button
               size={"icon"}
@@ -54,7 +45,16 @@ export default function CartItem() {
               +
             </Button>
           </div>
+          $378.00
         </div>
+
+        <Button
+          size="icon"
+          variant="secondary"
+          className={"rounded-sm h-8 w-8 p-1.5"}
+        >
+          <Trash />
+        </Button>
       </div>
     </div>
   );

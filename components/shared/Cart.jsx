@@ -11,11 +11,6 @@ export default function Cart() {
         <CartItem />
         <CartItem />
         <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
       </ScrollArea>
 
       <div class="space-y-2 my-4">

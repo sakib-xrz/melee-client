@@ -11,7 +11,6 @@ import Link from "next/link";
 import { AuthRoutes, ProductRoutes, SupportRoutes } from "@/common/KeyChain";
 import { usePathname } from "next/navigation";
 import ActiveIcon from "./ActiveIcon";
-import CartItem from "./CartItem";
 import Cart from "./Cart";
 import { Button } from "../ui/button";
 
