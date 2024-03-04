@@ -4,8 +4,24 @@ import Container from "@/components/shared/Container";
 import ProductCarousel from "./components/ProductCarousel";
 import { Button } from "@/components/ui/button";
 import { ShoppingBasket, ShoppingCart } from "lucide-react";
+import { toast } from "sonner";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import Login from "@/components/form/Login";
+import Register from "@/components/form/Register";
 
 export default function ProductDetailsPage() {
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(true);
+  const [registerModalOpen, setRegisterModalOpen] = useState(false);
+
   const images = [
     "/images/dress.png",
     "/images/dress2.png",
@@ -13,6 +29,18 @@ export default function ProductDetailsPage() {
     "/images/dress4.png",
     "/images/dress4.png",
   ];
+
+  const user = false;
+
+  const handleAddToCart = () => {
+    if (!user) {
+      setAuthModalOpen(true);
+      console.log("open modal");
+    } else {
+      toast.success("Added to cart");
+    }
+  };
+
   return (
     <Container>
       <div className="flex flex-col md:flex-row gap-6 w-full">
@@ -25,7 +53,7 @@ export default function ProductDetailsPage() {
             Women Floral Midi Dress
           </h1>
           <hr />
-          <p class="font-medium pt-3 text-lg line-clamp-3 xl:line-clamp-none">
+          <p className="font-medium pt-3 text-lg line-clamp-3 xl:line-clamp-none">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
             soluta impedit maiores hic? Dolore corrupti animi numquam et alias
             a, architecto, cum doloremque doloribus accusamus nulla aspernatur
@@ -71,6 +99,7 @@ export default function ProductDetailsPage() {
                 className="rounded-sm text-lg gap-2 max-xs:w-full"
                 variant={"outline"}
                 size="lg"
+                onClick={() => handleAddToCart()}
               >
                 <ShoppingCart />
                 Add to Cart
@@ -83,7 +112,7 @@ export default function ProductDetailsPage() {
       <div className="space-y-5 py-5 text-lg">
         <div>
           <h4 className="text-2xl pb-3 font-semibold ">Description</h4>
-          <p class="font-medium">
+          <p className="font-medium">
             Material : <br />
             <span>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
@@ -93,9 +122,9 @@ export default function ProductDetailsPage() {
             </span>
           </p>
         </div>
-        <p class="font-medium">
+        <p className="font-medium">
           Measurements : <br />
-          <span class="space-y-3">
+          <span className="space-y-3">
             <span>Strap Length : 129 cm</span>
             <span>Strap Width : 85 cm</span>
             <span>Buckle Length : 23 cm</span>
@@ -106,7 +135,7 @@ export default function ProductDetailsPage() {
             </span>
           </span>
         </p>
-        <p class="font-medium">
+        <p className="font-medium">
           Shipping Information : <br />
           <span>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
@@ -116,6 +145,56 @@ export default function ProductDetailsPage() {
           </span>
         </p>
       </div>
+
+      <Dialog
+        open={authModalOpen}
+        onOpenChange={() => {
+          setAuthModalOpen(false);
+          setLoginModalOpen(true);
+          setRegisterModalOpen(false);
+        }}
+      >
+        {loginModalOpen && (
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Welcome! Please Login to continue.</DialogTitle>
+              <DialogDescription>
+                Don’t have an account?{" "}
+                <span
+                  onClick={() => {
+                    setLoginModalOpen(false);
+                    setRegisterModalOpen(true);
+                  }}
+                  className="font-medium underline cursor-pointer"
+                >
+                  Create Account
+                </span>
+              </DialogDescription>
+            </DialogHeader>
+            <Login />
+          </DialogContent>
+        )}
+        {registerModalOpen && (
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create your Melee Account</DialogTitle>
+              <DialogDescription>
+                Already have an account?{" "}
+                <span
+                  onClick={() => {
+                    setRegisterModalOpen(false);
+                    setLoginModalOpen(true);
+                  }}
+                  className="font-medium underline cursor-pointer"
+                >
+                  Login Here
+                </span>
+              </DialogDescription>
+            </DialogHeader>
+            <Register />
+          </DialogContent>
+        )}
+      </Dialog>
     </Container>
   );
 }
