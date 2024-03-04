@@ -82,7 +82,7 @@ export default function Navbar() {
                 key={index}
                 href={link.href}
                 className={
-                  "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent "
+                  "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
                 }
               >
                 {pathname === link.href ? (
@@ -105,7 +105,7 @@ export default function Navbar() {
                 key={index}
                 href={link.href}
                 className={
-                  "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent"
+                  "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
                 }
               >
                 {pathname === link.href ? (
@@ -128,7 +128,7 @@ export default function Navbar() {
                 key={index}
                 href={link.href}
                 className={
-                  "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent"
+                  "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
                 }
               >
                 {pathname === link.href ? (
