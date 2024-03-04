@@ -16,11 +16,9 @@ export default function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
-                pathname === link.href
-                  ? "border-y border-white hover:border-y-0"
-                  : ""
-              }`}
+              className={
+                "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent "
+              }
             >
               {pathname === link.href ? (
                 <div>
@@ -41,11 +39,9 @@ export default function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
-                pathname === link.href
-                  ? "border-y border-white hover:border-transparent"
-                  : ""
-              }`}
+              className={
+                "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent"
+              }
             >
               {pathname === link.href ? (
                 <div>
@@ -66,11 +62,9 @@ export default function Sidebar() {
             <Link
               key={index}
               href={link.href}
-              className={`flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap hover:bg-accent ${
-                pathname === link.href
-                  ? "border-y border-white hover:border-y-0"
-                  : ""
-              }`}
+              className={
+                "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent"
+              }
             >
               {pathname === link.href ? (
                 <div>
