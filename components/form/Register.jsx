@@ -148,14 +148,6 @@ export default function Register() {
           Create Account
         </Button>
       </div>
-      <p className="text-center text-sm font-medium leading-none">
-        Already have an account?{" "}
-        <Link href={"/login"}>
-          <Button variant="link" className="p-0 font-bold">
-            Log in
-          </Button>
-        </Link>
-      </p>
     </form>
   );
 }

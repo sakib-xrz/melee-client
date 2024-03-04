@@ -21,7 +21,7 @@ export default function ProductDetailsPage() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(true);
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
-
+  console.log(authModalOpen);
   const images = [
     "/images/dress.png",
     "/images/dress2.png",
@@ -187,7 +187,7 @@ export default function ProductDetailsPage() {
                   }}
                   className="font-medium underline cursor-pointer"
                 >
-                  Login Here
+                  Login
                 </span>
               </DialogDescription>
             </DialogHeader>
