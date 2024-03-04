@@ -20,8 +20,7 @@ import Register from "@/components/form/Register";
 export default function ProductDetailsPage() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(true);
-  const [registerModalOpen, setRegisterModalOpen] = useState(false);
-  console.log(authModalOpen);
+
   const images = [
     "/images/dress.png",
     "/images/dress2.png",
@@ -151,19 +150,17 @@ export default function ProductDetailsPage() {
         onOpenChange={() => {
           setAuthModalOpen(false);
           setLoginModalOpen(true);
-          setRegisterModalOpen(false);
         }}
       >
-        {loginModalOpen && (
+        {loginModalOpen ? (
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Welcome! Please Login to continue.</DialogTitle>
+              <DialogTitle>Welcome! Please Login to Continue.</DialogTitle>
               <DialogDescription>
                 Don’t have an account?{" "}
                 <span
                   onClick={() => {
                     setLoginModalOpen(false);
-                    setRegisterModalOpen(true);
                   }}
                   className="font-medium underline cursor-pointer"
                 >
@@ -173,16 +170,14 @@ export default function ProductDetailsPage() {
             </DialogHeader>
             <Login />
           </DialogContent>
-        )}
-        {registerModalOpen && (
+        ) : (
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Create your Melee Account</DialogTitle>
+              <DialogTitle>Create Your Account</DialogTitle>
               <DialogDescription>
                 Already have an account?{" "}
                 <span
                   onClick={() => {
-                    setRegisterModalOpen(false);
                     setLoginModalOpen(true);
                   }}
                   className="font-medium underline cursor-pointer"
