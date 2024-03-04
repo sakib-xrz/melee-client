@@ -7,12 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Password } from "@/components/ui/password";
 import { Phone } from "@/components/ui/phone";
 import { useFormik } from "formik";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
-import Logo from "public/images/melee-white-transparent.png";
 
 const validationSchema = Yup.object({
   first_name: Yup.string().required("First Name is required"),
@@ -27,11 +24,11 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  first_name: "Sakibul",
-  last_name: "Islam",
-  phone: "2124567890",
-  password: "12345678",
-  confirm_password: "12345678",
+  first_name: "",
+  last_name: "",
+  phone: "",
+  password: "",
+  confirm_password: "",
 };
 
 export default function Register() {
@@ -87,7 +84,6 @@ export default function Register() {
             name="first_name"
             placeholder="e.g. Jhon"
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             value={formik.values.first_name}
           />
           <FormikErrorBox formik={formik} field="first_name" />

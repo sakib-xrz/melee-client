@@ -2,17 +2,13 @@
 
 import FormikErrorBox from "@/components/form/FormikErrorBox";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Password } from "@/components/ui/password";
 import { Phone } from "@/components/ui/phone";
 import { useFormik } from "formik";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
-import Logo from "public/images/melee-white-transparent.png";
 
 const validationSchema = Yup.object({
   phone: Yup.string().required("Phone is required"),
@@ -22,13 +18,14 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  phone: "2124567890",
-  password: "12345678",
+  phone: "",
+  password: "",
 };
 
 export default function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -63,6 +60,7 @@ export default function Login() {
       // });
     },
   });
+
   return (
     <form onSubmit={formik.handleSubmit} className="space-y-4">
       <div>
@@ -73,7 +71,6 @@ export default function Login() {
           name="phone"
           placeholder="xxx-xxx-xxxx"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.phone}
         />
         <FormikErrorBox formik={formik} field="phone" />
@@ -85,7 +82,6 @@ export default function Login() {
           name="password"
           placeholder="min 8 characters"
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.password}
         />
         <FormikErrorBox formik={formik} field="password" />

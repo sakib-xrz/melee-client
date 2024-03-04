@@ -10,7 +10,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -68,18 +67,20 @@ export default function ProductDetailsPage() {
             <div>
               <Button
                 size={"icon"}
+                variant={"outline"}
                 className={"rounded-l-sm rounded-r-none text-2xl"}
               >
                 -
               </Button>
               <Button
                 variant={"outline"}
-                className="rounded-none text-2xl pointer-events-none w-16"
+                className="rounded-none text-2xl pointer-events-none w-12"
               >
                 0
               </Button>
               <Button
                 size={"icon"}
+                variant={"outline"}
                 className={"rounded-r-sm rounded-l-none  text-2xl"}
               >
                 +

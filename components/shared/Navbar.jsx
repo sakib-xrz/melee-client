@@ -11,6 +11,9 @@ import Link from "next/link";
 import { AuthRoutes, ProductRoutes, SupportRoutes } from "@/common/KeyChain";
 import { usePathname } from "next/navigation";
 import ActiveIcon from "./ActiveIcon";
+import CartItem from "./CartItem";
+import Cart from "./Cart";
+import { Button } from "../ui/button";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -57,7 +60,12 @@ export default function Navbar() {
         open={cartDrawerOpen}
         setOpen={setCartDrawerOpen}
         title={"My Cart"}
-      ></RightSideDrawer>
+      >
+        <Cart />
+        <Button className="absolute bottom-2.5 right-4">
+          Proceed to Checkout
+        </Button>
+      </RightSideDrawer>
 
       <LeftSideDrawer
         open={menuDrawerOpen}
