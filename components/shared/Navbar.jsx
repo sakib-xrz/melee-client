@@ -88,6 +88,7 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
+                onClick={() => setMenuDrawerOpen(false)}
                 className={
                   "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
                 }
@@ -111,6 +112,7 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
+                onClick={() => setMenuDrawerOpen(false)}
                 className={
                   "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
                 }
@@ -134,6 +136,7 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
+                onClick={() => setMenuDrawerOpen(false)}
                 className={
                   "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
                 }

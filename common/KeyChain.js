@@ -38,3 +38,17 @@ export const SupportRoutes = [
     href: "/contact",
   },
 ];
+export const AdminRoutes = [
+  {
+    title: "Dashboard",
+    href: "/admin/dashboard",
+  },
+  {
+    title: "Products",
+    href: "/admin/products",
+  },
+  {
+    title: "Orders",
+    href: "/admin/orders",
+  },
+];

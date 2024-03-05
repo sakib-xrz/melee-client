@@ -9,6 +9,7 @@ export default function HomePage() {
   useEffect(() => {
     router.push("/products");
   }, []);
+
   return (
     <main className="h-screen flex items-center justify-center">
       <Loader2 className="w-20 h-20 animate-spin" />
