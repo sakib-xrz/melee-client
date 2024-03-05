@@ -41,7 +41,7 @@ export const SupportRoutes = [
 export const AdminRoutes = [
   {
     title: "Dashboard",
-    href: "/admin/dashboard",
+    href: "/admin",
   },
   {
     title: "Products",
