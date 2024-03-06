@@ -44,11 +44,11 @@ export const AdminRoutes = [
     href: "/admin",
   },
   {
-    title: "Products",
+    title: "Product Management",
     href: "/admin/products",
   },
   {
-    title: "Orders",
+    title: "Order Management",
     href: "/admin/orders",
   },
 ];
