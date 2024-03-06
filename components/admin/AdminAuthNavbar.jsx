@@ -16,7 +16,7 @@ export default function AdminAuthNavbar() {
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
 
   return (
-    <div className="border-b border-border sticky top-0 z-50">
+    <div className="border-b border-border bg-background sticky top-0 z-50">
       <Container extraClassName="max-w-[115rem]">
         <div className="grid grid-cols-3 justify-between items-center">
           <p>
