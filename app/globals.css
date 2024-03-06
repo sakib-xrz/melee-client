@@ -75,4 +75,16 @@
   font-size: 16px;
   font-weight: 400;
   color: white !important;
+  background-color: var(--background) !important;
+}
+
+.ql-editor.ql-blank:before {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--muted-foreground) !important;
+  font-style: normal;
+}
+
+.ql-snow.ql-toolbar {
+  color: white !important;
 }
