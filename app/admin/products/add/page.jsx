@@ -11,6 +11,7 @@ import "react-quill/dist/quill.snow.css";
 import ImageUploader from "@/components/form/ImageUploader";
 import Image from "next/image";
 import { X } from "lucide-react";
+import Link from "next/link";
 
 export default function AdminAddProductPage() {
   const formik = useFormik({
@@ -20,8 +21,6 @@ export default function AdminAddProductPage() {
       description: "",
       product_image: "",
       view_product_image: "",
-      images: [],
-      view_images: [],
       unit_price: "",
       stock: "",
     },
@@ -72,7 +71,7 @@ export default function AdminAddProductPage() {
             </p>
             <div className="flex gap-2 items-center">
               {formik.values.view_product_image ? (
-                <div className="rounded-md sm:w-72 sm:h-72 relative">
+                <div className="rounded-md w-52 sm:w-72 h-52 sm:h-72 relative">
                   <Image
                     className="w=full h-full object-cover rounded-md"
                     src={formik.values.view_product_image}
@@ -205,7 +204,16 @@ export default function AdminAddProductPage() {
               </div>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex gap-3 justify-end">
+              <Link href={"/admin/products"}>
+                <Button
+                  className="w-fit whitespace-nowrap"
+                  type="submit"
+                  variant="secondary"
+                >
+                  Cancel
+                </Button>
+              </Link>
               <Button className="w-fit whitespace-nowrap" type="submit">
                 Publish Product
               </Button>
