@@ -2,29 +2,17 @@
 
 import { UploadCloud } from "lucide-react";
 
-export default function ImageUploader({ formik, name, multiple = false }) {
+export default function ImageUploader({ formik, id, name }) {
   const handleImageUpload = (event) => {
-    const files = event.target.files;
-    console.log("reach here");
-    if (multiple) {
-      const fileUrls = Array.from(files)
-        .reverse()
-        .map((file) => URL.createObjectURL(file));
-      formik.setFieldValue(name, files);
-      formik.setFieldValue(`view_${name}`, fileUrls);
-    } else {
-      const file = files[0];
-      const fileUrl = URL.createObjectURL(file);
-      formik.setFieldValue(name, file);
-      formik.setFieldValue(`view_${name}`, fileUrl);
-    }
+    const file = event.target.files[0];
+    formik.setFieldValue(name, file);
   };
 
   return (
-    <div className="flex flex-col gap-1 md:flex-row aspect-square w-52 md:w-72 h-52 md:h-72">
+    <div className="flex flex-col gap-1 md:flex-row w-full">
       <div className="flex items-center w-full h-full">
         <label className="flex flex-col items-center justify-center w-full h-full p-6 border border-dashed rounded-lg cursor-pointer border-border">
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center w-full">
             <UploadCloud className="w-10 h-10 p-2 rounded-lg bg-primary-50 text-primary-600" />
             <p className="font-semibold text-center cursor-pointer text-primary-600">
               Click here to upload
@@ -34,9 +22,10 @@ export default function ImageUploader({ formik, name, multiple = false }) {
             </p>
             <div className="space-y-1">
               <input
+                id={id}
+                name={name}
                 accept="image/*"
                 type="file"
-                multiple={multiple}
                 className="hidden"
                 onChange={handleImageUpload}
               />
