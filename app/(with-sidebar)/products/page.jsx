@@ -6,7 +6,7 @@ import ProductCardSkeleton from "./components/ProductCardSkeleton";
 export default function ProductsPage() {
   return (
     <div>
-      <div className="lg:sticky lg:top-52 lg:z-50">
+      <div className="lg:sticky lg:top-36 lg:z-50">
         <Marquee className="bg-white text-black font-bold">
           NEW DROP! This is your animated alert bar, (Your text here!)
         </Marquee>

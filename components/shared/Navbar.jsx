@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <div className="border-b-2 border-border sticky top-0 z-50 bg-background">
       <Container extraClassName="max-w-[115rem]">
-        <div className="flex items-center justify-between lg:h-36">
+        <div className="flex items-center justify-between lg:h-20">
           <div className=" lg:hidden ">
             <Menu
               className="text-2xl font-medium text-white cursor-pointer"
@@ -29,7 +29,7 @@ export default function Navbar() {
             />
           </div>
 
-          <Link href={"/products"} className="w-6/12 md:w-4/12 lg:w-5/12">
+          <Link href={"/products"} className="w-6/12 md:w-4/12 lg:w-3/12">
             <Image
               src={Logo}
               alt="MELEE LOGO DARK"
