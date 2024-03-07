@@ -1,17 +1,29 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import dress1 from "public/images/dress.png";
+import dress from "public/images/dress.png";
+import dress4 from "public/images/dress4.png";
 import redX from "public/images/red-x-transparent.png";
+import { useState } from "react";
 
 export default function ProductCard({ isOutOfStock = false }) {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div
       className={`product-card xl:w-64 relative ${
         isOutOfStock ? "" : "hover:bg-accent transition-colors duration-300"
       }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <Link href={"/products/1"}>
-        <Image className="object-contain" src={dress1} alt="dress" priority />
+        <Image
+          className="object-contain"
+          src={isOutOfStock ? dress4 : isHovered ? dress : dress4}
+          alt="dress"
+          priority
+        />
         <div className="product-info px-4 py-3 flex flex-col space-y-2">
           <h4 className="text-sm font-medium leading-tight truncate cursor-pointer hover:underline">
             Women Floral Midi Dress

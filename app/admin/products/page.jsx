@@ -175,7 +175,7 @@ const tableColumns = [
     title: <p className="text-center">Actions</p>,
     dataField: "sold_amount",
     renderer: () => (
-      <p className="flex gap-3 justify-center items-center">
+      <div className="flex gap-3 justify-center items-center">
         <div>
           <Button variant="outline" size="icon">
             <Eye />
@@ -186,7 +186,7 @@ const tableColumns = [
             <Pencil />
           </Button>
         </div>
-      </p>
+      </div>
     ),
   },
 ];
