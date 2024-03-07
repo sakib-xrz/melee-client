@@ -76,7 +76,7 @@ export default function ProductDetailsPage() {
               </Button>
               <Button
                 className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
-                variant={"outline"}
+                variant={"secondary"}
                 onClick={() => handleBuyNow()}
               >
                 <ShoppingCart />
@@ -96,7 +96,7 @@ export default function ProductDetailsPage() {
               <Button
                 size="lg"
                 className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
-                variant={"outline"}
+                variant={"secondary"}
               >
                 <ShoppingCart />
                 Add to Cart
