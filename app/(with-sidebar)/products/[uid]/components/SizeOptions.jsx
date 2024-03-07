@@ -16,7 +16,9 @@ function SizeOptions() {
         <label
           key={size}
           className={`border rounded-sm text-center py-3 text-sm font-medium cursor-pointer ${
-            selectedSize === size ? "bg-accent text-white" : ""
+            selectedSize === size
+              ? "bg-white text-background"
+              : "hover:bg-accent"
           }`}
         >
           <input

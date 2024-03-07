@@ -78,7 +78,7 @@ export default function ProductDetailsPage() {
             </Button>
 
             <Button
-              className="rounded-sm text-base gap-2"
+              className="rounded-sm text-base gap-2 bg-white"
               onClick={() => handleBuyNow()}
             >
               <ShoppingBasket />
