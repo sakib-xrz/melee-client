@@ -11,11 +11,11 @@ function SizeOptions() {
   const sizes = ["S", "M", "L", "XL", "XXL"];
 
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className="grid grid-cols-5 xl:grid-cols-10 gap-2">
       {sizes.map((size) => (
         <label
           key={size}
-          className={`border rounded-sm text-center py-3 font-medium cursor-pointer ${
+          className={`border rounded-sm text-center py-3 text-sm font-medium cursor-pointer ${
             selectedSize === size ? "bg-accent text-white" : ""
           }`}
         >

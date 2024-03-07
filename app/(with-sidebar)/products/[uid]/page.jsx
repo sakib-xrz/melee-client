@@ -28,13 +28,7 @@ export default function ProductDetailsPage() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(true);
 
-  const images = [
-    "/images/dress.png",
-    "/images/dress2.png",
-    "/images/dress3.png",
-    "/images/dress4.png",
-    "/images/dress4.png",
-  ];
+  const images = ["/images/primary.jpeg", "/images/secondary.jpeg"];
 
   const user = false;
 
@@ -54,30 +48,29 @@ export default function ProductDetailsPage() {
           <ProductCarousel images={images} />
         </div>
 
-        <div className="col-span-12 lg:col-span-6 space-y-8 xl:px-20">
+        <div className="col-span-12 lg:col-span-6 space-y-5 xl:px-20">
           <div>
-            <h1 className="text-2xl sm:text-3xl xl:text-4xl pb-3 font-semibold line-clamp-2">
+            <h1 className="text-2xl font-medium line-clamp-2">
               Women Floral Midi Dress
             </h1>
-            <div>
-              <h1 className="text-2xl sm:text-3xl xl:text-4xl font-semibold">
-                $54.00
-              </h1>
-              <p className="text-sm sm:text-base">(incl. of taxes)</p>
-            </div>
+          </div>
+
+          <div>
+            <h1 className="text-lg font-semibold">$54.00</h1>
+            <p className="text-sm">(incl. of taxes)</p>
           </div>
 
           <div className="space-y-2">
-            <div className="text-base sm:text-lg font-semibold">
+            <div className="text-sm">
               Select Size <span className="text-red-500">*</span>
             </div>
 
             <SizeOptions />
           </div>
 
-          <div className="flex xl:hidden flex-col xs:flex-row items-center gap-5">
+          <div className="flex flex-col xs:flex-row items-center gap-5">
             <Button
-              className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
+              className="rounded-sm text-base gap-2"
               variant={"secondary"}
             >
               <ShoppingCart />
@@ -85,27 +78,7 @@ export default function ProductDetailsPage() {
             </Button>
 
             <Button
-              onClick={() => handleBuyNow()}
-              className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
-            >
-              <ShoppingBasket />
-              Buy Now
-            </Button>
-          </div>
-
-          <div className="hidden xl:flex flex-col xs:flex-row items-center gap-5">
-            <Button
-              size="lg"
-              className="rounded-sm text-base sm:text-lg md:text-xl gap-2 w-full"
-              variant={"secondary"}
-            >
-              <ShoppingCart />
-              Add to Cart
-            </Button>
-
-            <Button
-              size="lg"
-              className="rounded-sm text-base sm:text-lg md:text-xl gap-2 w-full"
+              className="rounded-sm text-base gap-2"
               onClick={() => handleBuyNow()}
             >
               <ShoppingBasket />
@@ -114,10 +87,12 @@ export default function ProductDetailsPage() {
           </div>
 
           <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam amet
-            ipsa ullam adipisci, dolorum maiores neque eius quaerat ducimus
-            tempora dolores cumque debitis placeat temporibus, fugit sunt
-            similique. Nam, nihil!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, eius
+            qui error repudiandae blanditiis beatae necessitatibus praesentium
+            tempora eos deleniti perferendis molestias ipsa delectus id tempore
+            vel voluptas temporibus repellendus ad quas nihil vero in.
+            Praesentium doloremque eius maiores autem vel quos architecto?
+            Aliquam, sapiente laboriosam eveniet magni optio modi?
           </div>
 
           <Accordion type="single" collapsible className="w-full">

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import dress from "public/images/dress.png";
-import dress4 from "public/images/dress4.png";
+import primaryImage from "public/images/primary.jpeg";
+import secondaryImage from "public/images/secondary.jpeg";
 import redX from "public/images/red-x-transparent.png";
 import { useState } from "react";
 
@@ -20,7 +20,13 @@ export default function ProductCard({ isOutOfStock = false }) {
       <Link href={"/products/1"}>
         <Image
           className="object-contain"
-          src={isOutOfStock ? dress4 : isHovered ? dress : dress4}
+          src={
+            isOutOfStock
+              ? primaryImage
+              : isHovered
+              ? secondaryImage
+              : primaryImage
+          }
           alt="dress"
           priority
         />
