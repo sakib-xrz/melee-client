@@ -9,7 +9,9 @@ export default function ProductCarousel({ images }) {
       infiniteLoop={true}
       showIndicators={false}
       showStatus={false}
-      showThumbs={true}
+      showThumbs={false}
+      autoPlay={true}
+      emulateTouch={true}
       className="productCarousel"
     >
       {images.map((image, index) => (

@@ -41,7 +41,6 @@
 .productCarousel.carousel-root .carousel .thumb.selected {
   border: 1px solid white;
 }
-
 .productCarousel.carousel-root .carousel .thumb.selected,
 .productCarousel.carousel-root .carousel .thumb:hover {
   border: 1;

@@ -9,10 +9,11 @@ import { Phone } from "@/components/ui/phone";
 import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
 import Logo from "public/images/melee-white-transparent.png";
+import APIKit from "@/common/APIkit";
 
 const validationSchema = Yup.object({
   phone: Yup.string().required("Phone is required"),
@@ -22,24 +23,27 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  phone: "2124567890",
-  password: "12345678",
+  phone: "+8801768869413",
+  password: "123456",
 };
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const previousURL = searchParams.get("next");
   const [loading, setLoading] = useState(false);
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    // validationSchema,
     onSubmit: (values) => {
-      // setLoading(true);
+      setLoading(true);
       const payload = {
         phone: values.phone,
         password: values.password,
       };
 
-      const handleSuccess = ({ data }) => {
+      const handleSuccess = (data) => {
+        console.log(data);
         // formik.resetForm();
         // setJWTokenAndRedirect(data.access, () => {
         //   router.push("/candidate");
@@ -50,11 +54,11 @@ export default function LoginPage() {
         // throw error;
       };
 
-      // const promise = APIKit.auth
-      //   .token(payload)
-      //   .then(handleSuccess)
-      //   .catch(handleFailure)
-      //   .finally(() => setLoading(false));
+      const promise = APIKit.auth
+        .token(payload)
+        .then(handleSuccess)
+        .catch(handleFailure)
+        .finally(() => setLoading(false));
 
       // return toast.promise(promise, {
       //   loading: "Creating your account...",

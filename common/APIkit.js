@@ -9,7 +9,7 @@ const APIKit = {
 
   auth: {
     register: (payload) => {
-      const url = "/auth/register";
+      const url = "/auth/onboarding";
       return client.post(url, payload);
     },
 

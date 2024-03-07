@@ -1,7 +1,7 @@
 function PhotoPlaceholder() {
   return (
     <svg
-      className="w-28 h-28 xs:w-40 xs:h-40 lg:h-60 lg:w-60 text-gray-200 animate-pulse"
+      className="w-full h-full object-contain text-gray-200 animate-pulse"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       fill="currentColor"

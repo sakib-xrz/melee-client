@@ -17,6 +17,13 @@ import Login from "@/components/form/Login";
 import Register from "@/components/form/Register";
 import SizeOptions from "./components/SizeOptions";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 export default function ProductDetailsPage() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(true);
@@ -41,116 +48,139 @@ export default function ProductDetailsPage() {
   };
 
   return (
-    <Container>
-      <div className="flex flex-col md:flex-row gap-6 w-full">
-        <div className="w-full md:w-5/12 xl:w-1/3">
+    <Container extraClassName={"max-w-[115rem]"}>
+      <div className="grid grid-cols-12 gap-6 w-full">
+        <div className="col-span-12 lg:col-span-6 hover:cursor-grab active:cursor-grabbing">
           <ProductCarousel images={images} />
         </div>
 
-        <div className="w-full">
-          <h1 className="text-2xl sm:text-3xl xl:text-4xl pb-3 font-semibold line-clamp-2">
-            Women Floral Midi Dress
-          </h1>
-          <hr />
-
-          <div className="mt-5">
+        <div className="col-span-12 lg:col-span-6 space-y-10 xl:px-20">
+          <div>
+            <h1 className="text-2xl sm:text-3xl xl:text-4xl pb-3 font-semibold line-clamp-2">
+              Women Floral Midi Dress
+            </h1>
             <div>
               <h1 className="text-2xl sm:text-3xl xl:text-4xl font-semibold">
                 $54.00
               </h1>
               <p className="text-sm sm:text-base">(incl. of taxes)</p>
             </div>
-
-            <div className="space-y-2 mt-5">
-              <div className="text-base sm:text-lg font-semibold">
-                Select Size <span className="text-red-500">*</span>
-              </div>
-
-              <SizeOptions />
-            </div>
-
-            <div className="flex xl:hidden flex-col xs:flex-row items-center gap-5 mt-5">
-              <Button className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full">
-                <ShoppingBasket />
-                Buy Now
-              </Button>
-              <Button
-                className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
-                variant={"secondary"}
-                onClick={() => handleBuyNow()}
-              >
-                <ShoppingCart />
-                Add to Cart
-              </Button>
-            </div>
-
-            <div className="hidden xl:flex flex-col xs:flex-row items-center gap-5 mt-5">
-              <Button
-                size="lg"
-                className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
-                onClick={() => handleBuyNow()}
-              >
-                <ShoppingBasket />
-                Buy Now
-              </Button>
-              <Button
-                size="lg"
-                className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
-                variant={"secondary"}
-              >
-                <ShoppingCart />
-                Add to Cart
-              </Button>
-            </div>
-
-            <p className="font-normal text-base sm:text-lg xl:text-xl line-clamp-3 xl:line-clamp-none mt-5">
-              [Short Description Here] Lorem ipsum dolor, sit amet consectetur
-              adipisicing elit. Nesciunt deleniti, consequuntur provident a iste
-              eius sequi deserunt optio dolor dicta labore mollitia sed
-              molestiae sint explicabo repellendus. Repudiandae, distinctio
-              itaque!
-            </p>
           </div>
-        </div>
-      </div>
 
-      <div className="space-y-5 py-5 text-base sm:text-lg md:text-xl">
-        <div>
-          <h4 className="text-lg xs:text-xl sm:text-2xl pb-3 font-semibold">
-            Description
-          </h4>
-          <p className="font-normal">
-            Material : <br />
-            <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-              commodi ad sit cupiditate voluptatem labore minima molestiae,
-              deserunt accusantium omnis, incidunt accusamus. Laudantium illo
-              fugit qui, dolorum consequatur fugiat sequi!
-            </span>
-          </p>
+          <div className="space-y-2">
+            <div className="text-base sm:text-lg font-semibold">
+              Select Size <span className="text-red-500">*</span>
+            </div>
+
+            <SizeOptions />
+          </div>
+
+          <div className="flex xl:hidden flex-col xs:flex-row items-center gap-5">
+            <Button
+              className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
+              variant={"secondary"}
+            >
+              <ShoppingCart />
+              Add to Cart
+            </Button>
+
+            <Button
+              onClick={() => handleBuyNow()}
+              className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
+            >
+              <ShoppingBasket />
+              Buy Now
+            </Button>
+          </div>
+
+          <div className="hidden xl:flex flex-col xs:flex-row items-center gap-5">
+            <Button
+              size="lg"
+              className="rounded-sm text-base sm:text-lg md:text-xl gap-2 w-full"
+              variant={"secondary"}
+            >
+              <ShoppingCart />
+              Add to Cart
+            </Button>
+
+            <Button
+              size="lg"
+              className="rounded-sm text-base sm:text-lg md:text-xl gap-2 w-full"
+              onClick={() => handleBuyNow()}
+            >
+              <ShoppingBasket />
+              Buy Now
+            </Button>
+          </div>
+
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Details</AccordionTrigger>
+              <AccordionContent>
+                -Designed in London -Made from luxury, extra soft heavyweight
+                black 70% organic cotton, 30% recycled polyester heavyweight
+                fleece <br />
+                -All over MALFUNCTION graphic in raised embroidery
+                <br />
+                -Removable velcro bunny ears on hood <br />
+                -Full-length two-way zip with custom hardware
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Sizing</AccordionTrigger>
+              <AccordionContent>
+                Chloe is 5ft 6 (168cm) and wears a size L/XL here Our tracksuits
+                naturally come in a unisex baggy, comfy fit. We recommend going
+                for your usual size unless you consider yourself very tall for
+                your size or prefer a super oversized fit. Although these are
+                our recommendations, everybody is different both in shape and
+                how they like their tracksuits to fit! Please always refer to
+                our size chart below before purchasing.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Care</AccordionTrigger>
+              <AccordionContent>
+                Machine washable at max 30°C. Gentle cycle, always wash with
+                similar colours. If your hoodie is part of a set make sure to
+                wash the set together. We recommend zipping up your hoodie and
+                turning the garment inside out when washing to protect the
+                design. Hang to dry. Do not bleach. Do not iron over design.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger>Delivery and Returns</AccordionTrigger>
+              <AccordionContent>
+                Delivery: UK delivery - Free delivery on orders over £150
+                Tracked delivery: £3.99 Next Day Delivery*: £6.99 *Order before
+                3pm UK time for delivery the following working day International
+                tracked delivery - Free delivery on orders over £250 Orders can
+                only be sent to the address given at checkout so please make
+                sure this is correct before purchasing. Please note orders
+                placed after 3pm Noon on Fridays will be dispatched the
+                following Monday ♡ Returns: We are happy to refund or exchange
+                any item within 14 days of delivery. If 14 days (21 for
+                international orders) have passed since your purchase,
+                unfortunately we can’t offer you a refund or exchange. To be
+                eligible for a return, your item must be unworn in its original,
+                undamaged, unwashed condition complete with the original
+                packaging. If our customer care team feel any of these points
+                are not met, it is at their discretion on whether the item is
+                suitable for return. Should a refund be refused your item will
+                be returned to you. Please note we are unable to accept returns
+                on any jewelry pieces including shoe charms and underwear sets
+                or pieces for hygiene reasons. For more information, you can
+                find our full return policy HERE International Duties & Taxes:
+                For some countries outside of the UK, additional import fees may
+                need to be paid in order to release your order. Our parcels are
+                sent DDU (Duties Delivered Unpaid) and unfortunately we cant be
+                responsible for any import charges charged by your country
+                import laws, these are the responsibility of the customer to
+                pay.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
-        <p className="font-normal">
-          Measurements : <br />
-          <span className="space-y-3">
-            <span>Strap Length : 129 cm</span>
-            <span>Strap Width : 85 cm</span>
-            <span>Buckle Length : 23 cm</span>
-            <span>Buckle Width : 8 cm</span>
-            <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia,
-              tenetur.
-            </span>
-          </span>
-        </p>
-        <p className="font-normal">
-          Shipping Information : <br />
-          <span>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-            commodi ad sit cupiditate voluptatem labore minima molestiae,
-            deserunt accusantium omnis, incidunt accusamus. Laudantium illo
-            fugit qui, dolorum consequatur fugiat sequi!
-          </span>
-        </p>
       </div>
 
       <Dialog

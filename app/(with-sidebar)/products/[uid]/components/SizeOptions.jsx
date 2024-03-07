@@ -11,7 +11,7 @@ function SizeOptions() {
   const sizes = ["S", "M", "L", "XL", "XXL"];
 
   return (
-    <div className="grid grid-cols-5 xl:grid-cols-10 gap-2">
+    <div className="grid grid-cols-5 gap-2">
       {sizes.map((size) => (
         <label
           key={size}

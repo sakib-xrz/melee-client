@@ -11,7 +11,7 @@ export default function ProductCard({ isOutOfStock = false }) {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
-      className={`product-card xl:w-64 relative ${
+      className={`product-card relative ${
         isOutOfStock ? "" : "hover:bg-accent transition-colors duration-300"
       }`}
       onMouseEnter={() => setIsHovered(true)}

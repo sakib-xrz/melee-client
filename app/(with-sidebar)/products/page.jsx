@@ -11,8 +11,8 @@ export default function ProductsPage() {
           NEW DROP! This is your animated alert bar, (Your text here!)
         </Marquee>
       </div>
-      <Container>
-        <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-5">
+      <Container extraClassName={"max-w-[115rem]"}>
+        <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-5 lg:gap-8">
           <div className="xs:flex justify-center items-center">
             <ProductCard />
           </div>
