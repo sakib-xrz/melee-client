@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import Login from "@/components/form/Login";
 import Register from "@/components/form/Register";
+import SizeOptions from "./components/SizeOptions";
 
 export default function ProductDetailsPage() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function ProductDetailsPage() {
 
   const user = false;
 
-  const handleAddToCart = () => {
+  const handleBuyNow = () => {
     if (!user) {
       setAuthModalOpen(true);
       console.log("open modal");
@@ -42,77 +43,83 @@ export default function ProductDetailsPage() {
   return (
     <Container>
       <div className="flex flex-col md:flex-row gap-6 w-full">
-        <div className="w-full md:w-2/6 xl:w-1/3">
+        <div className="w-full md:w-5/12 xl:w-1/3">
           <ProductCarousel images={images} />
         </div>
 
-        <div className="w-full md:w-4/6 xl:w-2/3">
-          <h1 className="text-4xl pb-3 font-semibold line-clamp-2">
+        <div className="w-full">
+          <h1 className="text-2xl sm:text-3xl xl:text-4xl pb-3 font-semibold line-clamp-2">
             Women Floral Midi Dress
           </h1>
           <hr />
-          <p className="font-medium pt-3 text-lg line-clamp-3 xl:line-clamp-none">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-            soluta impedit maiores hic? Dolore corrupti animi numquam et alias
-            a, architecto, cum doloremque doloribus accusamus nulla aspernatur
-            maiores, eaque nobis? Lorem, ipsum dolor sit amet consectetur
-            adipisicing elit. Voluptatibus, veritatis consequatur sed obcaecati
-            accusamus laborum quam nam voluptatum omnis earum neque deserunt
-            aliquid pariatur. Quod, consequatur! Delectus hic odio deserunt!
-          </p>
 
-          <div className="my-5 space-y-10">
-            <h1 className="text-5xl font-semibold">$54.00</h1>
-
+          <div className="mt-5">
             <div>
-              <Button
-                size={"icon"}
-                variant={"outline"}
-                className={"rounded-l-sm rounded-r-none text-2xl"}
-              >
-                -
-              </Button>
-              <Button
-                variant={"outline"}
-                className="rounded-none text-2xl pointer-events-none w-12"
-              >
-                0
-              </Button>
-              <Button
-                size={"icon"}
-                variant={"outline"}
-                className={"rounded-r-sm rounded-l-none  text-2xl"}
-              >
-                +
-              </Button>
+              <h1 className="text-2xl sm:text-3xl xl:text-4xl font-semibold">
+                $54.00
+              </h1>
+              <p className="text-sm sm:text-base">(incl. of taxes)</p>
             </div>
 
-            <div className="flex flex-col xs:flex-row items-center gap-5">
-              <Button
-                className="rounded-sm text-lg gap-2 max-xs:w-full"
-                size="lg"
-              >
+            <div className="space-y-2 mt-5">
+              <div className="text-base sm:text-lg font-semibold">
+                Select Size <span className="text-red-500">*</span>
+              </div>
+
+              <SizeOptions />
+            </div>
+
+            <div className="flex xl:hidden flex-col xs:flex-row items-center gap-5 mt-5">
+              <Button className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full">
                 <ShoppingBasket />
                 Buy Now
               </Button>
               <Button
-                className="rounded-sm text-lg gap-2 max-xs:w-full"
+                className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
                 variant={"outline"}
-                size="lg"
-                onClick={() => handleAddToCart()}
+                onClick={() => handleBuyNow()}
               >
                 <ShoppingCart />
                 Add to Cart
               </Button>
             </div>
+
+            <div className="hidden xl:flex flex-col xs:flex-row items-center gap-5 mt-5">
+              <Button
+                size="lg"
+                className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
+                onClick={() => handleBuyNow()}
+              >
+                <ShoppingBasket />
+                Buy Now
+              </Button>
+              <Button
+                size="lg"
+                className="rounded-sm text-base sm:text-lg md:text-xl gap-2 max-xs:w-full"
+                variant={"outline"}
+              >
+                <ShoppingCart />
+                Add to Cart
+              </Button>
+            </div>
+
+            <p className="font-normal text-base sm:text-lg xl:text-xl line-clamp-3 xl:line-clamp-none mt-5">
+              [Short Description Here] Lorem ipsum dolor, sit amet consectetur
+              adipisicing elit. Nesciunt deleniti, consequuntur provident a iste
+              eius sequi deserunt optio dolor dicta labore mollitia sed
+              molestiae sint explicabo repellendus. Repudiandae, distinctio
+              itaque!
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="space-y-5 py-5 text-lg">
+      <div className="space-y-5 py-5 text-base sm:text-lg md:text-xl">
         <div>
-          <h4 className="text-2xl pb-3 font-semibold ">Description</h4>
-          <p className="font-medium">
+          <h4 className="text-lg xs:text-xl sm:text-2xl pb-3 font-semibold">
+            Description
+          </h4>
+          <p className="font-normal">
             Material : <br />
             <span>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
@@ -122,7 +129,7 @@ export default function ProductDetailsPage() {
             </span>
           </p>
         </div>
-        <p className="font-medium">
+        <p className="font-normal">
           Measurements : <br />
           <span className="space-y-3">
             <span>Strap Length : 129 cm</span>
@@ -135,7 +142,7 @@ export default function ProductDetailsPage() {
             </span>
           </span>
         </p>
-        <p className="font-medium">
+        <p className="font-normal">
           Shipping Information : <br />
           <span>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
