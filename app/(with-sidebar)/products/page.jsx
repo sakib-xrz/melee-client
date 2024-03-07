@@ -23,7 +23,7 @@ export default function ProductsPage() {
             <ProductCard />
           </div>
           <div className="xs:flex justify-center items-center">
-            <ProductCard />
+            <ProductCard isOutOfStock />
           </div>
           <div className="xs:flex justify-center items-center">
             <ProductCard />
