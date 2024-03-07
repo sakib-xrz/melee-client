@@ -2,7 +2,7 @@ import DataTable from "@/components/shared/DataTable";
 import PageTitleWithButton from "@/components/shared/PageTitleWithButton";
 import { Button } from "@/components/ui/button";
 import dress from "@/public/images/dress.png";
-import { Eye, Pencil } from "lucide-react";
+import { Check, Eye, Pencil } from "lucide-react";
 import Image from "next/image";
 
 const data = [
@@ -11,6 +11,7 @@ const data = [
     product_image: dress,
     unit_price: 19.99,
     stock: 10,
+    isPublished: true,
     sold: 5,
     sold_amount: 99.95,
   },
@@ -19,6 +20,7 @@ const data = [
     product_image: dress,
     unit_price: 24.5,
     stock: 20,
+    isPublished: true,
     sold: 2,
     sold_amount: 49.0,
   },
@@ -27,6 +29,7 @@ const data = [
     product_image: dress,
     unit_price: 129.95,
     stock: 35,
+    isPublished: false,
     sold: 8,
     sold_amount: 1036.0,
   },
@@ -35,6 +38,7 @@ const data = [
     product_image: dress,
     unit_price: 399.99,
     stock: 5,
+    isPublished: true,
     sold: 1,
     sold_amount: 399.99,
   },
@@ -43,6 +47,7 @@ const data = [
     product_image: dress,
     unit_price: 14.99,
     stock: 100,
+    isPublished: true,
     sold: 15,
     sold_amount: 224.85,
   },
@@ -51,6 +56,7 @@ const data = [
     product_image: dress,
     unit_price: 59.99,
     stock: 12,
+    isPublished: true,
     sold: 3,
     sold_amount: 179.97,
   },
@@ -59,6 +65,7 @@ const data = [
     product_image: dress,
     unit_price: 29.95,
     stock: 3,
+    isPublished: false,
     sold: 0,
     sold_amount: 0.0,
   },
@@ -67,6 +74,7 @@ const data = [
     product_image: dress,
     unit_price: 19.99,
     stock: 40,
+    isPublished: true,
     sold: 10,
     sold_amount: 199.9,
   },
@@ -75,6 +83,7 @@ const data = [
     product_image: dress,
     unit_price: 34.0, // Assuming you meant to complete the price
     stock: undefined, // Assuming you don't have stock information for this product
+    isPublished: true,
     sold: undefined, // Assuming you don't have sales information for this product
     sold_amount: undefined, // Calculated based on `unit_price` and `sold` (which are undefined)
   },
@@ -83,6 +92,7 @@ const data = [
     product_image: dress,
     unit_price: 55.99,
     stock: 2,
+    isPublished: true,
     sold: 1,
     sold_amount: 55.99,
   },
@@ -118,17 +128,39 @@ const tableColumns = [
     renderer: (row) => <p className="text-left">{row.name || "N/A"}</p>,
   },
   {
+    title: <p className="text-left">Stock Count</p>,
+    dataField: "stock",
+    renderer: (row) => (
+      <div className="flex items-center gap-2">
+        <p className="text-center">S ({row.stock || "N/A"})</p>
+        <p className="text-center">M ({row.stock || "N/A"})</p>
+        <p className="text-center">L ({row.stock || "N/A"})</p>
+        <p className="text-center">XL ({row.stock || "N/A"})</p>
+        <p className="text-center">XXL ({row.stock || "N/A"})</p>
+      </div>
+    ),
+  },
+  {
+    title: <p className="text-center">Publish</p>,
+    dataField: "isPublished",
+    renderer: (row) => (
+      <p className="flex justify-center">
+        {row.isPublished ? (
+          <Check className="bg-white rounded-full text-background p-1 w-5 h-5" />
+        ) : (
+          <Check className="bg-accent rounded-full text-background p-1 w-5 h-5" />
+        )}
+      </p>
+    ),
+  },
+  {
     title: <p className="text-center">Unit Price</p>,
     dataField: "unit_price",
     renderer: (row) => <p className="text-center">{row.unit_price || "N/A"}</p>,
   },
+
   {
-    title: <p className="text-center">Stock</p>,
-    dataField: "stock",
-    renderer: (row) => <p className="text-center">{row.stock || "N/A"}</p>,
-  },
-  {
-    title: <p className="text-center">Sold</p>,
+    title: <p className="text-center">Total Sold</p>,
     dataField: "sold",
     renderer: (row) => <p className="text-center">{row.sold || "N/A"}</p>,
   },
