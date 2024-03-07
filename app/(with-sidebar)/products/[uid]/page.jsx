@@ -54,7 +54,7 @@ export default function ProductDetailsPage() {
           <ProductCarousel images={images} />
         </div>
 
-        <div className="col-span-12 lg:col-span-6 space-y-10 xl:px-20">
+        <div className="col-span-12 lg:col-span-6 space-y-8 xl:px-20">
           <div>
             <h1 className="text-2xl sm:text-3xl xl:text-4xl pb-3 font-semibold line-clamp-2">
               Women Floral Midi Dress
@@ -111,6 +111,13 @@ export default function ProductDetailsPage() {
               <ShoppingBasket />
               Buy Now
             </Button>
+          </div>
+
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam amet
+            ipsa ullam adipisci, dolorum maiores neque eius quaerat ducimus
+            tempora dolores cumque debitis placeat temporibus, fugit sunt
+            similique. Nam, nihil!
           </div>
 
           <Accordion type="single" collapsible className="w-full">
