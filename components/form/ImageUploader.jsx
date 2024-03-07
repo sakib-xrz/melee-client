@@ -21,7 +21,7 @@ export default function ImageUploader({ formik, name, multiple = false }) {
   };
 
   return (
-    <div className="flex flex-col gap-1 md:flex-row aspect-square w-52 sm:w-72 h-52 sm:h-72">
+    <div className="flex flex-col gap-1 md:flex-row aspect-square w-52 md:w-72 h-52 md:h-72">
       <div className="flex items-center w-full h-full">
         <label className="flex flex-col items-center justify-center w-full h-full p-6 border border-dashed rounded-lg cursor-pointer border-border">
           <div className="flex flex-col items-center justify-center">
