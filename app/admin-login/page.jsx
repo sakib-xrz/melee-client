@@ -4,7 +4,6 @@ import FormikErrorBox from "@/components/form/FormikErrorBox";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Password } from "@/components/ui/password";
-import { Phone } from "@/components/ui/phone";
 import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,7 +105,6 @@ export default function LoginPage() {
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
               />
-
               <FormikErrorBox formik={formik} field="phone" />
             </div>
             <div>

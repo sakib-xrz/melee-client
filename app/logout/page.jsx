@@ -4,13 +4,13 @@ import { useStore } from "@/context/StoreProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function AdminLogout() {
+export default function Logout() {
   const router = useRouter();
-  const { logoutAdmin } = useStore();
+  const { logout } = useStore();
 
   useEffect(() => {
-    logoutAdmin();
-    router.push("/admin-login");
+    logout();
+    router.push("/login");
   }, []);
 
   return null;

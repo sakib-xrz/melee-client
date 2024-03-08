@@ -2,67 +2,78 @@
 
 import FormikErrorBox from "@/components/form/FormikErrorBox";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Password } from "@/components/ui/password";
-import { Phone } from "@/components/ui/phone";
 import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
 import Logo from "public/images/melee-white-transparent.png";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
+import APIKit from "@/common/APIkit";
+import { setJWTokenAndRedirect } from "@/common/UtilKit";
 
 const validationSchema = Yup.object({
   phone: Yup.string().required("Phone is required"),
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
+    .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
 });
 
 const initialValues = {
-  phone: "2124567890",
-  password: "12345678",
+  phone: "+8801768869412",
+  password: "123456",
 };
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const previousURL = searchParams.get("next");
   const [loading, setLoading] = useState(false);
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    // validationSchema,
     onSubmit: (values) => {
-      // setLoading(true);
+      setLoading(true);
       const payload = {
-        phone: values.phone,
+        phone: `+${values.phone}`,
         password: values.password,
       };
 
       const handleSuccess = ({ data }) => {
-        // formik.resetForm();
-        // setJWTokenAndRedirect(data.access, () => {
-        //   router.push("/candidate");
-        // });
+        formik.resetForm();
+        setJWTokenAndRedirect(data.access, () => {
+          if (previousURL) {
+            router.push(previousURL);
+          } else {
+            router.push("/products");
+          }
+        });
       };
 
       const handleFailure = (error) => {
-        // throw error;
+        throw error;
       };
 
-      // const promise = APIKit.auth
-      //   .token(payload)
-      //   .then(handleSuccess)
-      //   .catch(handleFailure)
-      //   .finally(() => setLoading(false));
+      const promise = APIKit.auth
+        .token(payload)
+        .then(handleSuccess)
+        .catch(handleFailure)
+        .finally(() => setLoading(false));
 
-      // return toast.promise(promise, {
-      //   loading: "Creating your account...",
-      //   success: "Signed up successfully",
-      //   error: (error) => error.message,
-      // });
+      return toast.promise(promise, {
+        loading: "Signing you in...",
+        success: "Signed in successfully",
+        error: (error) =>
+          error.response.data?.detail || "Authentication failed!",
+      });
     },
   });
+
   return (
     <div className="flex min-h-screen items-center px-5">
       <div className="mx-auto w-full sm:w-2/3 xl:w-1/3">
@@ -83,12 +94,14 @@ export default function LoginPage() {
           <form onSubmit={formik.handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="phone">Phone</Label>
-              <Phone
-                type="phone"
+              <PhoneInput
+                country={"bd"}
                 id="phone"
                 name="phone"
                 placeholder="xxx-xxx-xxxx"
-                onChange={formik.handleChange}
+                onChange={(formattedValue) => {
+                  formik.setFieldValue("phone", formattedValue);
+                }}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
               />
