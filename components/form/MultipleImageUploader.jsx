@@ -13,7 +13,6 @@ export default function MultipleImageUploader({ formik, id, name }) {
       const file = files[i];
       updatedImages.push({
         file: file,
-        url: URL.createObjectURL(file),
       });
     }
 
@@ -57,14 +56,14 @@ export default function MultipleImageUploader({ formik, id, name }) {
       {formik.values[name].length > 0 && (
         <div className="flex gap-3 items-center flex-wrap">
           {formik.values[name].map((image, index) => (
-            <div key={image.url}>
+            <div key={index}>
               <div className="rounded-md w-32 h-32 relative">
                 <Image
                   className="w-full h-full object-cover rounded-md"
                   alt={`Uploaded ${index}`}
                   width={500}
                   height={500}
-                  src={image.url}
+                  src={URL.createObjectURL(image.file)}
                 />
                 <div>
                   <X

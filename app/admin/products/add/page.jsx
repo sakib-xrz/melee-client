@@ -6,13 +6,16 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormik } from "formik";
-const DynamicQuill = dynamic(() => import("react-quill"), { ssr: false });
-import "react-quill/dist/quill.snow.css";
+
 import ImageUploader from "@/components/form/ImageUploader";
 import Image from "next/image";
 import { X } from "lucide-react";
 import Link from "next/link";
 import MultipleImageUpload from "@/components/form/MultipleImageUploader";
+import TextEditorFields from "./components/TextEditorFields";
+import StockFields from "./components/StockFields";
+import PrimarySecondaryImage from "./components/PrimarySecondaryImage";
+import AdditionalImages from "./components/AdditionalImages";
 
 export default function AdminAddProductPage() {
   const sizes = ["S", "M", "L", "XL", "XXL"];
@@ -32,6 +35,10 @@ export default function AdminAddProductPage() {
       stock_l: "",
       stock_xl: "",
       stock_xxl: "",
+      details: "",
+      sizing: "",
+      care: "",
+      delivery_and_returns: "",
     },
     onSubmit: (values) => {
       // setLoading(true);
@@ -55,6 +62,10 @@ export default function AdminAddProductPage() {
         additional_images: formik.values.additional_images || [],
         unit_price: parseFloat(formik.values.unit_price) || 0,
         stock: stockArray || [],
+        details: formik.values.details || "",
+        sizing: formik.values.sizing || "",
+        care: formik.values.care || "",
+        delivery_and_returns: formik.values.delivery_and_returns || "",
       };
 
       console.log(payload);
@@ -80,95 +91,7 @@ export default function AdminAddProductPage() {
         </h2>
       </CardHeader>
       <CardContent className="mt-10">
-        <form
-          onSubmit={formik.handleSubmit}
-          className="grid grid-cols-12 gap-5"
-        >
-          <div className="col-span-12 md:col-span-4 xl:col-span-3">
-            <div className="flex flex-col flex-wrap sm:flex-row md:flex-col gap-5 w-full">
-              <div className="space-y-2">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Primary Image (1200*1200){" "}
-                  <span className="text-red-500">*</span>
-                </p>
-                <div className="flex gap-2 items-center w-full">
-                  {formik.values.primary_image ? (
-                    <div className="rounded-md w-52 sm:w-72 h-52 sm:h-72 relative">
-                      <Image
-                        className="w=full h-full object-cover rounded-md"
-                        src={URL.createObjectURL(formik.values.primary_image)}
-                        width={500}
-                        height={500}
-                        alt=""
-                      />
-                      <div>
-                        <X
-                          onClick={() => {
-                            formik.setFieldValue("primary_image", "");
-                          }}
-                          className="bg-red-500 rounded-full absolute right-1 top-1 cursor-pointer p-1"
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <ImageUploader
-                      formik={formik}
-                      id={"primary_image"}
-                      name={"primary_image"}
-                    />
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Secondary Image (1200*1200){" "}
-                  <span className="text-red-500">*</span>
-                </p>
-                <div className="flex gap-2 items-center">
-                  {formik.values.secondary_image ? (
-                    <div className="rounded-md w-52 sm:w-72 h-52 sm:h-72 relative">
-                      <Image
-                        className="w=full h-full object-cover rounded-md"
-                        src={URL.createObjectURL(formik.values.secondary_image)}
-                        width={500}
-                        height={500}
-                        alt=""
-                      />
-                      <div>
-                        <X
-                          onClick={() => {
-                            formik.setFieldValue("secondary_image", "");
-                          }}
-                          className="bg-red-500 rounded-full absolute right-1 top-1 cursor-pointer p-1"
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <ImageUploader
-                      formik={formik}
-                      id={"secondary_image"}
-                      name={"secondary_image"}
-                    />
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Additional Images (1200*1200)
-                </p>
-                <div>
-                  <MultipleImageUpload
-                    formik={formik}
-                    id={"additional_images"}
-                    name={"additional_images"}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <form onSubmit={formik.handleSubmit}>
           <div className="w-full space-y-5 col-span-12 md:col-span-8 xl:col-span-9">
             <div className="space-y-2">
               <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
@@ -223,233 +146,13 @@ export default function AdminAddProductPage() {
               </div>
             </div>
 
-            <div className="flex w-full flex-col gap-4 xl:flex-row">
-              <div className="w-full space-y-2 xl:w-1/5">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Stock (S)
-                </p>
-                <div>
-                  <Input
-                    className="bg-transparent"
-                    type="text"
-                    id="stock_s"
-                    name="stock_s"
-                    placeholder="Stock for small size"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.stock_s}
-                  />
-                </div>
-              </div>
-              <div className="w-full space-y-2 xl:w-1/5">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Stock (M)
-                </p>
-                <div>
-                  <Input
-                    className="bg-transparent"
-                    type="text"
-                    id="stock_m"
-                    name="stock_m"
-                    placeholder="Stock for medium size"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.stock_m}
-                  />
-                </div>
-              </div>
-              <div className="w-full space-y-2 xl:w-1/5">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Stock (L)
-                </p>
-                <div>
-                  <Input
-                    className="bg-transparent"
-                    type="text"
-                    id="stock_l"
-                    name="stock_l"
-                    placeholder="Stock for large size"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.stock_l}
-                  />
-                </div>
-              </div>
-              <div className="w-full space-y-2 xl:w-1/5">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Stock (XL)
-                </p>
-                <div>
-                  <Input
-                    className="bg-transparent"
-                    type="text"
-                    id="stock_xl"
-                    name="stock_xl"
-                    placeholder="Stock for xl size"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.stock_xl}
-                  />
-                </div>
-              </div>
-              <div className="w-full space-y-2 xl:w-1/5">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Stock (XXL)
-                </p>
-                <div>
-                  <Input
-                    className="bg-transparent"
-                    type="text"
-                    id="stock_xxl"
-                    name="stock_xxl"
-                    placeholder="Stock for xxl size"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.stock_xxl}
-                  />
-                </div>
-              </div>
-            </div>
+            <StockFields formik={formik} />
 
-            <div className="flex w-full flex-col gap-4 xl:flex-row">
-              <div className="w-full space-y-2 xl:w-1/2">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Description
-                </p>
-                <div>
-                  <DynamicQuill
-                    placeholder=""
-                    modules={{
-                      toolbar: [
-                        [{ header: "1" }, { header: "2" }, { font: [] }],
-                        [{ size: [] }],
-                        ["bold", "italic", "underline", "strike", "blockquote"],
-                        [
-                          { list: "ordered" },
-                          { list: "bullet" },
-                          { indent: "-1" },
-                          { indent: "+1" },
-                        ],
-                        ["link", "image", "video"],
-                        ["clean"],
-                      ],
-                      clipboard: {
-                        matchVisual: false,
-                      },
-                    }}
-                    theme="snow"
-                    value={formik.values.description}
-                    onChange={(value) =>
-                      formik.setFieldValue("description", value)
-                    }
-                  />
-                </div>
-              </div>
+            <TextEditorFields formik={formik} />
 
-              <div className="w-full space-y-2 xl:w-1/2">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Description
-                </p>
-                <div>
-                  <DynamicQuill
-                    placeholder=""
-                    modules={{
-                      toolbar: [
-                        [{ header: "1" }, { header: "2" }, { font: [] }],
-                        [{ size: [] }],
-                        ["bold", "italic", "underline", "strike", "blockquote"],
-                        [
-                          { list: "ordered" },
-                          { list: "bullet" },
-                          { indent: "-1" },
-                          { indent: "+1" },
-                        ],
-                        ["link", "image", "video"],
-                        ["clean"],
-                      ],
-                      clipboard: {
-                        matchVisual: false,
-                      },
-                    }}
-                    theme="snow"
-                    value={formik.values.description}
-                    onChange={(value) =>
-                      formik.setFieldValue("description", value)
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+            <PrimarySecondaryImage formik={formik} />
 
-            <div className="flex w-full flex-col gap-4 xl:flex-row">
-              <div className="w-full space-y-2 xl:w-1/2">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Description
-                </p>
-                <div>
-                  <DynamicQuill
-                    placeholder=""
-                    modules={{
-                      toolbar: [
-                        [{ header: "1" }, { header: "2" }, { font: [] }],
-                        [{ size: [] }],
-                        ["bold", "italic", "underline", "strike", "blockquote"],
-                        [
-                          { list: "ordered" },
-                          { list: "bullet" },
-                          { indent: "-1" },
-                          { indent: "+1" },
-                        ],
-                        ["link", "image", "video"],
-                        ["clean"],
-                      ],
-                      clipboard: {
-                        matchVisual: false,
-                      },
-                    }}
-                    theme="snow"
-                    value={formik.values.description}
-                    onChange={(value) =>
-                      formik.setFieldValue("description", value)
-                    }
-                  />
-                </div>
-              </div>
-
-              <div className="w-full space-y-2 xl:w-1/2">
-                <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                  Description
-                </p>
-                <div>
-                  <DynamicQuill
-                    placeholder=""
-                    modules={{
-                      toolbar: [
-                        [{ header: "1" }, { header: "2" }, { font: [] }],
-                        [{ size: [] }],
-                        ["bold", "italic", "underline", "strike", "blockquote"],
-                        [
-                          { list: "ordered" },
-                          { list: "bullet" },
-                          { indent: "-1" },
-                          { indent: "+1" },
-                        ],
-                        ["link", "image", "video"],
-                        ["clean"],
-                      ],
-                      clipboard: {
-                        matchVisual: false,
-                      },
-                    }}
-                    theme="snow"
-                    value={formik.values.description}
-                    onChange={(value) =>
-                      formik.setFieldValue("description", value)
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+            <AdditionalImages formik={formik} />
 
             <div className="flex gap-3 justify-end">
               <Link href={"/admin/products"}>
