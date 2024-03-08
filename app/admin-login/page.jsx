@@ -2,7 +2,6 @@
 
 import FormikErrorBox from "@/components/form/FormikErrorBox";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Password } from "@/components/ui/password";
 import { Phone } from "@/components/ui/phone";
@@ -14,6 +13,8 @@ import { useState } from "react";
 import * as Yup from "yup";
 import Logo from "public/images/melee-white-transparent.png";
 import APIKit from "@/common/APIkit";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const validationSchema = Yup.object({
   phone: Yup.string().required("Phone is required"),
@@ -23,8 +24,8 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  phone: "+8801768869413",
-  password: "123456",
+  phone: "",
+  password: "",
 };
 
 export default function LoginPage() {
@@ -87,7 +88,7 @@ export default function LoginPage() {
           <form onSubmit={formik.handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="phone">Phone</Label>
-              <Phone
+              {/* <Phone
                 type="phone"
                 id="phone"
                 name="phone"
@@ -95,7 +96,18 @@ export default function LoginPage() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
+              /> */}
+
+              <PhoneInput
+                country={"us"}
+                id="phone"
+                name="phone"
+                placeholder="xxx-xxx-xxxx"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.phone}
               />
+
               <FormikErrorBox formik={formik} field="phone" />
             </div>
             <div>
