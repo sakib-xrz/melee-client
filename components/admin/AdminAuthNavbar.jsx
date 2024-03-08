@@ -9,9 +9,10 @@ import { LeftSideDrawer } from "../shared/LeftSideDrawer";
 import Link from "next/link";
 import ActiveIcon from "../shared/ActiveIcon";
 import { AdminRoutes } from "@/common/KeyChain";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function AdminAuthNavbar() {
+  const router = useRouter();
   const pathname = usePathname();
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
 
@@ -33,10 +34,19 @@ export default function AdminAuthNavbar() {
             />
           </Link>
           <div className="flex justify-end">
-            <Button size="icon" variant="secondary" className="md:hidden">
+            <Button
+              onClick={() => router.push("/admin-logout")}
+              size="icon"
+              variant="secondary"
+              className="md:hidden"
+            >
               <LogOut />
             </Button>
-            <Button variant="secondary" className="gap-2 hidden md:flex w-fit">
+            <Button
+              onClick={() => router.push("/admin-logout")}
+              variant="secondary"
+              className="gap-2 hidden md:flex w-fit"
+            >
               <LogOut /> Logout
             </Button>
           </div>

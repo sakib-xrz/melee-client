@@ -15,17 +15,19 @@ import Logo from "public/images/melee-white-transparent.png";
 import APIKit from "@/common/APIkit";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { setJWTokenAndRedirect } from "@/common/UtilKit";
+import { toast } from "sonner";
 
 const validationSchema = Yup.object({
   phone: Yup.string().required("Phone is required"),
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
+    .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
 });
 
 const initialValues = {
-  phone: "",
-  password: "",
+  phone: "+8801768869413",
+  password: "123456",
 };
 
 export default function LoginPage() {
@@ -39,35 +41,40 @@ export default function LoginPage() {
     onSubmit: (values) => {
       setLoading(true);
       const payload = {
-        phone: values.phone,
+        phone: `+${values.phone}`,
         password: values.password,
       };
 
-      const handleSuccess = (data) => {
-        console.log(data);
-        // formik.resetForm();
-        // setJWTokenAndRedirect(data.access, () => {
-        //   router.push("/candidate");
-        // });
+      const handleSuccess = ({ data }) => {
+        formik.resetForm();
+        setJWTokenAndRedirect(data.access, () => {
+          if (previousURL) {
+            router.push(previousURL);
+          } else {
+            router.push("/admin");
+          }
+        });
       };
 
       const handleFailure = (error) => {
-        // throw error;
+        throw error;
       };
 
       const promise = APIKit.auth
-        .token(payload)
+        .token(payload, { as: "admin" })
         .then(handleSuccess)
         .catch(handleFailure)
         .finally(() => setLoading(false));
 
-      // return toast.promise(promise, {
-      //   loading: "Creating your account...",
-      //   success: "Signed up successfully",
-      //   error: (error) => error.message,
-      // });
+      return toast.promise(promise, {
+        loading: "Signing you in...",
+        success: "Signed in successfully",
+        error: (error) =>
+          error.response.data?.detail || "Authentication failed!",
+      });
     },
   });
+
   return (
     <div className="flex min-h-screen items-center px-5">
       <div className="mx-auto w-full sm:w-2/3 xl:w-1/3">
@@ -88,22 +95,14 @@ export default function LoginPage() {
           <form onSubmit={formik.handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="phone">Phone</Label>
-              {/* <Phone
-                type="phone"
-                id="phone"
-                name="phone"
-                placeholder="xxx-xxx-xxxx"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.phone}
-              /> */}
-
               <PhoneInput
-                country={"us"}
+                country={"bd"}
                 id="phone"
                 name="phone"
                 placeholder="xxx-xxx-xxxx"
-                onChange={formik.handleChange}
+                onChange={(formattedValue) => {
+                  formik.setFieldValue("phone", formattedValue);
+                }}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
               />

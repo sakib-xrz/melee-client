@@ -17,17 +17,17 @@ export default function AdminAuthGuardHOC({ children }) {
 
     if (token) {
       setJWTokenAndRedirect(token)
-        .then(fetchMe("candidate"))
+        .then(fetchMe())
         .catch((error) => {
-          console.log(error?.response);
-          router.push("/logout");
+          console.log(error.response.data?.detail);
+          router.push("/admin-logout");
         });
     } else {
       const nextURL = { next: pathname };
       const queryParams = new URLSearchParams(nextURL).toString();
-      router.push(`/login?${queryParams}`);
+      router.push(`/admin-login?${queryParams}`);
     }
   }, []);
 
-  return user?.email && user?.role === "candidate" ? children : null;
+  return user?.phone && user?.is_superuser === true ? children : null;
 }

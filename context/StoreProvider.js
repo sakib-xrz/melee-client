@@ -13,54 +13,25 @@ const StoreContext = createContext();
 export default function StoreProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
-  const [organization, setOrganization] = useState(null);
 
-  const fetchMe = async (role) => {
+  const fetchMe = async () => {
     try {
       const { data } = await APIKit.me.getMe();
-      if (data) {
-        if (data.role !== role) {
-          toast.error("You Don't have permission to access this.");
-          router.push(role === "recruiter" ? "/recruiter-logout" : "/logout");
-        }
-        setUser(data);
-      }
+      setUser(data);
     } catch (error) {
-      console.error(error);
-      toast.error(error.message);
-      router.push("/logout");
+      console.error(error?.response?.data?.detail);
+      toast.error(error?.response?.data?.detail);
     }
   };
 
-  const fetchWe = async () => {
-    try {
-      const { data } = await APIKit.we.getWe();
-      if (data) {
-        setOrganization(data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const refetchMe = (role) => {
+  const refetchMe = () => {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
     if (token) {
       setJWTokenAndRedirect(token)
-        .then(fetchMe(role))
+        .then(fetchMe())
         .catch((error) => {
-          console.log(error?.response);
-        });
-    }
-  };
-
-  const refetchWe = () => {
-    const token = localStorage.getItem(AUTH_TOKEN_KEY);
-    if (token) {
-      setJWTokenAndRedirect(token)
-        .then(fetchWe)
-        .catch((error) => {
-          console.log(error?.response);
+          console.error(error?.response?.data?.detail);
+          toast.error(error?.response?.data?.detail);
         });
     }
   };
@@ -71,21 +42,18 @@ export default function StoreProvider({ children }) {
     router.push("/login");
   };
 
-  const logoutRecruiter = () => {
+  const logoutAdmin = () => {
     setUser(null);
     localStorage.removeItem(AUTH_TOKEN_KEY);
-    router.push("/recruiter-login");
+    router.push("/admin-logout");
   };
 
   const userInfo = {
     user,
-    organization,
     fetchMe,
-    fetchWe,
     refetchMe,
-    refetchWe,
     logout,
-    logoutRecruiter,
+    logoutAdmin,
   };
 
   return (

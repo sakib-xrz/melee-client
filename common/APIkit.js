@@ -13,9 +13,9 @@ const APIKit = {
       return client.post(url, payload);
     },
 
-    token: (payload) => {
+    token: (payload, params) => {
       const url = "/auth/token";
-      return client.post(url, payload);
+      return client.post(url, payload, { params });
     },
   },
 

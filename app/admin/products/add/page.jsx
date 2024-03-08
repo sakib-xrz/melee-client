@@ -1,17 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormik } from "formik";
 
-import ImageUploader from "@/components/form/ImageUploader";
-import Image from "next/image";
-import { X } from "lucide-react";
 import Link from "next/link";
-import MultipleImageUpload from "@/components/form/MultipleImageUploader";
 import TextEditorFields from "./components/TextEditorFields";
 import StockFields from "./components/StockFields";
 import PrimarySecondaryImage from "./components/PrimarySecondaryImage";
@@ -45,7 +40,12 @@ export default function AdminAddProductPage() {
 
       sizes.forEach((size) => {
         const stockValue = formik.values[`stock_${size.toLowerCase()}`];
-        if (stockValue !== undefined && stockValue !== "") {
+        if (
+          stockValue !== undefined &&
+          stockValue !== "" &&
+          stockValue !== null &&
+          stockValue !== 0
+        ) {
           stockArray.push({
             size: size.toUpperCase(),
             stock: parseInt(stockValue),
@@ -56,7 +56,6 @@ export default function AdminAddProductPage() {
       const payload = {
         name: formik.values.name || "",
         short_pitch: formik.values.short_pitch || "",
-        description: formik.values.description || "",
         primary_image: formik.values.primary_image || "",
         secondary_image: formik.values.secondary_image || "",
         additional_images: formik.values.additional_images || [],
