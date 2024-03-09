@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Container from "./Container";
 import Logo from "public/images/melee-white-transparent.png";
-import { Menu, ShoppingCart } from "lucide-react";
+import { LogOut, Menu, ShoppingCart } from "lucide-react";
 import RightSideDrawer from "./RightSideDrawer";
 import { useState } from "react";
 import { LeftSideDrawer } from "./LeftSideDrawer";
@@ -13,9 +13,11 @@ import { usePathname } from "next/navigation";
 import ActiveIcon from "./ActiveIcon";
 import Cart from "./Cart";
 import { Button } from "../ui/button";
+import { useStore } from "@/context/StoreProvider";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { user } = useStore();
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   return (
@@ -82,29 +84,29 @@ export default function Navbar() {
           </div>
         }
       >
-        <nav className="grid gap-2 py-2 space-y-5">
+        <nav className="grid gap-2 py-2">
           <div className="space-y-2">
-            {AuthRoutes.map((link, index) => (
-              <Link
-                key={index}
-                href={link.href}
-                onClick={() => setMenuDrawerOpen(false)}
-                className={
-                  "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
-                }
-              >
-                {pathname === link.href ? (
-                  <div>
-                    <ActiveIcon />
-                  </div>
-                ) : (
-                  <div className="opacity-0">
-                    <ActiveIcon />
-                  </div>
-                )}
-                {link.title}
-              </Link>
-            ))}
+            {!user &&
+              AuthRoutes.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className={
+                    "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
+                  }
+                >
+                  {pathname === link.href ? (
+                    <div>
+                      <ActiveIcon />
+                    </div>
+                  ) : (
+                    <div className="opacity-0">
+                      <ActiveIcon />
+                    </div>
+                  )}
+                  {link.title}
+                </Link>
+              ))}
           </div>
 
           <div className="space-y-2">
@@ -112,7 +114,6 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
-                onClick={() => setMenuDrawerOpen(false)}
                 className={
                   "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
                 }
@@ -136,7 +137,6 @@ export default function Navbar() {
               <Link
                 key={index}
                 href={link.href}
-                onClick={() => setMenuDrawerOpen(false)}
                 className={
                   "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap"
                 }
@@ -154,6 +154,17 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
+
+          {user && (
+            <Button
+              onClick={() => router.push("/logout")}
+              variant="secondary"
+              size="lg"
+              className="gap-2 absolute bottom-0 w-full justify-center rounded-none"
+            >
+              <LogOut /> Logout
+            </Button>
+          )}
         </nav>
       </LeftSideDrawer>
     </div>

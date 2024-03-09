@@ -15,7 +15,7 @@ export default function Sidebar() {
 
   return (
     <div className="sticky top-36 min-h-[calc(100vh-9rem)] border-r-2 border-border bg-background">
-      <nav className="grid gap-2 py-2 space-y-5">
+      <nav className="grid gap-2 py-2">
         <div className="space-y-2">
           {!user &&
             AuthRoutes.map((link, index) => (
@@ -90,7 +90,8 @@ export default function Sidebar() {
           <Button
             onClick={() => router.push("/logout")}
             variant="secondary"
-            className="gap-2 hidden md:flex w-fit"
+            size="lg"
+            className="gap-2 hidden md:flex absolute bottom-0 w-full justify-center rounded-none"
           >
             <LogOut /> Logout
           </Button>
