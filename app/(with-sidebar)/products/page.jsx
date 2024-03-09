@@ -37,7 +37,11 @@ export default function ProductsPage() {
                   )),
               ]
             : data.results.map((product) => (
-                <ProductCard key={product.uid} product={product} />
+                <ProductCard
+                  key={product.uid}
+                  product={product}
+                  isOutOfStock={!product.is_stock}
+                />
               ))}
         </div>
       </Container>

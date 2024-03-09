@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-function SizeOptions() {
+function SizeOptions({ stock_size }) {
+  const sizes = stock_size.map((item) => item.size);
   const [selectedSize, setSelectedSize] = useState(null);
 
   const handleSizeChange = (event) => {
@@ -8,10 +9,8 @@ function SizeOptions() {
     console.log(event.target.value);
   };
 
-  const sizes = ["S", "M", "L", "XL", "XXL"];
-
   return (
-    <div className="grid grid-cols-5 xl:grid-cols-10 gap-2">
+    <div className="grid grid-cols-5 2xl:grid-cols-10 gap-2">
       {sizes.map((size) => (
         <label
           key={size}

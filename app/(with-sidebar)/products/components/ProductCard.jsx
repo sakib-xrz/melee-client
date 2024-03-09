@@ -11,14 +11,15 @@ export default function ProductCard({ product, isOutOfStock = false }) {
 
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div
+    <Link
+      href={`/products/${product.slug}`}
       className={`product-card relative ${
         isOutOfStock ? "" : "hover:bg-accent transition-colors duration-300"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={"/products/1"}>
+      <div>
         <Image
           className="object-contain"
           width={300}
@@ -45,7 +46,7 @@ export default function ProductCard({ product, isOutOfStock = false }) {
             )}
           </div>
         </div>
-      </Link>
+      </div>
       {isOutOfStock && (
         <Image
           src={redX}
@@ -53,6 +54,6 @@ export default function ProductCard({ product, isOutOfStock = false }) {
           className="absolute top-0 right-0 bg-black/70"
         />
       )}
-    </div>
+    </Link>
   );
 }

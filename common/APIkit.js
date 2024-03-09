@@ -26,6 +26,10 @@ const APIKit = {
         return client.get(url);
       },
     },
+    getSingleProduct: (slug) => {
+      const url = `/products/${slug}`;
+      return client.get(url);
+    },
   },
 
   me: {
