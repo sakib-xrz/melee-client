@@ -62,7 +62,6 @@ export const initialValues = {
   description: "",
   primary_image: "",
   secondary_image: "",
-  additional_images: [],
   unit_price: "240",
   stock_s: "",
   stock_m: "30",

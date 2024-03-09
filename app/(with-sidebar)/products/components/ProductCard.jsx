@@ -6,12 +6,8 @@ import redX from "public/images/red-x-transparent.png";
 import { useState } from "react";
 
 export default function ProductCard({ product, isOutOfStock = false }) {
-  const primaryImage = product.images.find(
-    (image) => image.type === "PRIMARY_PRODUCT_IMAGE"
-  ).image;
-  const secondaryImage = product.images.find(
-    (image) => image.type === "SECONDARY_PRODUCT_IMAGE"
-  ).image;
+  const primaryImage = product.primary_image.image;
+  const secondaryImage = product.secondary_image.image;
 
   const [isHovered, setIsHovered] = useState(false);
   return (

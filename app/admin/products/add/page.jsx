@@ -43,7 +43,6 @@ export default function AdminAddProductPage() {
     // },
     initialValues: initialValues,
     onSubmit: (values) => {
-      console.log(values);
       setLoading(true);
 
       sizes.forEach((size) => {

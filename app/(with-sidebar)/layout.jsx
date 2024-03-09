@@ -1,7 +1,29 @@
+"use client";
+
+import { AUTH_TOKEN_KEY } from "@/common/KeyChain";
+import { setJWTokenAndRedirect } from "@/common/UtilKit";
 import Navbar from "@/components/shared/Navbar";
 import Sidebar from "@/components/shared/Sidebar";
+import { useStore } from "@/context/StoreProvider";
+import { useEffect } from "react";
 
 export default function WithSidebarLayout({ children }) {
+  const { fetchMe } = useStore();
+
+  useEffect(() => {
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+
+    if (token) {
+      setJWTokenAndRedirect(token)
+        .then(fetchMe())
+        .catch((error) => {
+          console.log(error.response.data?.detail);
+        });
+    }
+
+    return () => {};
+  }, []);
+
   return (
     <main>
       <Navbar />
