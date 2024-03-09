@@ -10,7 +10,6 @@ import Link from "next/link";
 import TextEditorFields from "./components/TextEditorFields";
 import StockFields from "./components/StockFields";
 import PrimarySecondaryImage from "./components/PrimarySecondaryImage";
-import AdditionalImages from "./components/AdditionalImages";
 import APIKit from "@/common/APIkit";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -67,7 +66,6 @@ export default function AdminAddProductPage() {
         short_pitch: values.short_pitch || "",
         primary_image: values.primary_image || "",
         secondary_image: values.secondary_image || "",
-        additional_images: values.additional_images || [],
         unit_price: parseFloat(values.unit_price) || 0,
         stock: JSON.stringify(stockArray) || [],
         details: values.details || "",
@@ -94,9 +92,9 @@ export default function AdminAddProductPage() {
         .finally(() => setLoading(false));
 
       toast.promise(promise, {
-        loading: "Saving Product...",
-        success: "Product Saved Successfully",
-        error: "Failed to save product",
+        loading: "Adding Product...",
+        success: "Product added Successfully",
+        error: "Failed to add product",
       });
     },
   });
@@ -170,8 +168,6 @@ export default function AdminAddProductPage() {
             <TextEditorFields formik={formik} />
 
             <PrimarySecondaryImage formik={formik} />
-
-            <AdditionalImages formik={formik} />
 
             <div className="flex gap-3 justify-end">
               <Link href={"/admin/products"}>
