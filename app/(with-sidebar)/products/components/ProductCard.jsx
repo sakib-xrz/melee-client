@@ -2,12 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import primaryImage from "public/images/primary.jpeg";
-import secondaryImage from "public/images/secondary.jpeg";
 import redX from "public/images/red-x-transparent.png";
 import { useState } from "react";
 
-export default function ProductCard({ isOutOfStock = false }) {
+export default function ProductCard({ product, isOutOfStock = false }) {
+  const primaryImage = product.images.find(
+    (image) => image.type === "PRIMARY_PRODUCT_IMAGE"
+  ).image;
+  const secondaryImage = product.images.find(
+    (image) => image.type === "SECONDARY_PRODUCT_IMAGE"
+  ).image;
+
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
@@ -20,6 +25,8 @@ export default function ProductCard({ isOutOfStock = false }) {
       <Link href={"/products/1"}>
         <Image
           className="object-contain"
+          width={300}
+          height={300}
           src={
             isOutOfStock
               ? primaryImage
@@ -32,13 +39,13 @@ export default function ProductCard({ isOutOfStock = false }) {
         />
         <div className="product-info px-4 py-3 flex flex-col space-y-2">
           <h4 className="text-sm font-medium leading-tight truncate cursor-pointer hover:underline">
-            Women Floral Midi Dress
+            {product.name}
           </h4>
           <div className="flex items-center justify-between text-sm font-semibold">
             {isOutOfStock ? (
               <p className="text-red-600">Out of Stock</p>
             ) : (
-              <p>$54.00</p>
+              <p>${product.unit_price}</p>
             )}
           </div>
         </div>

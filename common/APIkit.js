@@ -19,7 +19,14 @@ const APIKit = {
     },
   },
 
-  public: {},
+  public: {
+    products: {
+      getProducts: () => {
+        const url = "/products";
+        return client.get(url);
+      },
+    },
+  },
 
   me: {
     getMe: () => {

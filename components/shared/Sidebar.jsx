@@ -13,8 +13,6 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { user } = useStore();
 
-  console.log(user);
-
   return (
     <div className="sticky top-36 min-h-[calc(100vh-9rem)] border-r-2 border-border bg-background">
       <nav className="grid gap-2 py-2 space-y-5">
