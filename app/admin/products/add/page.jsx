@@ -11,32 +11,41 @@ import TextEditorFields from "./components/TextEditorFields";
 import StockFields from "./components/StockFields";
 import PrimarySecondaryImage from "./components/PrimarySecondaryImage";
 import AdditionalImages from "./components/AdditionalImages";
+import APIKit from "@/common/APIkit";
+import { toast } from "sonner";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { initialValues } from "@/common/KeyChain";
 
 export default function AdminAddProductPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const sizes = ["S", "M", "L", "XL", "XXL"];
   const stockArray = [];
 
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      short_pitch: "",
-      description: "",
-      primary_image: "",
-      secondary_image: "",
-      additional_images: [],
-      unit_price: "",
-      stock_s: "",
-      stock_m: "",
-      stock_l: "",
-      stock_xl: "",
-      stock_xxl: "",
-      details: "",
-      sizing: "",
-      care: "",
-      delivery_and_returns: "",
-    },
+    // initialValues: {
+    //   name: "",
+    //   short_pitch: "",
+    //   description: "",
+    //   primary_image: "",
+    //   secondary_image: "",
+    //   additional_images: [],
+    //   unit_price: "",
+    //   stock_s: "",
+    //   stock_m: "",
+    //   stock_l: "",
+    //   stock_xl: "",
+    //   stock_xxl: "",
+    //   details: "",
+    //   sizing: "",
+    //   care: "",
+    //   delivery_and_returns: "",
+    // },
+    initialValues: initialValues,
     onSubmit: (values) => {
-      // setLoading(true);
+      console.log(values);
+      setLoading(true);
 
       sizes.forEach((size) => {
         const stockValue = formik.values[`stock_${size.toLowerCase()}`];
@@ -54,23 +63,22 @@ export default function AdminAddProductPage() {
       });
 
       const payload = {
-        name: formik.values.name || "",
-        short_pitch: formik.values.short_pitch || "",
-        primary_image: formik.values.primary_image || "",
-        secondary_image: formik.values.secondary_image || "",
-        additional_images: formik.values.additional_images || [],
-        unit_price: parseFloat(formik.values.unit_price) || 0,
-        stock: stockArray || [],
-        details: formik.values.details || "",
-        sizing: formik.values.sizing || "",
-        care: formik.values.care || "",
-        delivery_and_returns: formik.values.delivery_and_returns || "",
+        name: values.name || "",
+        short_pitch: values.short_pitch || "",
+        primary_image: values.primary_image || "",
+        secondary_image: values.secondary_image || "",
+        additional_images: values.additional_images || [],
+        unit_price: parseFloat(values.unit_price) || 0,
+        stock: JSON.stringify(stockArray) || [],
+        details: values.details || "",
+        sizing: values.sizing || "",
+        care: values.care || "",
+        delivery_and_returns: values.delivery_and_returns || "",
       };
 
-      console.log(payload);
-
-      const handleSuccess = () => {
-        formik.resetForm();
+      const handleSuccess = ({ data }) => {
+        console.log(data);
+        // formik.resetForm();
         router.push("/admin/products");
       };
 
@@ -78,6 +86,18 @@ export default function AdminAddProductPage() {
         console.log(error);
         throw error;
       };
+
+      const promise = APIKit.shop.product
+        .postProduct(payload)
+        .then(handleSuccess)
+        .catch(handleFailure)
+        .finally(() => setLoading(false));
+
+      toast.promise(promise, {
+        loading: "Saving Product...",
+        success: "Product Saved Successfully",
+        error: "Failed to save product",
+      });
     },
   });
 

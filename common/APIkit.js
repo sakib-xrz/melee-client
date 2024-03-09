@@ -27,6 +27,15 @@ const APIKit = {
       return client.get(url);
     },
   },
+
+  shop: {
+    product: {
+      postProduct: (payload) => {
+        const url = "/shop/products";
+        return client.post(url, payload, defaultFileUploadConfig);
+      },
+    },
+  },
 };
 
 export default APIKit;
