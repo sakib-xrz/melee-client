@@ -1,6 +1,5 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import APIKit from "./APIkit";
 import HTTPKit from "./HTTPkit";
 import { AUTH_TOKEN_KEY } from "./KeyChain";
@@ -48,12 +47,20 @@ export const setCart = (item) => {
   }
 };
 
-export const GetCart = () => {
-  return useQuery({
-    queryKey: ["cart"],
-    queryFn: () => {
-      const data = localStorage.getItem("cart");
-      return data ? JSON.parse(data) : null;
-    },
-  });
+export const getCart = () => {
+  const data = localStorage.getItem("cart");
+  return data ? JSON.parse(data) : null;
+};
+
+export const refetchGetCart = () => {
+  getCart();
+};
+
+export const removeItemFromCart = (slug) => {
+  const cart = localStorage.getItem("cart");
+  const items = JSON.parse(cart);
+
+  const newItems = items.filter((item) => item.slug !== slug);
+
+  localStorage.setItem("cart", JSON.stringify(newItems));
 };

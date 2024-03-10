@@ -1,7 +1,15 @@
+import { useStore } from "@/context/StoreProvider";
 import { ScrollArea } from "../ui/scroll-area";
 import CartItem from "./CartItem";
+import { useEffect } from "react";
 
 export default function Cart() {
+  const { getCartItems } = useStore();
+
+  useEffect(() => {
+    getCartItems();
+  }, [getCartItems]);
+
   return (
     <div>
       <ScrollArea className="h-[calc(100vh-20rem)] lg:h-[calc(100vh-18rem)]">

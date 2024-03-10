@@ -14,12 +14,16 @@ import ActiveIcon from "./ActiveIcon";
 import Cart from "./Cart";
 import { Button } from "../ui/button";
 import { useStore } from "@/context/StoreProvider";
+import { getCart } from "@/common/UtilKit";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { user } = useStore();
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
+
+  const cartData = getCart();
+
   return (
     <div className="border-b-2 border-border sticky top-0 z-50 bg-background">
       <Container extraClassName="max-w-[115rem]">
@@ -46,13 +50,9 @@ export default function Navbar() {
             className="relative mr-2 text-white flex gap-4 cursor-pointer"
           >
             <ShoppingCart className="text-2xl font-medium text-white" />
-            <small className="absolute top-[-10px] -right-[10px] lg:right-[50px] bg-white text-background rounded-full text-xs p-1 pl-[5px] w-5 h-5 flex justify-center items-center font-semibold">
-              0
+            <small className="absolute top-[-10px] -right-[10px] bg-white text-background rounded-full text-xs p-1 pl-[5px] w-5 h-5 flex justify-center items-center font-semibold">
+              {cartData?.length || 0}
             </small>
-
-            <div className=" items-center gap-1 hidden lg:flex">
-              <span>$0.00</span>
-            </div>
           </div>
         </div>
       </Container>

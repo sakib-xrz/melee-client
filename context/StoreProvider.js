@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import APIKit from "@/common/APIkit";
 import { AUTH_TOKEN_KEY } from "@/common/KeyChain";
-import { setJWTokenAndRedirect } from "@/common/UtilKit";
+import { getCart, setJWTokenAndRedirect } from "@/common/UtilKit";
 import { toast } from "sonner";
 
 const StoreContext = createContext();
@@ -13,6 +13,14 @@ const StoreContext = createContext();
 export default function StoreProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState([]);
+
+  const cartData = getCart();
+
+  const getCartItems = async () => {
+    const { data } = await APIKit.cart.getCart(cartData);
+    console.log(data);
+  };
 
   const fetchMe = async () => {
     try {
@@ -50,6 +58,7 @@ export default function StoreProvider({ children }) {
 
   const userInfo = {
     user,
+    getCartItems,
     fetchMe,
     refetchMe,
     logout,

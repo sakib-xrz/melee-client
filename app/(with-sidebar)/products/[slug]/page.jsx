@@ -27,7 +27,7 @@ import { useStore } from "@/context/StoreProvider";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/APIkit";
 import Loading from "@/components/shared/Loading";
-import { GetCart, setCart } from "@/common/UtilKit";
+import { getCart, refetchGetCart, setCart } from "@/common/UtilKit";
 
 export default function ProductDetailsPage({ params: { slug } }) {
   const { user } = useStore();
@@ -42,7 +42,10 @@ export default function ProductDetailsPage({ params: { slug } }) {
       APIKit.public.getSingleProduct(slug).then(({ data }) => data),
   });
 
-  const { data: cartData, refetch } = GetCart();
+  const cartData = getCart();
+  const refetch = () => {
+    refetchGetCart();
+  };
 
   if (isLoading) return <Loading />;
 

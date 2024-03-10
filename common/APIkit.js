@@ -19,6 +19,13 @@ const APIKit = {
     },
   },
 
+  cart: {
+    getCart: (payload) => {
+      const url = "/carts";
+      return client.post(url, payload);
+    },
+  },
+
   public: {
     products: {
       getProducts: () => {
