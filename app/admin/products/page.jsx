@@ -6,13 +6,16 @@ import Loading from "@/components/shared/Loading";
 import PageTitleWithButton from "@/components/shared/PageTitleWithButton";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import { Check, Eye, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
+
+const queryClient = new QueryClient();
 
 export default function AdminProductPage() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["shop/products"],
     queryFn: () => APIKit.shop.product.getProducts().then(({ data }) => data),
   });
@@ -82,7 +85,28 @@ export default function AdminProductPage() {
       title: <p className="text-center">Publish</p>,
       dataField: "is_published",
       renderer: (row) => (
-        <Switch checked={row.is_published} value={row.is_published} />
+        <div className="flex justify-center">
+          <Switch
+            checked={row.is_published}
+            value={row.is_published}
+            onCheckedChange={(value) => {
+              const promise = APIKit.shop.product
+                .updateProductStatus(row.uid, {
+                  name: row.name,
+                  is_published: value,
+                })
+                .then(() => {
+                  refetch();
+                });
+
+              toast.promise(promise, {
+                loading: "Updating product status...",
+                success: "Updated product status",
+                error: "Failed to update product status",
+              });
+            }}
+          />
+        </div>
       ),
     },
     {
@@ -110,11 +134,21 @@ export default function AdminProductPage() {
       title: <p className="text-center">Actions</p>,
       renderer: (row) => (
         <div className="flex gap-3 justify-center items-center">
-          <Link target="_blank" href={`/products/${row.slug}`}>
-            <Button variant="secondary" size="icon">
+          {row.is_published ? (
+            <Link target="_blank" href={`/products/${row.slug}`}>
+              <Button size="icon" variant="secondary">
+                <Eye />
+              </Button>
+            </Link>
+          ) : (
+            <Button
+              variant="secondary"
+              size="icon"
+              disabled={!row.is_published}
+            >
               <Eye />
             </Button>
-          </Link>
+          )}
           <Link href={`/admin/products/${row.uid}/edit`}>
             <Button size="icon">
               <Pencil />

@@ -57,6 +57,10 @@ const APIKit = {
         const url = `/shop/products/${uid}`;
         return client.put(url, payload, defaultFileUploadConfig);
       },
+      updateProductStatus: (uid, payload) => {
+        const url = `/shop/products/${uid}`;
+        return client.put(url, payload);
+      },
     },
   },
 };
