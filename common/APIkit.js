@@ -45,6 +45,10 @@ const APIKit = {
         const url = "/shop/products";
         return client.post(url, payload, defaultFileUploadConfig);
       },
+      getProducts: () => {
+        const url = "/shop/products";
+        return client.get(url);
+      },
     },
   },
 };
