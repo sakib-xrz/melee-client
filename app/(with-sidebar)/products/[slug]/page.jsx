@@ -62,7 +62,7 @@ export default function ProductDetailsPage({ params: { slug } }) {
         size: selectedSize,
       };
       setCart(item);
-      toast.success("Successfully added to cart!");
+      toast.success("Added to cart!");
     }
   };
 

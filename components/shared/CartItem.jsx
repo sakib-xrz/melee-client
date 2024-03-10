@@ -1,10 +1,59 @@
+"use client";
+
 import { Trash } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import dress from "public/images/dress.png";
+import { useStore } from "@/context/StoreProvider";
+import { toast } from "sonner";
 
-export default function CartItem({ cart }) {
-  console.log(cart);
+export default function CartItem({ cart, refetch }) {
+  const handleIncrement = (slug) => {
+    const cart = localStorage.getItem("cart");
+    const cartItems = JSON.parse(cart);
+
+    const updatedCartItems = cartItems.map((cartItem) => {
+      if (cartItem.slug === slug) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity + 1,
+        };
+      }
+      return cartItem;
+    });
+
+    localStorage.setItem("cart", JSON.stringify(updatedCartItems));
+    refetch();
+  };
+
+  const handleDecrement = (slug) => {
+    const cart = localStorage.getItem("cart");
+    const cartItems = JSON.parse(cart);
+
+    const updatedCartItems = cartItems.map((cartItem) => {
+      if (cartItem.slug === slug) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity - 1,
+        };
+      }
+      return cartItem;
+    });
+
+    localStorage.setItem("cart", JSON.stringify(updatedCartItems));
+    refetch();
+  };
+
+  const handleRemove = (slug) => {
+    const data = JSON.parse(localStorage.getItem("cart"));
+    const deleteItem = slug;
+
+    const updatedData = data.filter((item) => item.slug !== deleteItem);
+    localStorage.setItem("cart", JSON.stringify(updatedData));
+    refetch();
+    toast.success("Item removed from cart!");
+  };
+
   return (
     <div class="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col">
       <div class="flex items-start gap-3">
@@ -12,7 +61,10 @@ export default function CartItem({ cart }) {
           <p class="line-clamp-1 cursor-pointer hover:underline underline-offset-2">
             {cart.name}
           </p>
-          <p class="text-xs md:text-sm ">Price: ${cart.unit_price}</p>
+          <p class="text-xs md:text-sm ">
+            Price: ${parseFloat(cart.unit_price).toFixed(2)} x{" "}
+            {cart.selected_stock}{" "}
+          </p>
           <p class="text-xs md:text-sm ">Size: {cart.size}</p>
 
           <p class="text-xs md:text-sm ">Stock: {cart.present_stock}</p>
@@ -31,6 +83,7 @@ export default function CartItem({ cart }) {
               size={"icon"}
               variant={"outline"}
               className={"rounded-l-sm rounded-r-none h-8 w-8"}
+              onClick={() => handleDecrement(cart.slug)}
             >
               -
             </Button>
@@ -38,23 +91,25 @@ export default function CartItem({ cart }) {
               variant={"outline"}
               className="rounded-none pointer-events-none h-8 w-8"
             >
-              7
+              {cart.selected_stock}
             </Button>
             <Button
               size={"icon"}
               variant={"outline"}
               className={"rounded-r-sm rounded-l-none  h-8 w-8"}
+              onClick={() => handleIncrement(cart.slug)}
             >
               +
             </Button>
           </div>
-          $378.00
+          ${parseFloat(cart.selected_stock * cart.unit_price).toFixed(2)}
         </div>
 
         <Button
           size="icon"
           variant="secondary"
           className={"rounded-sm h-8 w-8 p-1.5"}
+          onClick={() => handleRemove(cart.slug)}
         >
           <Trash />
         </Button>
