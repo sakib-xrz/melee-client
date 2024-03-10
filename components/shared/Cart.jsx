@@ -4,21 +4,20 @@ import CartItem from "./CartItem";
 import { useEffect } from "react";
 
 export default function Cart() {
-  const { getCartItems } = useStore();
+  const { getCartItems, carts } = useStore();
 
   useEffect(() => {
     getCartItems();
-  }, [getCartItems]);
+  }, []);
 
   return (
     <div>
       <ScrollArea className="h-[calc(100vh-20rem)] lg:h-[calc(100vh-18rem)]">
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
+        {carts?.length > 0 ? (
+          carts.map((cart) => <CartItem key={cart?.uid} cart={cart} />)
+        ) : (
+          <p>No items in cart</p>
+        )}
       </ScrollArea>
 
       <div class="space-y-2 my-4">

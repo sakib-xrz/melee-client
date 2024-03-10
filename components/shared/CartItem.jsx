@@ -3,18 +3,19 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import dress from "public/images/dress.png";
 
-export default function CartItem() {
+export default function CartItem({ cart }) {
+  console.log(cart);
   return (
     <div class="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col">
       <div class="flex items-start gap-3">
         <div class="w-full space-y-1">
           <p class="line-clamp-1 cursor-pointer hover:underline underline-offset-2">
-            Women Floral Midi Dress
+            {cart.name}
           </p>
-          <p class="text-xs md:text-sm ">Price: $54.00</p>
-          <p class="text-xs md:text-sm ">Size: M</p>
+          <p class="text-xs md:text-sm ">Price: ${cart.unit_price}</p>
+          <p class="text-xs md:text-sm ">Size: {cart.size}</p>
 
-          <p class="text-xs md:text-sm ">Stock: 60</p>
+          <p class="text-xs md:text-sm ">Stock: {cart.present_stock}</p>
         </div>
 
         <Image

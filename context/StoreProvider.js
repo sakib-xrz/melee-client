@@ -13,13 +13,12 @@ const StoreContext = createContext();
 export default function StoreProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
-  const [cart, setCart] = useState([]);
-
-  const cartData = getCart();
+  const [carts, setCarts] = useState([]);
 
   const getCartItems = async () => {
+    const cartData = getCart();
     const { data } = await APIKit.cart.getCart(cartData);
-    console.log(data);
+    setCarts(data);
   };
 
   const fetchMe = async () => {
@@ -58,6 +57,7 @@ export default function StoreProvider({ children }) {
 
   const userInfo = {
     user,
+    carts,
     getCartItems,
     fetchMe,
     refetchMe,
