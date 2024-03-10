@@ -6,102 +6,9 @@ import Loading from "@/components/shared/Loading";
 import PageTitleWithButton from "@/components/shared/PageTitleWithButton";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
-import { Check, Eye, ImagePlus, Pencil } from "lucide-react";
+import { Check, Eye, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-// const data = [
-//   {
-//     name: "Floral Summer Dress",
-//     product_image: dress,
-//     unit_price: 19.99,
-//     stock: 10,
-//     isPublished: true,
-//     sold: 5,
-//     sold_amount: 99.95,
-//   },
-//   {
-//     name: "Men's Leather Watch",
-//     product_image: dress,
-//     unit_price: 24.5,
-//     stock: 20,
-//     isPublished: true,
-//     sold: 2,
-//     sold_amount: 49.0,
-//   },
-//   {
-//     name: "Wireless Noise-Canceling Headphones",
-//     product_image: dress,
-//     unit_price: 129.95,
-//     stock: 35,
-//     isPublished: false,
-//     sold: 8,
-//     sold_amount: 1036.0,
-//   },
-//   {
-//     name: "Mountain Bike",
-//     product_image: dress,
-//     unit_price: 399.99,
-//     stock: 5,
-//     isPublished: true,
-//     sold: 1,
-//     sold_amount: 399.99,
-//   },
-//   {
-//     name: "Organic Coffee Beans (1kg)",
-//     product_image: dress,
-//     unit_price: 14.99,
-//     stock: 100,
-//     isPublished: true,
-//     sold: 15,
-//     sold_amount: 224.85,
-//   },
-//   {
-//     name: "Travel Backpack",
-//     product_image: dress,
-//     unit_price: 59.99,
-//     stock: 12,
-//     isPublished: true,
-//     sold: 3,
-//     sold_amount: 179.97,
-//   },
-//   {
-//     name: "Indoor Herb Garden Kit",
-//     product_image: dress,
-//     unit_price: 29.95,
-//     stock: 3,
-//     isPublished: false,
-//     sold: 0,
-//     sold_amount: 0.0,
-//   },
-//   {
-//     name: "Wireless Charging Pad",
-//     product_image: dress,
-//     unit_price: 19.99,
-//     stock: 40,
-//     isPublished: true,
-//     sold: 10,
-//     sold_amount: 199.9,
-//   },
-//   {
-//     name: "Set of 4 Wine Glasses",
-//     product_image: dress,
-//     unit_price: 34.0, // Assuming you meant to complete the price
-//     stock: undefined, // Assuming you don't have stock information for this product
-//     isPublished: true,
-//     sold: undefined, // Assuming you don't have sales information for this product
-//     sold_amount: undefined, // Calculated based on `unit_price` and `sold` (which are undefined)
-//   },
-//   {
-//     name: "Product 10",
-//     product_image: dress,
-//     unit_price: 55.99,
-//     stock: 2,
-//     isPublished: true,
-//     sold: 1,
-//     sold_amount: 55.99,
-//   },
-// ];
 
 export default function AdminProductPage() {
   const { data, isLoading } = useQuery({
@@ -208,17 +115,12 @@ export default function AdminProductPage() {
       title: <p className="text-center">Actions</p>,
       renderer: (row) => (
         <div className="flex gap-3 justify-center items-center">
-          <div>
-            <Button variant="outline" size="icon">
-              <ImagePlus />
-            </Button>
-          </div>
           <Link target="_blank" href={`/products/${row.slug}`}>
             <Button variant="secondary" size="icon">
               <Eye />
             </Button>
           </Link>
-          <Link href={"#"}>
+          <Link href={`/admin/products/${row.uid}/edit`}>
             <Button size="icon">
               <Pencil />
             </Button>

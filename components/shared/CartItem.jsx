@@ -12,6 +12,8 @@ export default function CartItem() {
             Women Floral Midi Dress
           </p>
           <p class="text-xs md:text-sm ">Price: $54.00</p>
+          <p class="text-xs md:text-sm ">Size: M</p>
+
           <p class="text-xs md:text-sm ">Stock: 60</p>
         </div>
 

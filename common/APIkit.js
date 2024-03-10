@@ -49,6 +49,10 @@ const APIKit = {
         const url = "/shop/products";
         return client.get(url);
       },
+      getSingleProduct: (uid) => {
+        const url = `/shop/products/${uid}`;
+        return client.get(url);
+      },
     },
   },
 };
