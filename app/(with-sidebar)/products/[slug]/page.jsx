@@ -26,6 +26,7 @@ import {
 import { useStore } from "@/context/StoreProvider";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/APIkit";
+import Loading from "@/components/shared/Loading";
 
 export default function ProductDetailsPage({ params: { slug } }) {
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function ProductDetailsPage({ params: { slug } }) {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
   const images = data.images.map((image) => image.image);
 

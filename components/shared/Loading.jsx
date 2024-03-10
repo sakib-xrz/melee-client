@@ -1,9 +1,9 @@
 import Image from "next/image";
 import loadingImage from "public/images/loader.gif";
 
-export default function loading() {
+export default function Loading() {
   return (
-    <main className="h-screen flex items-center justify-center">
+    <main className="flex justify-center mt-28">
       <Image
         src={loadingImage}
         alt="loading"

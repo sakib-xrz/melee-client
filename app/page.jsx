@@ -1,6 +1,7 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
+import Image from "next/image";
+import loadingImage from "public/images/loader.gif";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -12,7 +13,13 @@ export default function HomePage() {
 
   return (
     <main className="h-screen flex items-center justify-center">
-      <Loader2 className="w-20 h-20 animate-spin" />
+      <Image
+        src={loadingImage}
+        alt="loading"
+        priority
+        width={250}
+        height={250}
+      />
     </main>
   );
 }
