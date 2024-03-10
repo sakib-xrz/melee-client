@@ -14,7 +14,6 @@ import APIKit from "@/common/APIkit";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { initialValues } from "@/common/KeyChain";
 
 export default function AdminAddProductPage() {
   const router = useRouter();
@@ -73,7 +72,7 @@ export default function AdminAddProductPage() {
 
       const handleSuccess = ({ data }) => {
         console.log(data);
-        // formik.resetForm();
+        formik.resetForm();
         router.push("/admin/products");
       };
 

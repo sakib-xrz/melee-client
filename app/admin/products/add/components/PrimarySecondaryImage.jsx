@@ -14,7 +14,11 @@ export default function PrimarySecondaryImage({ formik }) {
             <div className="rounded-md w-32 h-32 relative">
               <Image
                 className="w=full h-full object-cover rounded-md"
-                src={URL.createObjectURL(formik.values.primary_image)}
+                src={
+                  typeof formik.values.primary_image === "string"
+                    ? formik.values.primary_image
+                    : URL.createObjectURL(formik.values.primary_image)
+                }
                 width={500}
                 height={500}
                 alt=""
@@ -46,7 +50,11 @@ export default function PrimarySecondaryImage({ formik }) {
             <div className="rounded-md w-32 h-32 relative">
               <Image
                 className="w=full h-full object-cover rounded-md"
-                src={URL.createObjectURL(formik.values.secondary_image)}
+                src={
+                  typeof formik.values.secondary_image === "string"
+                    ? formik.values.secondary_image
+                    : URL.createObjectURL(formik.values.secondary_image)
+                }
                 width={500}
                 height={500}
                 alt=""

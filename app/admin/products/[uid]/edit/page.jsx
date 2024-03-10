@@ -25,22 +25,27 @@ export default function EditProduct({ params: { uid } }) {
     secondary_image:
       data.images.find((image) => image.type === "SECONDARY_PRODUCT_IMAGE")
         .image || "",
-    unit_price: data.unit_price || "",
-    stock_s: data.stock.length
-      ? data.stock.find((stock) => stock.size === "S").stock
-      : "",
-    stock_m: data.stock.length
-      ? data.stock.find((stock) => stock.size === "M").stock
-      : "",
-    stock_l: data.stock.length
-      ? data.stock.find((stock) => stock.size === "L").stock
-      : "",
-    stock_xl: data.stock.length
-      ? data.stock.find((stock) => stock.size === "XL").stock
-      : "",
-    stock_xxl: data.stock.length
-      ? data.stock.find((stock) => stock.size === "XXL").stock
-      : "",
+    unit_price: data.unit_price ? parseFloat(data.unit_price).toFixed(2) : "",
+    stock_s:
+      data.stock.length && data.stock.find((stock) => stock.size === "S")
+        ? data.stock.find((stock) => stock.size === "S").stock
+        : "",
+    stock_m:
+      data.stock.length && data.stock.find((stock) => stock.size === "M")
+        ? data.stock.find((stock) => stock.size === "M").stock
+        : "",
+    stock_l:
+      data.stock.length && data.stock.find((stock) => stock.size === "L")
+        ? data.stock.find((stock) => stock.size === "L").stock
+        : "",
+    stock_xl:
+      data.stock.length && data.stock.find((stock) => stock.size === "XL")
+        ? data.stock.find((stock) => stock.size === "XL").stock
+        : "",
+    stock_xxl:
+      data.stock.length && data.stock.find((stock) => stock.size === "XXL")
+        ? data.stock.find((stock) => stock.size === "XXL").stock
+        : "",
     details: data.details || "",
     sizing: data.sizing || "",
     care: data.care || "",
@@ -56,7 +61,7 @@ export default function EditProduct({ params: { uid } }) {
 
   return (
     <div>
-      <EditProductForm initialValues={initialValues} />
+      <EditProductForm initialValues={initialValues} uid={data.uid} />
     </div>
   );
 }
