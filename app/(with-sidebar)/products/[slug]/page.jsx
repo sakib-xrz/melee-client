@@ -27,7 +27,7 @@ import { useStore } from "@/context/StoreProvider";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/APIkit";
 import Loading from "@/components/shared/Loading";
-import { getCart, refetchGetCart, setCart } from "@/common/UtilKit";
+import GetCart, { getCart, refetchGetCart, setCart } from "@/common/UtilKit";
 
 export default function ProductDetailsPage({ params: { slug } }) {
   const { user } = useStore();
@@ -42,10 +42,7 @@ export default function ProductDetailsPage({ params: { slug } }) {
       APIKit.public.getSingleProduct(slug).then(({ data }) => data),
   });
 
-  const cartData = getCart();
-  const refetch = () => {
-    refetchGetCart();
-  };
+  const { data: cartData, refetch } = GetCart();
 
   if (isLoading) return <Loading />;
 
@@ -65,7 +62,7 @@ export default function ProductDetailsPage({ params: { slug } }) {
         size: selectedSize,
       };
       setCart(item);
-      toast.success("Added to cart");
+      toast.success("Successfully added to cart!");
     }
   };
 
@@ -128,7 +125,7 @@ export default function ProductDetailsPage({ params: { slug } }) {
                 }}
               >
                 {isAlreadyExists ? (
-                  "Added to Cart"
+                  "Already in Cart"
                 ) : (
                   <>
                     <ShoppingCart />

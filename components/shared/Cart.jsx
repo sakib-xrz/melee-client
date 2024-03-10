@@ -2,12 +2,14 @@ import { useStore } from "@/context/StoreProvider";
 import { ScrollArea } from "../ui/scroll-area";
 import CartItem from "./CartItem";
 import { useEffect } from "react";
+import GetCart from "@/common/UtilKit";
 
 export default function Cart() {
   const { getCartItems, carts } = useStore();
+  const { data: cartData } = GetCart();
 
   useEffect(() => {
-    getCartItems();
+    getCartItems(cartData);
   }, []);
 
   return (

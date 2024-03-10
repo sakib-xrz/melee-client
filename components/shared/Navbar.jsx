@@ -14,7 +14,7 @@ import ActiveIcon from "./ActiveIcon";
 import Cart from "./Cart";
 import { Button } from "../ui/button";
 import { useStore } from "@/context/StoreProvider";
-import { getCart } from "@/common/UtilKit";
+import GetCart from "@/common/UtilKit";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -22,7 +22,7 @@ export default function Navbar() {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
 
-  const cartData = getCart();
+  const { data: cartData } = GetCart();
 
   return (
     <div className="border-b-2 border-border sticky top-0 z-50 bg-background">

@@ -10,12 +10,12 @@ const queryClient = new QueryClient();
 export default function GlobalProvider({ children }) {
   return (
     <>
-      <StoreProvider>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <StoreProvider>
           <Toaster position="top-center" richColors />
           {children}
-        </QueryClientProvider>
-      </StoreProvider>
+        </StoreProvider>
+      </QueryClientProvider>
     </>
   );
 }
