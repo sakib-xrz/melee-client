@@ -84,6 +84,7 @@ export default function CartItem({ cart, refetch }) {
               variant={"outline"}
               className={"rounded-l-sm rounded-r-none h-8 w-8"}
               onClick={() => handleDecrement(cart.slug)}
+              disabled={cart.selected_stock < 2}
             >
               -
             </Button>
@@ -98,6 +99,7 @@ export default function CartItem({ cart, refetch }) {
               variant={"outline"}
               className={"rounded-r-sm rounded-l-none  h-8 w-8"}
               onClick={() => handleIncrement(cart.slug)}
+              disabled={cart.selected_stock >= cart.present_stock}
             >
               +
             </Button>
