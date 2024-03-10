@@ -23,25 +23,23 @@ export default function AdminAddProductPage() {
   const stockArray = [];
 
   const formik = useFormik({
-    // initialValues: {
-    //   name: "",
-    //   short_pitch: "",
-    //   description: "",
-    //   primary_image: "",
-    //   secondary_image: "",
-    //   additional_images: [],
-    //   unit_price: "",
-    //   stock_s: "",
-    //   stock_m: "",
-    //   stock_l: "",
-    //   stock_xl: "",
-    //   stock_xxl: "",
-    //   details: "",
-    //   sizing: "",
-    //   care: "",
-    //   delivery_and_returns: "",
-    // },
-    initialValues: initialValues,
+    initialValues: {
+      name: "",
+      short_pitch: "",
+      description: "",
+      primary_image: "",
+      secondary_image: "",
+      unit_price: "",
+      stock_s: "",
+      stock_m: "",
+      stock_l: "",
+      stock_xl: "",
+      stock_xxl: "",
+      details: "",
+      sizing: "",
+      care: "",
+      delivery_and_returns: "",
+    },
     onSubmit: (values) => {
       setLoading(true);
 
@@ -127,22 +125,7 @@ export default function AdminAddProductPage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
-                Short Brief
-              </p>
-              <div>
-                <Textarea
-                  className="bg-transparent"
-                  id="short_pitch"
-                  name="short_pitch"
-                  placeholder="Short brief about your product"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.short_pitch}
-                />
-              </div>
-            </div>
+            <PrimarySecondaryImage formik={formik} />
 
             <div className="space-y-2">
               <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
@@ -162,11 +145,26 @@ export default function AdminAddProductPage() {
               </div>
             </div>
 
+            <div className="space-y-2">
+              <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
+                Short Brief
+              </p>
+              <div>
+                <Textarea
+                  className="bg-transparent"
+                  id="short_pitch"
+                  name="short_pitch"
+                  placeholder="Short brief about your product"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.short_pitch}
+                />
+              </div>
+            </div>
+
             <StockFields formik={formik} />
 
             <TextEditorFields formik={formik} />
-
-            <PrimarySecondaryImage formik={formik} />
 
             <div className="flex gap-3 justify-end">
               <Link href={"/admin/products"}>
@@ -178,7 +176,11 @@ export default function AdminAddProductPage() {
                   Cancel
                 </Button>
               </Link>
-              <Button className="w-fit whitespace-nowrap" type="submit">
+              <Button
+                isLoading={loading}
+                className="w-fit whitespace-nowrap"
+                type="submit"
+              >
                 Publish Product
               </Button>
             </div>
