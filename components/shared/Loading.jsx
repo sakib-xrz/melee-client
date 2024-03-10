@@ -3,7 +3,7 @@ import loadingImage from "public/images/loader.gif";
 
 export default function Loading() {
   return (
-    <main className="flex justify-center mt-28">
+    <main className="flex justify-center mt-32">
       <Image
         src={loadingImage}
         alt="loading"

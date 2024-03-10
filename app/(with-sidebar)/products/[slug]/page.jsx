@@ -27,10 +27,14 @@ import { useStore } from "@/context/StoreProvider";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/APIkit";
 import Loading from "@/components/shared/Loading";
+import { GetCart, setCart } from "@/common/UtilKit";
 
 export default function ProductDetailsPage({ params: { slug } }) {
+  const { user } = useStore();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(true);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [errorMessages, setErrorMessages] = useState("");
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["product", slug],
@@ -38,7 +42,29 @@ export default function ProductDetailsPage({ params: { slug } }) {
       APIKit.public.getSingleProduct(slug).then(({ data }) => data),
   });
 
-  const { user } = useStore();
+  const { data: cartData, refetch } = GetCart();
+
+  if (isLoading) return <Loading />;
+
+  const images = data.images.map((image) => image.image);
+
+  const isAlreadyExists = !!cartData?.find((e) => e.slug == data.slug);
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      setErrorMessages("Please select a size");
+      return;
+    } else {
+      setErrorMessages("");
+      const item = {
+        slug: data.slug,
+        quantity: 1,
+        size: selectedSize,
+      };
+      setCart(item);
+      toast.success("Added to cart");
+    }
+  };
 
   const handleBuyNow = () => {
     if (!user) {
@@ -48,10 +74,6 @@ export default function ProductDetailsPage({ params: { slug } }) {
       toast.success("Purchase successful!");
     }
   };
-
-  if (isLoading) return <Loading />;
-
-  const images = data.images.map((image) => image.image);
 
   return (
     <Container extraClassName={"max-w-[115rem]"}>
@@ -78,18 +100,38 @@ export default function ProductDetailsPage({ params: { slug } }) {
                 Select Size <span className="text-red-500">*</span>
               </div>
 
-              <SizeOptions stock_size={data.stock_size} />
+              <SizeOptions
+                stock_size={data.stock_size}
+                selectedSize={selectedSize}
+                setSelectedSize={setSelectedSize}
+                setErrorMessages={setErrorMessages}
+                isAlreadyExists={isAlreadyExists}
+              />
+              {errorMessages && (
+                <div className="text-red-500 text-sm">{errorMessages}</div>
+              )}
             </div>
           )}
 
           {data.stock_size.length > 0 ? (
             <div className="flex flex-col xs:flex-row items-center gap-5">
               <Button
+                disabled={isAlreadyExists}
                 className="rounded-sm text-base gap-2"
                 variant={"secondary"}
+                onClick={() => {
+                  handleAddToCart();
+                  refetch();
+                }}
               >
-                <ShoppingCart />
-                Add to Cart
+                {isAlreadyExists ? (
+                  "Added to Cart"
+                ) : (
+                  <>
+                    <ShoppingCart />
+                    Add to Cart
+                  </>
+                )}
               </Button>
 
               <Button
@@ -113,44 +155,55 @@ export default function ProductDetailsPage({ params: { slug } }) {
           {data.short_pitch && <div>{data.short_pitch}</div>}
 
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Details</AccordionTrigger>
-              <AccordionContent>
-                <div
-                  className="ql-editor prose !p-0"
-                  dangerouslySetInnerHTML={{ __html: data.details }}
-                />
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>Sizing</AccordionTrigger>
-              <AccordionContent>
-                <div
-                  className="ql-editor prose !p-0"
-                  dangerouslySetInnerHTML={{ __html: data.sizing }}
-                />
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger>Care</AccordionTrigger>
-              <AccordionContent>
-                <div
-                  className="ql-editor prose !p-0"
-                  dangerouslySetInnerHTML={{ __html: data.care }}
-                />
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-4">
-              <AccordionTrigger>Delivery and Returns</AccordionTrigger>
-              <AccordionContent>
-                <div
-                  className="ql-editor prose !p-0 !text-primary"
-                  dangerouslySetInnerHTML={{
-                    __html: data.delivery_and_returns,
-                  }}
-                />
-              </AccordionContent>
-            </AccordionItem>
+            {data.details && (
+              <AccordionItem value="item-1">
+                <AccordionTrigger>Details</AccordionTrigger>
+                <AccordionContent>
+                  <div
+                    className="ql-editor prose !p-0"
+                    dangerouslySetInnerHTML={{ __html: data.details }}
+                  />
+                </AccordionContent>
+              </AccordionItem>
+            )}
+
+            {data.sizing && (
+              <AccordionItem value="item-2">
+                <AccordionTrigger>Sizing</AccordionTrigger>
+                <AccordionContent>
+                  <div
+                    className="ql-editor prose !p-0"
+                    dangerouslySetInnerHTML={{ __html: data.sizing }}
+                  />
+                </AccordionContent>
+              </AccordionItem>
+            )}
+
+            {data.care && (
+              <AccordionItem value="item-3">
+                <AccordionTrigger>Care</AccordionTrigger>
+                <AccordionContent>
+                  <div
+                    className="ql-editor prose !p-0"
+                    dangerouslySetInnerHTML={{ __html: data.care }}
+                  />
+                </AccordionContent>
+              </AccordionItem>
+            )}
+
+            {data.delivery_and_returns && (
+              <AccordionItem value="item-4">
+                <AccordionTrigger>Delivery and Returns</AccordionTrigger>
+                <AccordionContent>
+                  <div
+                    className="ql-editor prose !p-0 !text-primary"
+                    dangerouslySetInnerHTML={{
+                      __html: data.delivery_and_returns,
+                    }}
+                  />
+                </AccordionContent>
+              </AccordionItem>
+            )}
           </Accordion>
         </div>
       </div>

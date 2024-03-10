@@ -1,12 +1,14 @@
-import { useState } from "react";
-
-function SizeOptions({ stock_size }) {
+function SizeOptions({
+  stock_size,
+  selectedSize,
+  setSelectedSize,
+  setErrorMessages,
+}) {
   const sizes = stock_size.map((item) => item.size);
-  const [selectedSize, setSelectedSize] = useState(null);
 
   const handleSizeChange = (event) => {
     setSelectedSize(event.target.value);
-    console.log(event.target.value);
+    setErrorMessages("");
   };
 
   return (
