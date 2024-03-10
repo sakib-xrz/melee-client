@@ -63,7 +63,7 @@ export default function AdminProductPage() {
               </p>
             ))
           ) : (
-            <p className="text-center">N/A</p>
+            <p className="text-center">Out of stock</p>
           )}
         </div>
       ),
