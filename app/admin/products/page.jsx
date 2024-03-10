@@ -5,6 +5,7 @@ import DataTable from "@/components/shared/DataTable";
 import Loading from "@/components/shared/Loading";
 import PageTitleWithButton from "@/components/shared/PageTitleWithButton";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { useQuery } from "@tanstack/react-query";
 import { Check, Eye, Pencil } from "lucide-react";
 import Image from "next/image";
@@ -81,13 +82,7 @@ export default function AdminProductPage() {
       title: <p className="text-center">Publish</p>,
       dataField: "is_published",
       renderer: (row) => (
-        <p className="flex justify-center">
-          {row.is_published ? (
-            <Check className="bg-white rounded-full text-background p-1 w-5 h-5" />
-          ) : (
-            <Check className="bg-accent rounded-full text-background p-1 w-5 h-5" />
-          )}
-        </p>
+        <Switch checked={row.is_published} value={row.is_published} />
       ),
     },
     {
