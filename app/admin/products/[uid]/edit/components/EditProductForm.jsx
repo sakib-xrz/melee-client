@@ -15,7 +15,7 @@ import PrimarySecondaryImage from "../../../add/components/PrimarySecondaryImage
 import StockFields from "../../../add/components/StockFields";
 import TextEditorFields from "../../../add/components/TextEditorFields";
 
-export default function EditProductForm({ initialValues, uid }) {
+export default function EditProductForm({ initialValues, uid, refetch }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const sizes = ["S", "M", "L", "XL", "XXL"];
@@ -48,6 +48,7 @@ export default function EditProductForm({ initialValues, uid }) {
         secondary_image: values.secondary_image || "",
         unit_price: parseFloat(values.unit_price) || 0,
         stock: JSON.stringify(stockArray) || [],
+        is_published: values.is_published || false,
         details: values.details || "",
         sizing: values.sizing || "",
         care: values.care || "",
@@ -56,7 +57,7 @@ export default function EditProductForm({ initialValues, uid }) {
 
       const handleSuccess = ({ data }) => {
         console.log(data);
-        formik.resetForm();
+        refetch();
         router.push("/admin/products");
       };
 

@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import EditProductForm from "./components/EditProductForm";
 
 export default function EditProduct({ params: { uid } }) {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["/shop/products", uid],
     queryFn: () =>
       APIKit.shop.product.getSingleProduct(uid).then(({ data }) => data),
@@ -14,6 +14,8 @@ export default function EditProduct({ params: { uid } }) {
   });
 
   if (isLoading) return <Loading />;
+
+  console.log(data);
 
   const initialValues = {
     name: data.name || "",
@@ -46,6 +48,7 @@ export default function EditProduct({ params: { uid } }) {
       data.stock.length && data.stock.find((stock) => stock.size === "XXL")
         ? data.stock.find((stock) => stock.size === "XXL").stock
         : "",
+    is_published: data.is_published || false,
     details: data.details || "",
     sizing: data.sizing || "",
     care: data.care || "",
@@ -61,7 +64,11 @@ export default function EditProduct({ params: { uid } }) {
 
   return (
     <div>
-      <EditProductForm initialValues={initialValues} uid={data.uid} />
+      <EditProductForm
+        initialValues={initialValues}
+        uid={data.uid}
+        refetch={refetch}
+      />
     </div>
   );
 }
