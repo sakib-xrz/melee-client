@@ -15,8 +15,6 @@ export default function EditProduct({ params: { uid } }) {
 
   if (isLoading) return <Loading />;
 
-  console.log(data);
-
   const initialValues = {
     name: data.name || "",
     short_pitch: data.short_pitch || "",

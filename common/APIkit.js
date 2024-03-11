@@ -62,11 +62,11 @@ const APIKit = {
       },
       updateProduct: (uid, payload) => {
         const url = `/shop/products/${uid}`;
-        return client.put(url, payload, defaultFileUploadConfig);
+        return client.patch(url, payload, defaultFileUploadConfig);
       },
       updateProductStatus: (uid, payload) => {
-        const url = `/shop/products/${uid}`;
-        return client.put(url, payload);
+        const url = `/shop/products/${uid}/publish`;
+        return client.patch(url, payload);
       },
     },
   },

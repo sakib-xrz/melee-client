@@ -6,13 +6,11 @@ import Loading from "@/components/shared/Loading";
 import PageTitleWithButton from "@/components/shared/PageTitleWithButton";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { QueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Check, Eye, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
-
-const queryClient = new QueryClient();
 
 export default function AdminProductPage() {
   const { data, isLoading, refetch } = useQuery({
@@ -89,12 +87,9 @@ export default function AdminProductPage() {
           <Switch
             checked={row.is_published}
             value={row.is_published}
-            onCheckedChange={(value) => {
+            onCheckedChange={() => {
               const promise = APIKit.shop.product
-                .updateProductStatus(row.uid, {
-                  name: row.name,
-                  is_published: value,
-                })
+                .updateProductStatus(row.uid)
                 .then(() => {
                   refetch();
                 });
