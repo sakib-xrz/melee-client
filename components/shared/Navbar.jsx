@@ -9,20 +9,23 @@ import { useState } from "react";
 import { LeftSideDrawer } from "./LeftSideDrawer";
 import Link from "next/link";
 import { AuthRoutes, ProductRoutes, SupportRoutes } from "@/common/KeyChain";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ActiveIcon from "./ActiveIcon";
 import Cart from "./Cart";
 import { Button } from "../ui/button";
 import { useStore } from "@/context/StoreProvider";
-import { GetCart } from "@/common/UtilKit";
+import { GetCart, calculateTotal } from "@/common/UtilKit";
 
 export default function Navbar() {
+  const router = useRouter();
   const pathname = usePathname();
-  const { user } = useStore();
+  const { user, carts } = useStore();
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
 
   const { data: cartData } = GetCart();
+
+  const { total } = calculateTotal(carts || []);
 
   return (
     <div className="border-b-2 border-border sticky top-0 z-50 bg-background">
@@ -65,7 +68,11 @@ export default function Navbar() {
         <Cart />
 
         {cartData && cartData.length > 0 ? (
-          <Button className="absolute bottom-2.5 right-4">
+          <Button
+            disabled={+total === 0}
+            onClick={() => router.push("/checkout")}
+            className="absolute bottom-2.5 right-4"
+          >
             Proceed to Checkout
           </Button>
         ) : null}

@@ -83,6 +83,6 @@ export const calculateTotal = (data) => {
   return {
     subtotal: subtotal,
     shipping: shipping,
-    total: total,
+    total: +total,
   };
 };
