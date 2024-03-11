@@ -14,7 +14,7 @@ import ActiveIcon from "./ActiveIcon";
 import Cart from "./Cart";
 import { Button } from "../ui/button";
 import { useStore } from "@/context/StoreProvider";
-import GetCart from "@/common/UtilKit";
+import { GetCart } from "@/common/UtilKit";
 
 export default function Navbar() {
   const pathname = usePathname();

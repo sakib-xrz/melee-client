@@ -57,4 +57,21 @@ export const GetCart = () => {
   });
 };
 
-export default GetCart;
+export const calculateTotal = (data) => {
+  const subtotal = data?.reduce((accumulator, currentValue) => {
+    return (
+      accumulator + currentValue?.selected_stock * currentValue?.unit_price
+    );
+  }, 0);
+
+  // Calculate shipping charge as a single charge for all products
+  const shipping = data?.length > 0 ? data[0]?.shipping_charges : 0;
+
+  const total = (subtotal + shipping)?.toFixed(2);
+
+  return {
+    subtotal: subtotal,
+    shipping: shipping,
+    total: total,
+  };
+};

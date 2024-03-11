@@ -2,7 +2,7 @@ import { useStore } from "@/context/StoreProvider";
 import { ScrollArea } from "../ui/scroll-area";
 import CartItem from "./CartItem";
 import { useEffect } from "react";
-import GetCart from "@/common/UtilKit";
+import { GetCart, calculateTotal } from "@/common/UtilKit";
 
 export default function Cart() {
   const { getCartItems, carts, cartLoading } = useStore();
@@ -13,6 +13,8 @@ export default function Cart() {
   }, [cartData]);
 
   if (cartLoading) return <p>Loading...</p>;
+
+  const { subtotal, shipping, total } = calculateTotal(carts || []);
 
   return (
     <div>
@@ -31,15 +33,15 @@ export default function Cart() {
           <h2 class="text-sm font-bold ">Payment Break Down</h2>
           <div class="flex justify-between items-center text-sm font-medium text-grey-700">
             <p>Sub Total</p>
-            <p>$378.00</p>
+            <p>${subtotal || 0}</p>
           </div>
           <div class="flex justify-between items-center text-sm font-medium text-grey-700">
             <p>Shipping Charge</p>
-            <p class="flex items-center gap-1">$10.00</p>
+            <p class="flex items-center gap-1">${shipping || 0}</p>
           </div>
           <div class="flex justify-between items-center text-sm font-bold text-grey-700">
             <p>Total Cost</p>
-            <p>$388.00</p>
+            <p>${total || 0}</p>
           </div>
         </div>
       )}

@@ -27,7 +27,7 @@ import { useStore } from "@/context/StoreProvider";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/APIkit";
 import Loading from "@/components/shared/Loading";
-import GetCart, { getCart, refetchGetCart, setCart } from "@/common/UtilKit";
+import { GetCart, setCart } from "@/common/UtilKit";
 
 export default function ProductDetailsPage({ params: { slug } }) {
   const { user } = useStore();
