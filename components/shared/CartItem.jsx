@@ -56,6 +56,11 @@ export default function CartItem({ cart, refetch }) {
     toast.success("Item removed from cart!");
   };
 
+  const selected_quantity =
+    cart.selected_stock > cart.present_stock
+      ? cart.present_stock
+      : cart.selected_stock;
+
   return (
     <div class="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col">
       <div class="flex items-start gap-3">
@@ -64,8 +69,7 @@ export default function CartItem({ cart, refetch }) {
             {cart.name}
           </p>
           <p class="text-xs md:text-sm ">
-            Price: ${parseFloat(cart.unit_price).toFixed(2)} x{" "}
-            {cart.selected_stock}{" "}
+            Price: ${parseFloat(cart.unit_price).toFixed(2)}
           </p>
           <p class="text-xs md:text-sm ">Size: {cart.size}</p>
 
@@ -78,39 +82,45 @@ export default function CartItem({ cart, refetch }) {
           alt="cart image"
         />
       </div>
-      <div className="flex justify-between items-center">
-        <div className="flex gap-4 items-center">
-          <div>
-            <Button
-              size={"icon"}
-              variant={"outline"}
-              className={"rounded-l-sm rounded-r-none h-8 w-8"}
-              onClick={() => handleDecrement(cart.slug)}
-              disabled={cart.selected_stock < 2 || cartLoading}
-            >
-              -
-            </Button>
-            <Button
-              variant={"outline"}
-              className="rounded-none pointer-events-none h-8 w-8"
-            >
-              {cart.selected_stock}
-            </Button>
-            <Button
-              size={"icon"}
-              variant={"outline"}
-              className={"rounded-r-sm rounded-l-none  h-8 w-8"}
-              onClick={() => handleIncrement(cart.slug)}
-              disabled={
-                cart.selected_stock >= cart.present_stock || cartLoading
-              }
-            >
-              +
-            </Button>
-          </div>
-          ${parseFloat(cart.selected_stock * cart.unit_price).toFixed(2)}
-        </div>
 
+      <div className="flex justify-between items-center">
+        {cart.present_stock < 1 ? (
+          <p class="text-red-600 text-xs md:text-sm font-medium">
+            Item out of stock. Please remove from cart
+          </p>
+        ) : (
+          <div className="flex gap-4 items-center">
+            <div>
+              <Button
+                size={"icon"}
+                variant={"outline"}
+                className={"rounded-l-sm rounded-r-none h-8 w-8"}
+                onClick={() => handleDecrement(cart.slug)}
+                disabled={cart.selected_stock < 2 || cartLoading}
+              >
+                -
+              </Button>
+              <Button
+                variant={"outline"}
+                className="rounded-none pointer-events-none h-8 w-8"
+              >
+                {selected_quantity}
+              </Button>
+              <Button
+                size={"icon"}
+                variant={"outline"}
+                className={"rounded-r-sm rounded-l-none  h-8 w-8"}
+                onClick={() => handleIncrement(cart.slug)}
+                disabled={
+                  cart.selected_stock >= cart.present_stock || cartLoading
+                }
+              >
+                +
+              </Button>
+            </div>
+            ${parseFloat(cart.selected_stock * cart.unit_price).toFixed(2)}
+          </div>
+        )}
         <Button
           size="icon"
           variant="secondary"

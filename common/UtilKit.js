@@ -59,13 +59,24 @@ export const GetCart = () => {
 
 export const calculateTotal = (data) => {
   const subtotal = data?.reduce((accumulator, currentValue) => {
-    return (
-      accumulator + currentValue?.selected_stock * currentValue?.unit_price
-    );
+    const selected_quantity =
+      currentValue.selected_stock > currentValue.present_stock
+        ? currentValue.present_stock
+        : currentValue.selected_stock;
+    return accumulator + selected_quantity * currentValue.unit_price;
   }, 0);
 
-  // Calculate shipping charge as a single charge for all products
-  const shipping = data?.length > 0 ? data[0]?.shipping_charges : 0;
+  // Calculate total selected quantity for shipping calculation
+  const totalSelectedQuantity = data?.reduce((accumulator, currentValue) => {
+    const selected_quantity =
+      currentValue.selected_stock > currentValue.present_stock
+        ? currentValue.present_stock
+        : currentValue.selected_stock;
+    return accumulator + selected_quantity;
+  }, 0);
+
+  // Calculate shipping charge as a single charge for all products based on total selected quantity
+  const shipping = totalSelectedQuantity > 0 ? data[0]?.shipping_charges : 0;
 
   const total = (subtotal + shipping)?.toFixed(2);
 
