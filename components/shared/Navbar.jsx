@@ -70,7 +70,9 @@ export default function Navbar() {
         {cartData && cartData.length > 0 ? (
           <Button
             disabled={+total === 0}
-            onClick={() => router.push("/checkout")}
+            onClick={() => {
+              router.push("/checkout"), setCartDrawerOpen(false);
+            }}
             className="absolute bottom-2.5 right-4"
           >
             Proceed to Checkout

@@ -62,30 +62,32 @@ export default function CartItem({ cart, refetch }) {
       : cart.selected_stock;
 
   return (
-    <div class="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col">
-      <div class="flex items-start gap-3">
-        <div class="w-full space-y-1">
-          <p class="line-clamp-1 cursor-pointer hover:underline underline-offset-2">
+    <div className="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col">
+      <div className="flex items-start gap-3">
+        <div className="w-full space-y-1">
+          <p className="line-clamp-1 cursor-pointer hover:underline underline-offset-2">
             {cart.name}
           </p>
-          <p class="text-xs md:text-sm ">
+          <p className="text-xs md:text-sm ">
             Price: ${parseFloat(cart.unit_price).toFixed(2)}
           </p>
-          <p class="text-xs md:text-sm ">Size: {cart.size}</p>
+          <p className="text-xs md:text-sm ">Size: {cart.size}</p>
 
-          <p class="text-xs md:text-sm ">Stock: {cart.present_stock}</p>
+          <p className="text-xs md:text-sm ">Stock: {cart.present_stock}</p>
         </div>
 
         <Image
-          class="w-16 h-16 object-cover rounded-md border-2 border-border"
-          src={dress}
+          className="w-16 h-16 object-cover rounded-md border border-border aspect-square"
+          src={cart.primary_image}
+          width={100}
+          height={100}
           alt="cart image"
         />
       </div>
 
       <div className="flex justify-between items-center">
         {cart.present_stock < 1 ? (
-          <p class="text-red-600 text-xs md:text-sm font-medium">
+          <p className="text-red-600 text-xs md:text-sm font-medium">
             Item out of stock. Please remove from cart
           </p>
         ) : (
@@ -118,7 +120,9 @@ export default function CartItem({ cart, refetch }) {
                 +
               </Button>
             </div>
-            ${parseFloat(cart.selected_stock * cart.unit_price).toFixed(2)}
+            <p className="font-medium">
+              ${parseFloat(cart.selected_stock * cart.unit_price).toFixed(2)}
+            </p>
           </div>
         )}
         <Button
