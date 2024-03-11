@@ -5,12 +5,14 @@ import { useEffect } from "react";
 import GetCart from "@/common/UtilKit";
 
 export default function Cart() {
-  const { getCartItems, carts } = useStore();
+  const { getCartItems, carts, cartLoading } = useStore();
   const { data: cartData, refetch } = GetCart();
 
   useEffect(() => {
     getCartItems(cartData || []);
   }, [cartData]);
+
+  if (cartLoading) return <p>Loading...</p>;
 
   return (
     <div>

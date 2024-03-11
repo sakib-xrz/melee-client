@@ -8,6 +8,8 @@ import { useStore } from "@/context/StoreProvider";
 import { toast } from "sonner";
 
 export default function CartItem({ cart, refetch }) {
+  const { cartLoading } = useStore();
+
   const handleIncrement = (slug) => {
     const cart = localStorage.getItem("cart");
     const cartItems = JSON.parse(cart);
@@ -84,7 +86,7 @@ export default function CartItem({ cart, refetch }) {
               variant={"outline"}
               className={"rounded-l-sm rounded-r-none h-8 w-8"}
               onClick={() => handleDecrement(cart.slug)}
-              disabled={cart.selected_stock < 2}
+              disabled={cart.selected_stock < 2 || cartLoading}
             >
               -
             </Button>
@@ -99,7 +101,9 @@ export default function CartItem({ cart, refetch }) {
               variant={"outline"}
               className={"rounded-r-sm rounded-l-none  h-8 w-8"}
               onClick={() => handleIncrement(cart.slug)}
-              disabled={cart.selected_stock >= cart.present_stock}
+              disabled={
+                cart.selected_stock >= cart.present_stock || cartLoading
+              }
             >
               +
             </Button>

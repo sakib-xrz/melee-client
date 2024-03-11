@@ -14,10 +14,13 @@ export default function StoreProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [carts, setCarts] = useState([]);
+  const [cartLoading, setCartLoading] = useState(false);
 
   const getCartItems = async (cartData) => {
+    setCartLoading(true);
     const { data } = await APIKit.cart.getCart(cartData);
     setCarts(data);
+    setCartLoading(false);
   };
 
   const fetchMe = async () => {
@@ -57,6 +60,7 @@ export default function StoreProvider({ children }) {
   const userInfo = {
     user,
     carts,
+    cartLoading,
     getCartItems,
     fetchMe,
     refetchMe,
