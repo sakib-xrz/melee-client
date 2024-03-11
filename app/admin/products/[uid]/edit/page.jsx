@@ -29,24 +29,29 @@ export default function EditProduct({ params: { uid } }) {
         .image || "",
     unit_price: data.unit_price ? parseFloat(data.unit_price).toFixed(2) : "",
     stock_s:
-      data.stock.length && data.stock.find((stock) => stock.size === "S")
-        ? data.stock.find((stock) => stock.size === "S").stock
+      data.stock_size.length &&
+      data.stock_size.find((stock) => stock.size === "S")
+        ? data.stock_size.find((stock) => stock.size === "S").stock
         : "",
     stock_m:
-      data.stock.length && data.stock.find((stock) => stock.size === "M")
-        ? data.stock.find((stock) => stock.size === "M").stock
+      data.stock_size.length &&
+      data.stock_size.find((stock) => stock.size === "M")
+        ? data.stock_size.find((stock) => stock.size === "M").stock
         : "",
     stock_l:
-      data.stock.length && data.stock.find((stock) => stock.size === "L")
-        ? data.stock.find((stock) => stock.size === "L").stock
+      data.stock_size.length &&
+      data.stock_size.find((stock) => stock.size === "L")
+        ? data.stock_size.find((stock) => stock.size === "L").stock
         : "",
     stock_xl:
-      data.stock.length && data.stock.find((stock) => stock.size === "XL")
-        ? data.stock.find((stock) => stock.size === "XL").stock
+      data.stock_size.length &&
+      data.stock_size.find((stock) => stock.size === "XL")
+        ? data.stock_size.find((stock) => stock.size === "XL").stock
         : "",
     stock_xxl:
-      data.stock.length && data.stock.find((stock) => stock.size === "XXL")
-        ? data.stock.find((stock) => stock.size === "XXL").stock
+      data.stock_size.length &&
+      data.stock_size.find((stock) => stock.size === "XXL")
+        ? data.stock_size.find((stock) => stock.size === "XXL").stock
         : "",
     is_published: data.is_published || false,
     details: data.details || "",

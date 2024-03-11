@@ -55,8 +55,7 @@ export default function EditProductForm({ initialValues, uid, refetch }) {
         delivery_and_returns: values.delivery_and_returns || "",
       };
 
-      const handleSuccess = ({ data }) => {
-        console.log(data);
+      const handleSuccess = () => {
         refetch();
         router.push("/admin/products");
       };
