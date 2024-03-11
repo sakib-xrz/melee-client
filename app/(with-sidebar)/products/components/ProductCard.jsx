@@ -23,7 +23,7 @@ export default function ProductCard({ product, isOutOfStock = false }) {
     >
       <div>
         <Image
-          className="object-cover aspect-square"
+          className="object-cover w-full aspect-square"
           width={300}
           height={300}
           src={
