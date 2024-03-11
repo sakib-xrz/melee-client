@@ -19,7 +19,7 @@ export default function ProductCarousel({ images }) {
           key={index}
           alt=""
           src={image}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain aspect-square"
         />
       ))}
     </Carousel>

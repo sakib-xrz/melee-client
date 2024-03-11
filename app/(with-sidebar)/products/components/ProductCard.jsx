@@ -3,11 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import redX from "public/images/red-x-transparent.png";
+
+import placeholderImage from "public/images/placeholder.png";
 import { useState } from "react";
 
 export default function ProductCard({ product, isOutOfStock = false }) {
-  const primaryImage = product.primary_image.image;
-  const secondaryImage = product.secondary_image.image;
+  const primaryImage = product?.primary_image?.image;
+  const secondaryImage = product?.secondary_image?.image;
 
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -21,15 +23,15 @@ export default function ProductCard({ product, isOutOfStock = false }) {
     >
       <div>
         <Image
-          className="object-contain"
+          className="object-cover aspect-square"
           width={300}
           height={300}
           src={
             isOutOfStock
-              ? primaryImage
+              ? primaryImage || placeholderImage
               : isHovered
-              ? secondaryImage
-              : primaryImage
+              ? secondaryImage || placeholderImage
+              : primaryImage || placeholderImage
           }
           alt="dress"
           priority

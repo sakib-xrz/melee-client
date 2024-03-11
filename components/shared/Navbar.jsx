@@ -63,9 +63,12 @@ export default function Navbar() {
         title={"My Cart"}
       >
         <Cart />
-        <Button className="absolute bottom-2.5 right-4">
-          Proceed to Checkout
-        </Button>
+
+        {cartData && cartData.length > 0 ? (
+          <Button className="absolute bottom-2.5 right-4">
+            Proceed to Checkout
+          </Button>
+        ) : null}
       </RightSideDrawer>
 
       <LeftSideDrawer
