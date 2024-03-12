@@ -1,16 +1,9 @@
-import Image from "next/image";
-import loadingImage from "public/images/loader.gif";
+import { Loader2 } from "lucide-react";
 
 export default function Loading() {
   return (
     <main className="flex justify-center mt-32">
-      <Image
-        src={loadingImage}
-        alt="loading"
-        priority
-        width={250}
-        height={250}
-      />
+      <Loader2 className="h-10 w-10 animate-spin" />
     </main>
   );
 }
