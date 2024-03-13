@@ -3,7 +3,7 @@ set -e
  
 echo "Deployment started..."
  
-git pull origin master
+git pull origin main
  
 echo "Beautifying Code..."
 npm run prettier
