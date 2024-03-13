@@ -5,9 +5,6 @@ echo "Deployment started..."
  
 git pull origin main
  
-echo "Beautifying Code..."
-npm run prettier
- 
 echo "Installing Dependencies..."
 npm install --yes
  
