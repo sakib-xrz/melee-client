@@ -16,6 +16,7 @@ import "react-phone-input-2/lib/style.css";
 import { toast } from "sonner";
 import APIKit from "@/common/APIkit";
 import { setJWTokenAndRedirect } from "@/common/UtilKit";
+import { AUTH_TOKEN_KEY } from "@/common/KeyChain";
 
 const validationSchema = Yup.object({
   phone: Yup.string().required("Phone is required"),
