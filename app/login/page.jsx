@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Logo from "public/images/melee-white-transparent.png";
 import PhoneInput from "react-phone-input-2";
@@ -34,6 +34,13 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const previousURL = searchParams.get("next");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem(AUTH_TOKEN_KEY)) {
+      router.back();
+    }
+  }, [router]);
+
   const formik = useFormik({
     initialValues,
     // validationSchema,
