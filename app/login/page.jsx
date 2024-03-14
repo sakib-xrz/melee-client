@@ -26,7 +26,7 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  phone: "+8801768869412",
+  phone: "+8801409029742",
   password: "123456",
 };
 
