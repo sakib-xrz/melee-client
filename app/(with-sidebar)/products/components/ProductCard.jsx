@@ -8,9 +8,6 @@ import placeholderImage from "public/images/placeholder.png";
 import { useState } from "react";
 
 export default function ProductCard({ product, isOutOfStock = false }) {
-  const primaryImage = product?.primary_image?.image;
-  const secondaryImage = product?.secondary_image?.image;
-
   const [isHovered, setIsHovered] = useState(false);
   return (
     <Link
@@ -22,16 +19,14 @@ export default function ProductCard({ product, isOutOfStock = false }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div>
-        <Image
+        <img
           className="object-cover w-full aspect-square"
-          width={300}
-          height={300}
           src={
             isOutOfStock
-              ? primaryImage || placeholderImage
+              ? product?.primary_image?.image || placeholderImage
               : isHovered
-              ? secondaryImage || placeholderImage
-              : primaryImage || placeholderImage
+              ? product?.secondary_image?.image || placeholderImage
+              : product?.primary_image?.image || placeholderImage
           }
           alt="dress"
           priority
