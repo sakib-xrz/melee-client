@@ -15,7 +15,7 @@ import PrimarySecondaryImage from "../../../add/components/PrimarySecondaryImage
 import StockFields from "../../../add/components/StockFields";
 import TextEditorFields from "../../../add/components/TextEditorFields";
 
-export default function EditProductForm({ initialValues, uid, refetch }) {
+export default function EditProductForm({ initialValues, data, uid, refetch }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const sizes = ["S", "M", "L", "XL", "XXL"];
@@ -108,7 +108,7 @@ export default function EditProductForm({ initialValues, uid, refetch }) {
               </div>
             </div>
 
-            <PrimarySecondaryImage formik={formik} />
+            <PrimarySecondaryImage formik={formik} data={data} />
 
             <div className="space-y-2">
               <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">

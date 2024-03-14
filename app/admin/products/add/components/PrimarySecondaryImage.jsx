@@ -1,8 +1,10 @@
+import APIKit from "@/common/APIkit";
 import ImageUploader from "@/components/form/ImageUploader";
 import { X } from "lucide-react";
 import Image from "next/image";
 
-export default function PrimarySecondaryImage({ formik }) {
+export default function PrimarySecondaryImage({ formik, data }) {
+  console.log(data);
   return (
     <div className="flex flex-col sm:flex-row gap-4 w-full">
       <div className="space-y-2 w-full">
@@ -26,7 +28,15 @@ export default function PrimarySecondaryImage({ formik }) {
               <div>
                 <X
                   onClick={() => {
-                    formik.setFieldValue("primary_image", "");
+                    APIKit.shop.product.image
+                      .deleteImage(
+                        data.images.find(
+                          (image) => image.type === "PRIMARY_PRODUCT_IMAGE"
+                        ).uid
+                      )
+                      .then(() => {
+                        formik.setFieldValue("primary_image", "");
+                      });
                   }}
                   className="bg-red-500 rounded-full absolute right-1 top-1 cursor-pointer p-1"
                 />
@@ -62,7 +72,15 @@ export default function PrimarySecondaryImage({ formik }) {
               <div>
                 <X
                   onClick={() => {
-                    formik.setFieldValue("secondary_image", "");
+                    APIKit.shop.product.image
+                      .deleteImage(
+                        data.images.find(
+                          (image) => image.type === "SECONDARY_PRODUCT_IMAGE"
+                        ).uid
+                      )
+                      .then(() => {
+                        formik.setFieldValue("secondary_image", "");
+                      });
                   }}
                   className="bg-red-500 rounded-full absolute right-1 top-1 cursor-pointer p-1"
                 />

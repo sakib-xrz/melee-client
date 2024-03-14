@@ -45,7 +45,7 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (localStorage.getItem(AUTH_TOKEN_KEY)) {
-      router.back();
+      router.push("/products");
     }
   }, []);
   const formik = useFormik({

@@ -38,7 +38,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (localStorage.getItem(AUTH_TOKEN_KEY)) {
-      router.back();
+      router.push("/admin");
     }
   }, []);
 

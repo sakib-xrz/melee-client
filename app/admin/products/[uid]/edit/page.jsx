@@ -20,11 +20,15 @@ export default function EditProduct({ params: { uid } }) {
     short_pitch: data.short_pitch || "",
     description: data.description || "",
     primary_image:
-      data.images.find((image) => image.type === "PRIMARY_PRODUCT_IMAGE")
-        .image || "",
+      (data.images.length &&
+        data.images.find((image) => image.type === "PRIMARY_PRODUCT_IMAGE")
+          .image) ||
+      "",
     secondary_image:
-      data.images.find((image) => image.type === "SECONDARY_PRODUCT_IMAGE")
-        .image || "",
+      (data.images.length &&
+        data.images.find((image) => image.type === "SECONDARY_PRODUCT_IMAGE")
+          .image) ||
+      "",
     unit_price: data.unit_price ? parseFloat(data.unit_price).toFixed(2) : "",
     stock_s:
       data.stock_size.length &&
@@ -69,6 +73,7 @@ export default function EditProduct({ params: { uid } }) {
     <div>
       <EditProductForm
         initialValues={initialValues}
+        data={data}
         uid={data.uid}
         refetch={refetch}
       />

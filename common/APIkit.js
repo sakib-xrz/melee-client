@@ -68,6 +68,13 @@ const APIKit = {
         const url = `/shop/products/${uid}/publish`;
         return client.patch(url, payload);
       },
+
+      image: {
+        deleteImage: (uid) => {
+          const url = `/shop/products/image/${uid}`;
+          return client.delete(url);
+        },
+      },
     },
   },
 };
