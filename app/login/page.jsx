@@ -75,66 +75,73 @@ export default function LoginPage() {
   });
 
   return (
-    <div className="flex min-h-screen items-center px-5">
-      <div className="mx-auto w-full sm:w-2/3 xl:w-1/3">
-        <div className="space-y-8 rounded-md bg-background px-8 py-10 border">
-          <Link href={"/products"} className="flex justify-center">
-            <Image
-              src={Logo}
-              width={200}
-              height={50}
-              alt="MELEE Logo"
-              placeholder="blur"
-              priority
-            />
-          </Link>
-          <h2 className=" text-center text-2xl md:text-3xl font-semibold tracking-tight first:mt-0">
-            Login to Your Account
-          </h2>
-          <form onSubmit={formik.handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="phone">Phone</Label>
-              <PhoneInput
-                country={"bd"}
-                id="phone"
-                name="phone"
-                placeholder="xxx-xxx-xxxx"
-                onChange={(formattedValue) => {
-                  formik.setFieldValue("phone", formattedValue);
-                }}
-                onBlur={formik.handleBlur}
-                value={formik.values.phone}
+    <>
+      <title>Login | MELEE</title>
+      <div className="flex min-h-screen items-center px-5">
+        <div className="mx-auto w-full sm:w-2/3 xl:w-1/3">
+          <div className="space-y-8 rounded-md bg-background px-8 py-10 border">
+            <Link href={"/products"} className="flex justify-center">
+              <Image
+                src={Logo}
+                width={200}
+                height={50}
+                alt="MELEE Logo"
+                placeholder="blur"
+                priority
               />
-              <FormikErrorBox formik={formik} field="phone" />
-            </div>
-            <div>
-              <Label htmlFor="password">Password</Label>
-              <Password
-                id="password"
-                name="password"
-                placeholder="min 8 characters"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-              />
-              <FormikErrorBox formik={formik} field="password" />
-            </div>
-            <div className="w-full">
-              <Button type="submit" className="mt-2 w-full" isLoading={loading}>
-                Login
-              </Button>
-            </div>
-            <p className="text-center text-sm font-medium leading-none">
-              Don’t have an account?{" "}
-              <Link href={"/register"}>
-                <Button variant="link" className="p-0 font-bold">
-                  Create Account
+            </Link>
+            <h2 className=" text-center text-2xl md:text-3xl font-semibold tracking-tight first:mt-0">
+              Login to Your Account
+            </h2>
+            <form onSubmit={formik.handleSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="phone">Phone</Label>
+                <PhoneInput
+                  country={"bd"}
+                  id="phone"
+                  name="phone"
+                  placeholder="xxx-xxx-xxxx"
+                  onChange={(formattedValue) => {
+                    formik.setFieldValue("phone", formattedValue);
+                  }}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.phone}
+                />
+                <FormikErrorBox formik={formik} field="phone" />
+              </div>
+              <div>
+                <Label htmlFor="password">Password</Label>
+                <Password
+                  id="password"
+                  name="password"
+                  placeholder="min 8 characters"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+                <FormikErrorBox formik={formik} field="password" />
+              </div>
+              <div className="w-full">
+                <Button
+                  type="submit"
+                  className="mt-2 w-full"
+                  isLoading={loading}
+                >
+                  Login
                 </Button>
-              </Link>
-            </p>
-          </form>
+              </div>
+              <p className="text-center text-sm font-medium leading-none">
+                Don’t have an account?{" "}
+                <Link href={"/register"}>
+                  <Button variant="link" className="p-0 font-bold">
+                    Create Account
+                  </Button>
+                </Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

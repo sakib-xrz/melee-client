@@ -16,6 +16,7 @@ export default function ProductsPage() {
 
   return (
     <div>
+      <title>Products | MELEE</title>
       <div className="lg:sticky lg:top-36 lg:z-50">
         <Marquee className="bg-white text-black font-bold">
           NEW DROP! This is your animated alert bar, (Your text here!)

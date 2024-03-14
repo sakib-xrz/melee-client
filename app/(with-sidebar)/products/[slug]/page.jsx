@@ -76,183 +76,186 @@ export default function ProductDetailsPage({ params: { slug } }) {
   };
 
   return (
-    <Container extraClassName={"max-w-[115rem]"}>
-      <div className="grid grid-cols-12 gap-6 w-full">
-        <div className="col-span-12 lg:col-span-6 hover:cursor-grab active:cursor-grabbing">
-          <ProductCarousel images={images} />
-        </div>
-
-        <div className="col-span-12 lg:col-span-6 space-y-5 xl:px-20">
-          <div>
-            <h1 className="text-2xl font-medium line-clamp-2">{data.name}</h1>
+    <>
+      <title>Product details | MELEE</title>
+      <Container extraClassName={"max-w-[115rem]"}>
+        <div className="grid grid-cols-12 gap-6 w-full">
+          <div className="col-span-12 lg:col-span-6 hover:cursor-grab active:cursor-grabbing">
+            <ProductCarousel images={images} />
           </div>
 
-          <div>
-            <h1 className="text-lg font-semibold">
-              ${parseFloat(data.unit_price).toFixed(2)}
-            </h1>
-            <p className="text-sm">(incl. of taxes)</p>
-          </div>
-
-          {data.stock_size.length > 0 && (
-            <div className="space-y-2">
-              <div className="text-sm">
-                Select Size <span className="text-red-500">*</span>
-              </div>
-
-              <SizeOptions
-                stock_size={data.stock_size}
-                selectedSize={selectedSize}
-                setSelectedSize={setSelectedSize}
-                setErrorMessages={setErrorMessages}
-                isAlreadyExists={isAlreadyExists}
-              />
-              {errorMessages && (
-                <div className="text-red-500 text-sm">{errorMessages}</div>
-              )}
+          <div className="col-span-12 lg:col-span-6 space-y-5 xl:px-20">
+            <div>
+              <h1 className="text-2xl font-medium line-clamp-2">{data.name}</h1>
             </div>
-          )}
 
-          {data.stock_size.length > 0 ? (
-            <div className="flex flex-row items-center gap-5">
+            <div>
+              <h1 className="text-lg font-semibold">
+                ${parseFloat(data.unit_price).toFixed(2)}
+              </h1>
+              <p className="text-sm">(incl. of taxes)</p>
+            </div>
+
+            {data.stock_size.length > 0 && (
+              <div className="space-y-2">
+                <div className="text-sm">
+                  Select Size <span className="text-red-500">*</span>
+                </div>
+
+                <SizeOptions
+                  stock_size={data.stock_size}
+                  selectedSize={selectedSize}
+                  setSelectedSize={setSelectedSize}
+                  setErrorMessages={setErrorMessages}
+                  isAlreadyExists={isAlreadyExists}
+                />
+                {errorMessages && (
+                  <div className="text-red-500 text-sm">{errorMessages}</div>
+                )}
+              </div>
+            )}
+
+            {data.stock_size.length > 0 ? (
+              <div className="flex flex-row items-center gap-5">
+                <Button
+                  disabled={isAlreadyExists}
+                  className="rounded-sm text-base gap-2"
+                  variant={"secondary"}
+                  onClick={() => {
+                    handleAddToCart();
+                    refetch();
+                  }}
+                >
+                  {isAlreadyExists ? (
+                    "Already in Cart"
+                  ) : (
+                    <>
+                      <ShoppingCart />
+                      Add to Cart
+                    </>
+                  )}
+                </Button>
+
+                <Button
+                  className="rounded-sm text-base gap-2 bg-white"
+                  onClick={() => handleBuyNow()}
+                >
+                  <ShoppingBasket />
+                  Buy Now
+                </Button>
+              </div>
+            ) : (
               <Button
-                disabled={isAlreadyExists}
                 className="rounded-sm text-base gap-2"
                 variant={"secondary"}
-                onClick={() => {
-                  handleAddToCart();
-                  refetch();
-                }}
+                disabled
               >
-                {isAlreadyExists ? (
-                  "Already in Cart"
-                ) : (
-                  <>
-                    <ShoppingCart />
-                    Add to Cart
-                  </>
-                )}
+                Sold Out
               </Button>
-
-              <Button
-                className="rounded-sm text-base gap-2 bg-white"
-                onClick={() => handleBuyNow()}
-              >
-                <ShoppingBasket />
-                Buy Now
-              </Button>
-            </div>
-          ) : (
-            <Button
-              className="rounded-sm text-base gap-2"
-              variant={"secondary"}
-              disabled
-            >
-              Sold Out
-            </Button>
-          )}
-
-          {data.short_pitch && <div>{data.short_pitch}</div>}
-
-          <Accordion type="single" collapsible className="w-full">
-            {data.details && (
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Details</AccordionTrigger>
-                <AccordionContent>
-                  <div
-                    className="ql-editor prose !p-0"
-                    dangerouslySetInnerHTML={{ __html: data.details }}
-                  />
-                </AccordionContent>
-              </AccordionItem>
             )}
 
-            {data.sizing && (
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Sizing</AccordionTrigger>
-                <AccordionContent>
-                  <div
-                    className="ql-editor prose !p-0"
-                    dangerouslySetInnerHTML={{ __html: data.sizing }}
-                  />
-                </AccordionContent>
-              </AccordionItem>
-            )}
+            {data.short_pitch && <div>{data.short_pitch}</div>}
 
-            {data.care && (
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Care</AccordionTrigger>
-                <AccordionContent>
-                  <div
-                    className="ql-editor prose !p-0"
-                    dangerouslySetInnerHTML={{ __html: data.care }}
-                  />
-                </AccordionContent>
-              </AccordionItem>
-            )}
+            <Accordion type="single" collapsible className="w-full">
+              {data.details && (
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>Details</AccordionTrigger>
+                  <AccordionContent>
+                    <div
+                      className="ql-editor prose !p-0"
+                      dangerouslySetInnerHTML={{ __html: data.details }}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
 
-            {data.delivery_and_returns && (
-              <AccordionItem value="item-4">
-                <AccordionTrigger>Delivery and Returns</AccordionTrigger>
-                <AccordionContent>
-                  <div
-                    className="ql-editor prose !p-0 !text-primary"
-                    dangerouslySetInnerHTML={{
-                      __html: data.delivery_and_returns,
-                    }}
-                  />
-                </AccordionContent>
-              </AccordionItem>
-            )}
-          </Accordion>
+              {data.sizing && (
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>Sizing</AccordionTrigger>
+                  <AccordionContent>
+                    <div
+                      className="ql-editor prose !p-0"
+                      dangerouslySetInnerHTML={{ __html: data.sizing }}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+
+              {data.care && (
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>Care</AccordionTrigger>
+                  <AccordionContent>
+                    <div
+                      className="ql-editor prose !p-0"
+                      dangerouslySetInnerHTML={{ __html: data.care }}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+
+              {data.delivery_and_returns && (
+                <AccordionItem value="item-4">
+                  <AccordionTrigger>Delivery and Returns</AccordionTrigger>
+                  <AccordionContent>
+                    <div
+                      className="ql-editor prose !p-0 !text-primary"
+                      dangerouslySetInnerHTML={{
+                        __html: data.delivery_and_returns,
+                      }}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+            </Accordion>
+          </div>
         </div>
-      </div>
 
-      <Dialog
-        open={authModalOpen}
-        onOpenChange={() => {
-          setAuthModalOpen(false);
-          setLoginModalOpen(true);
-        }}
-      >
-        {loginModalOpen ? (
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Welcome! Please Login to Continue.</DialogTitle>
-              <DialogDescription>
-                Don’t have an account?{" "}
-                <span
-                  onClick={() => {
-                    setLoginModalOpen(false);
-                  }}
-                  className="font-medium underline cursor-pointer"
-                >
-                  Create Account
-                </span>
-              </DialogDescription>
-            </DialogHeader>
-            <Login />
-          </DialogContent>
-        ) : (
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Create Your Account</DialogTitle>
-              <DialogDescription>
-                Already have an account?{" "}
-                <span
-                  onClick={() => {
-                    setLoginModalOpen(true);
-                  }}
-                  className="font-medium underline cursor-pointer"
-                >
-                  Login
-                </span>
-              </DialogDescription>
-            </DialogHeader>
-            <Register />
-          </DialogContent>
-        )}
-      </Dialog>
-    </Container>
+        <Dialog
+          open={authModalOpen}
+          onOpenChange={() => {
+            setAuthModalOpen(false);
+            setLoginModalOpen(true);
+          }}
+        >
+          {loginModalOpen ? (
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Welcome! Please Login to Continue.</DialogTitle>
+                <DialogDescription>
+                  Don’t have an account?{" "}
+                  <span
+                    onClick={() => {
+                      setLoginModalOpen(false);
+                    }}
+                    className="font-medium underline cursor-pointer"
+                  >
+                    Create Account
+                  </span>
+                </DialogDescription>
+              </DialogHeader>
+              <Login />
+            </DialogContent>
+          ) : (
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Create Your Account</DialogTitle>
+                <DialogDescription>
+                  Already have an account?{" "}
+                  <span
+                    onClick={() => {
+                      setLoginModalOpen(true);
+                    }}
+                    className="font-medium underline cursor-pointer"
+                  >
+                    Login
+                  </span>
+                </DialogDescription>
+              </DialogHeader>
+              <Register />
+            </DialogContent>
+          )}
+        </Dialog>
+      </Container>
+    </>
   );
 }

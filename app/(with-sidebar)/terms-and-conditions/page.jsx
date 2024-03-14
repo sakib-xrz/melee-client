@@ -1,5 +1,10 @@
 import Container from "@/components/shared/Container";
 
 export default function TermsPage() {
-  return <Container>Terms & Conditions Page Coming Soon...</Container>;
+  return (
+    <>
+      <title>Terms & Conditions | MELEE</title>
+      <Container>Terms & Conditions Page Coming Soon...</Container>
+    </>
+  );
 }

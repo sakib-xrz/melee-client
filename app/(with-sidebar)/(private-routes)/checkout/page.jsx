@@ -23,19 +23,22 @@ export default function CheckOutPage() {
   const checkoutItems = carts.filter((item) => item.present_stock !== 0);
 
   return (
-    <Container>
-      <Card>
-        <CardContent>
-          <CardHeader>
-            <CardTitle className="mb-2">Shopping Cart</CardTitle>
-          </CardHeader>
-          <div className="space-y-4">
-            {checkoutItems.map((product, index) => (
-              <CheckoutCard key={index} product={product} />
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    </Container>
+    <>
+      <title>Checkout | MELEE</title>
+      <Container>
+        <Card>
+          <CardContent>
+            <CardHeader>
+              <CardTitle className="mb-2">Shopping Cart</CardTitle>
+            </CardHeader>
+            <div className="space-y-4">
+              {checkoutItems.map((product, index) => (
+                <CheckoutCard key={index} product={product} />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </Container>
+    </>
   );
 }
