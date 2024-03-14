@@ -75,7 +75,7 @@ export default function Navbar() {
             }}
             className="absolute bottom-2.5 right-4"
           >
-            Proceed to Checkout
+            {user ? "Proceed to Checkout" : "Login to Checkout"}
           </Button>
         ) : null}
       </RightSideDrawer>

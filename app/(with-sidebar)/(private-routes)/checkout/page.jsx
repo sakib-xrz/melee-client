@@ -5,6 +5,8 @@ import { useStore } from "@/context/StoreProvider";
 import { useEffect } from "react";
 import CheckoutCard from "./components/CheckoutCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function CheckOutPage() {
   const { getCartItems, carts, cartLoading, user } = useStore();
@@ -28,7 +30,7 @@ export default function CheckOutPage() {
         <h1 className="text-3xl font-bold">Checkout</h1>
         <p className="mb-6">Please Review All Details before Placing Order</p>
         <div className="flex gap-6">
-          <Card className="w-full">
+          <Card className="w-full h-fit">
             <CardContent>
               <CardHeader>
                 <CardTitle>Shopping Cart</CardTitle>
@@ -40,7 +42,7 @@ export default function CheckOutPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="w-full h-fit">
+          <Card className="w-full h-fit space-y-6">
             <div>
               <CardHeader>
                 <CardTitle>Customer Details</CardTitle>
@@ -54,7 +56,59 @@ export default function CheckOutPage() {
                 </div>
               </div>
             </div>
-            <div></div>
+            <div>
+              <CardHeader>
+                <CardTitle>Shipping Address</CardTitle>
+              </CardHeader>
+              <div>
+                <p className="pt-3 pb-1">Address </p>
+                <Input
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="Address"
+                />
+              </div>
+              <div>
+                <p className="pt-3 pb-1">City </p>
+                <Input
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="Address"
+                />
+              </div>
+              <div>
+                <p className="pt-3 pb-1">Country </p>
+                <Input
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="Address"
+                />
+              </div>
+              <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
+                <div className="w-full">
+                  <p className="pt-3 pb-1">State </p>
+                  <Input
+                    type="text"
+                    id="address"
+                    name="address"
+                    placeholder="Address"
+                  />
+                </div>
+                <div className="w-full">
+                  <p className="pt-3 pb-1">Postal Code </p>
+                  <Input
+                    type="text"
+                    id="address"
+                    name="address"
+                    placeholder="Address"
+                  />
+                </div>
+              </div>
+            </div>
+            <Button className="w-full">Continue to Payment</Button>
           </Card>
         </div>
       </Container>
