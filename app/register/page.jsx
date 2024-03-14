@@ -5,21 +5,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Password } from "@/components/ui/password";
-import { Phone } from "@/components/ui/phone";
+import "react-phone-input-2/lib/style.css";
 import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Logo from "public/images/melee-white-transparent.png";
+import { AUTH_TOKEN_KEY } from "@/common/KeyChain";
+import PhoneInput from "react-phone-input-2";
+import { setJWTokenAndRedirect } from "@/common/UtilKit";
+import APIKit from "@/common/APIkit";
+import { toast } from "sonner";
 
 const validationSchema = Yup.object({
   first_name: Yup.string().required("First Name is required"),
   last_name: Yup.string().required("Last Name is required"),
   phone: Yup.string().required("Phone is required"),
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
+    .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
   confirm_password: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -29,50 +34,55 @@ const validationSchema = Yup.object({
 const initialValues = {
   first_name: "Sakibul",
   last_name: "Islam",
-  phone: "2124567890",
-  password: "12345678",
-  confirm_password: "12345678",
+  phone: "+8801409029742",
+  password: "123456",
+  confirm_password: "123456",
 };
 
 export default function RegisterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem(AUTH_TOKEN_KEY)) {
+      router.back();
+    }
+  }, []);
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      // setLoading(true);
+      setLoading(true);
       const payload = {
-        name: {
-          first_name: values.first_name,
-          last_name: values.last_name,
-        },
+        first_name: values.first_name,
+        last_name: values.last_name,
         phone: values.phone,
         password: values.password,
       };
 
       const handleSuccess = ({ data }) => {
-        // formik.resetForm();
-        // setJWTokenAndRedirect(data.access, () => {
-        //   router.push("/candidate");
-        // });
+        formik.resetForm();
+        setJWTokenAndRedirect(data.access, () => {
+          router.push("/products");
+        });
       };
 
       const handleFailure = (error) => {
-        // throw error;
+        throw error;
       };
 
-      // const promise = APIKit.auth
-      //   .register(payload)
-      //   .then(handleSuccess)
-      //   .catch(handleFailure)
-      //   .finally(() => setLoading(false));
+      const promise = APIKit.auth
+        .register(payload)
+        .then(handleSuccess)
+        .catch(handleFailure)
+        .finally(() => setLoading(false));
 
-      // return toast.promise(promise, {
-      //   loading: "Creating your account...",
-      //   success: "Signed up successfully",
-      //   error: (error) => error.message,
-      // });
+      return toast.promise(promise, {
+        loading: "Creating account...",
+        success: "Account created successfully!",
+        error: (error) =>
+          error.response.data?.detail || "Account creation failed!",
+      });
     },
   });
 
@@ -126,12 +136,14 @@ export default function RegisterPage() {
               </div>
               <div>
                 <Label htmlFor="phone">Phone</Label>
-                <Phone
-                  type="phone"
+                <PhoneInput
+                  country={"bd"}
                   id="phone"
                   name="phone"
                   placeholder="xxx-xxx-xxxx"
-                  onChange={formik.handleChange}
+                  onChange={(formattedValue) => {
+                    formik.setFieldValue("phone", formattedValue);
+                  }}
                   onBlur={formik.handleBlur}
                   value={formik.values.phone}
                 />

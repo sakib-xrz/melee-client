@@ -29,17 +29,17 @@ export default function Cart() {
       </ScrollArea>
 
       {carts?.length > 0 && (
-        <div class="space-y-2 my-4">
-          <h2 class="text-sm font-bold ">Payment Break Down</h2>
-          <div class="flex justify-between items-center text-sm font-medium text-grey-700">
+        <div className="space-y-2 my-4">
+          <h2 className="text-sm font-bold ">Payment Break Down</h2>
+          <div className="flex justify-between items-center text-sm font-medium text-grey-700">
             <p>Sub Total</p>
             <p>${subtotal || 0}</p>
           </div>
-          <div class="flex justify-between items-center text-sm font-medium text-grey-700">
+          <div className="flex justify-between items-center text-sm font-medium text-grey-700">
             <p>Shipping Charge</p>
-            <p class="flex items-center gap-1">${shipping || 0}</p>
+            <p className="flex items-center gap-1">${shipping || 0}</p>
           </div>
-          <div class="flex justify-between items-center text-sm font-bold text-grey-700">
+          <div className="flex justify-between items-center text-sm font-bold text-grey-700">
             <p>Total Cost</p>
             <p>${total || 0}</p>
           </div>

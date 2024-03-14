@@ -18,8 +18,6 @@ export default function CheckOutPage() {
 
   // const { subtotal, shipping, total } = calculateTotal(carts || []);
 
-  console.log(carts);
-
   const checkoutItems = carts.filter((item) => item.present_stock !== 0);
 
   return (

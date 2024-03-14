@@ -40,7 +40,7 @@ export default function LoginPage() {
     if (localStorage.getItem(AUTH_TOKEN_KEY)) {
       router.back();
     }
-  }, [router]);
+  }, []);
 
   const formik = useFormik({
     initialValues,
