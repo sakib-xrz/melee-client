@@ -3,7 +3,6 @@
 import { Trash } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import dress from "public/images/dress.png";
 import { useStore } from "@/context/StoreProvider";
 import { toast } from "sonner";
 
@@ -77,11 +76,11 @@ export default function CartItem({ cart, refetch }) {
         </div>
 
         <Image
-          className="w-16 h-16 object-cover rounded-md border border-border aspect-square"
+          className="w-16 object-cover rounded-md border border-border aspect-square"
           src={cart.primary_image}
           width={100}
           height={100}
-          alt="cart image"
+          alt={cart.name}
         />
       </div>
 

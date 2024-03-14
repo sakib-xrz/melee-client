@@ -19,7 +19,7 @@ export default function ProductCard({ product, isOutOfStock = false }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div>
-        <img
+        <Image
           className="object-cover w-full aspect-square"
           src={
             isOutOfStock
@@ -28,7 +28,9 @@ export default function ProductCard({ product, isOutOfStock = false }) {
               ? product?.secondary_image?.image || placeholderImage
               : product?.primary_image?.image || placeholderImage
           }
-          alt="dress"
+          alt={product.name}
+          width={300}
+          height={300}
           priority
         />
         <div className="product-info px-4 py-3 flex flex-col space-y-2">

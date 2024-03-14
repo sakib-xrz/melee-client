@@ -114,7 +114,7 @@ export default function ProductDetailsPage({ params: { slug } }) {
           )}
 
           {data.stock_size.length > 0 ? (
-            <div className="flex flex-col xs:flex-row items-center gap-5">
+            <div className="flex flex-row items-center gap-5">
               <Button
                 disabled={isAlreadyExists}
                 className="rounded-sm text-base gap-2"
