@@ -26,8 +26,8 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  phone: "+8801768869412",
-  password: "123456",
+  phone: "+12403607127",
+  password: "admin",
 };
 
 export default function LoginPage() {
