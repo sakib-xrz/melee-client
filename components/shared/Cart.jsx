@@ -3,6 +3,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import CartItem from "./CartItem";
 import { useEffect } from "react";
 import { GetCart, calculateTotal } from "@/common/UtilKit";
+import Loading from "./Loading";
 
 export default function Cart() {
   const { getCartItems, carts, cartLoading } = useStore();
@@ -12,7 +13,7 @@ export default function Cart() {
     getCartItems(cartData || []);
   }, [cartData]);
 
-  if (cartLoading) return <p>Loading...</p>;
+  if (cartLoading) return <Loading />;
 
   const { subtotal, shipping, total } = calculateTotal(carts || []);
 

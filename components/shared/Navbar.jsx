@@ -42,7 +42,7 @@ export default function Navbar() {
             <Image
               src={Logo}
               alt="MELEE LOGO DARK"
-              placeholder="blur"
+              placeholder="empty"
               className="w-full"
               priority
             />
@@ -88,7 +88,7 @@ export default function Navbar() {
             <Image
               src={Logo}
               alt="MELEE LOGO DARK"
-              placeholder="blur"
+              placeholder="empty"
               quality={100}
               className="h-12 w-auto object-contain"
               priority

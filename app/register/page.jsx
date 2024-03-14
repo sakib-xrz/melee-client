@@ -98,7 +98,7 @@ export default function RegisterPage() {
                 width={200}
                 height={50}
                 alt="MELEE Logo"
-                placeholder="blur"
+                placeholder="empty"
                 priority
               />
             </Link>

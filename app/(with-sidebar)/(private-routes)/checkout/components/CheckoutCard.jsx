@@ -15,22 +15,31 @@ const CheckoutCard = ({ product }) => {
           height={100}
         />
         <div className="w-full space-y-2">
-          <div className="flex justify-between items-center text-lg">
+          <div className="flex justify-between items-center xs:text-lg">
             <h1 className="line-clamp-1 cursor-pointer hover:underline underline-offset-2">
               {name}
             </h1>
-            <p>
+            <p className="hidden xs:block">
               ${parseFloat(unit_price).toFixed(2)}
               <span className="text-gray-500"> x {selected_stock}</span>
             </p>
           </div>
-          <div className="flex justify-between items-center text-base">
+          <div className="flex justify-between items-center xs:text-base">
             <p>Size : {size}</p>
-            <p className="font-medium">
+            <p className="font-medium hidden xs:block">
               Total ${parseFloat(selected_stock * unit_price).toFixed(2)}
             </p>
           </div>
         </div>
+      </div>
+      <div className="flex justify-between items-center text-sm xs:hidden">
+        <p>
+          ${parseFloat(unit_price).toFixed(2)}
+          <span className="text-gray-500"> x {selected_stock}</span>
+        </p>
+        <p className="font-medium">
+          Total ${parseFloat(selected_stock * unit_price).toFixed(2)}
+        </p>
       </div>
     </div>
   );
