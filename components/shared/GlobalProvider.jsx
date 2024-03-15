@@ -12,7 +12,7 @@ export default function GlobalProvider({ children }) {
     <>
       <QueryClientProvider client={queryClient}>
         <StoreProvider>
-          <Toaster position="top-center" richColors />
+          <Toaster position="bottom-left" richColors />
           {children}
         </StoreProvider>
       </QueryClientProvider>

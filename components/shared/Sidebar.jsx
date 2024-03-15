@@ -41,26 +41,49 @@ export default function Sidebar() {
         </div>
 
         <div className="space-y-2">
-          {ProductRoutes.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className={
-                "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent"
-              }
-            >
-              {pathname === link.href ? (
-                <div>
-                  <ActiveIcon />
-                </div>
-              ) : (
-                <div className="opacity-0">
-                  <ActiveIcon />
-                </div>
-              )}
-              {link.title}
-            </Link>
-          ))}
+          {!user
+            ? ProductRoutes.filter((item) => item.auth !== true).map(
+                (link, index) => (
+                  <Link
+                    key={index}
+                    href={link.href}
+                    className={
+                      "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent"
+                    }
+                  >
+                    {pathname === link.href ? (
+                      <div>
+                        <ActiveIcon />
+                      </div>
+                    ) : (
+                      <div className="opacity-0">
+                        <ActiveIcon />
+                      </div>
+                    )}
+                    {link.title}
+                  </Link>
+                )
+              )
+            : ProductRoutes.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className={
+                    "flex items-center gap-2 py-2 px-4 transition-colors whitespace-nowrap border-y hover:border-white border-transparent"
+                  }
+                >
+                  {pathname === link.href ? (
+                    <div>
+                      <ActiveIcon />
+                    </div>
+                  ) : (
+                    <div className="opacity-0">
+                      <ActiveIcon />
+                    </div>
+                  )}
+                  {link.title}
+                </Link>
+              ))}
         </div>
 
         <div className="space-y-2">

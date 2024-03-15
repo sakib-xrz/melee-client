@@ -121,10 +121,10 @@ export default function ProductDetailsPage({ params: { slug } }) {
             )}
 
             {data.stock_size.length > 0 ? (
-              <div className="flex flex-row items-center gap-5">
+              <div className="flex flex-col xs:flex-row items-center gap-5">
                 <Button
                   disabled={isAlreadyExists}
-                  className="rounded-sm text-base gap-2"
+                  className="rounded-sm text-base gap-2 w-full xs:w-auto"
                   variant={"secondary"}
                   onClick={() => {
                     handleAddToCart();
@@ -142,7 +142,7 @@ export default function ProductDetailsPage({ params: { slug } }) {
                 </Button>
 
                 <Button
-                  className="rounded-sm text-base gap-2 bg-white"
+                  className="rounded-sm text-base gap-2 bg-white w-full xs:w-auto"
                   onClick={() => handleBuyNow()}
                 >
                   <ShoppingBasket />
