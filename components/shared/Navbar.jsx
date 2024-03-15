@@ -23,7 +23,7 @@ export default function Navbar() {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
 
-  const { data: cartData } = GetCart();
+  const { data: cartData, refetch } = GetCart();
 
   const { total } = calculateTotal(carts || []);
 
@@ -48,15 +48,17 @@ export default function Navbar() {
             />
           </Link>
 
-          <div
-            onClick={() => setCartDrawerOpen(true)}
-            className="relative mr-2 text-white flex gap-4 cursor-pointer"
-          >
-            <ShoppingCart className="text-2xl font-medium text-white" />
-            <small className="absolute top-[-10px] -right-[10px] bg-white text-background rounded-full text-xs p-1 pl-[5px] w-5 h-5 flex justify-center items-center font-semibold">
-              {cartData?.length || 0}
-            </small>
-          </div>
+          {cartData?.length > 0 && (
+            <div
+              onClick={() => setCartDrawerOpen(true)}
+              className="relative mr-2 text-white flex gap-4 cursor-pointer"
+            >
+              <ShoppingCart className="text-2xl font-medium text-white" />
+              <small className="absolute top-[-10px] -right-[10px] bg-white text-background rounded-full text-xs p-1 pl-[5px] w-5 h-5 flex justify-center items-center font-semibold">
+                {cartData?.length || 0}
+              </small>
+            </div>
+          )}
         </div>
       </Container>
 
@@ -66,6 +68,20 @@ export default function Navbar() {
         title={"My Cart"}
       >
         <Cart />
+
+        {cartData && cartData.length > 0 ? (
+          <Button
+            onClick={() => {
+              localStorage.removeItem("cart"),
+                refetch(),
+                setCartDrawerOpen(false);
+            }}
+            variant={"outline"}
+            className="absolute bottom-2.5 left-4"
+          >
+            Clear Cart
+          </Button>
+        ) : null}
 
         {cartData && cartData.length > 0 ? (
           <Button
