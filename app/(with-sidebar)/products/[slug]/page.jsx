@@ -28,6 +28,7 @@ import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/APIkit";
 import Loading from "@/components/shared/Loading";
 import { GetCart, setCart } from "@/common/UtilKit";
+import ErrorComponent from "@/components/shared/ErrorComponent";
 
 export default function ProductDetailsPage({ params: { slug } }) {
   const { user } = useStore();
@@ -45,6 +46,10 @@ export default function ProductDetailsPage({ params: { slug } }) {
   const { data: cartData, refetch } = GetCart();
 
   if (isLoading) return <Loading />;
+
+  if (isError) {
+    return <ErrorComponent status={404} />;
+  }
 
   const images = data.images.map((image) => image.image);
 

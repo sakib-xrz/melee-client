@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import PrimarySecondaryImage from "../../../add/components/PrimarySecondaryImage";
 import StockFields from "../../../add/components/StockFields";
 import TextEditorFields from "../../../add/components/TextEditorFields";
+import { pickDifference } from "@/common/UtilKit";
 
 export default function EditProductForm({ initialValues, data, uid, refetch }) {
   const router = useRouter();
@@ -41,18 +42,26 @@ export default function EditProductForm({ initialValues, data, uid, refetch }) {
         }
       });
 
+      const difference = pickDifference(initialValues, values);
+
       const payload = {
-        name: values.name || "",
-        short_pitch: values.short_pitch || "",
-        primary_image: values.primary_image || "",
-        secondary_image: values.secondary_image || "",
+        ...(difference.name && { name: values.name }),
+        ...(difference.short_pitch && { short_pitch: values.short_pitch }),
+        ...(difference.primary_image && {
+          primary_image: values.primary_image,
+        }),
+        ...(difference.secondary_image && {
+          secondary_image: values.secondary_image,
+        }),
         unit_price: parseFloat(values.unit_price) || 0,
         stock: JSON.stringify(stockArray) || [],
         is_published: values.is_published || false,
-        details: values.details || "",
-        sizing: values.sizing || "",
-        care: values.care || "",
-        delivery_and_returns: values.delivery_and_returns || "",
+        ...(difference.details && { details: values.details }),
+        ...(difference.sizing && { sizing: values.sizing }),
+        ...(difference.care && { care: values.care }),
+        ...(difference.delivery_and_returns && {
+          delivery_and_returns: values.delivery_and_returns,
+        }),
       };
 
       const handleSuccess = () => {
