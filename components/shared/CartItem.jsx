@@ -77,7 +77,7 @@ export default function CartItem({ cart, refetch }) {
 
         <Image
           className="w-16 object-cover rounded-md border border-border aspect-square"
-          src={cart.primary_image}
+          src={cart.primary_image || "/images/placeholder-image.png"}
           width={100}
           height={100}
           alt={cart.name}

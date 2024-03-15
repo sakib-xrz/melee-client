@@ -2,14 +2,14 @@ import Image from "next/image";
 import React from "react";
 
 const CheckoutCard = ({ product }) => {
-  const { name, primary_image, selected_stock, unit_price, size } = product;
+  const { name, selected_stock, unit_price, size } = product;
 
   return (
     <div className="border rounded-md w-full mb-4 p-3 space-y-4 bg-background">
       <div className="flex gap-3">
         <Image
           className="w-16 h-16 object-cover rounded-md border border-border aspect-square"
-          src={primary_image}
+          src={product.primary_image || "/images/placeholder-image.png"}
           alt="cart image"
           width={100}
           height={100}

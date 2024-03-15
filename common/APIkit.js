@@ -77,6 +77,13 @@ const APIKit = {
       },
     },
   },
+
+  order: {
+    checkout: (payload) => {
+      const url = "/order/checkout";
+      return client.post(url, payload);
+    },
+  },
 };
 
 export default APIKit;

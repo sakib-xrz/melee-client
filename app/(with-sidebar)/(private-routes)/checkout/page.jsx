@@ -2,17 +2,18 @@
 import { GetCart, calculateTotal } from "@/common/UtilKit";
 import Container from "@/components/shared/Container";
 import { useStore } from "@/context/StoreProvider";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CheckoutCard from "./components/CheckoutCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Loading from "@/components/shared/Loading";
+import APIKit from "@/common/APIkit";
 
 export default function CheckOutPage() {
   const { getCartItems, carts, cartLoading, user } = useStore();
-  console.log(user);
   const { data: cartData } = GetCart();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getCartItems(cartData || []);
@@ -23,6 +24,19 @@ export default function CheckOutPage() {
   const { subtotal, shipping, total } = calculateTotal(carts || []);
 
   const checkoutItems = carts.filter((item) => item.present_stock !== 0);
+
+  const handleCheckout = () => {
+    setLoading(true);
+    const payload = {
+      products: checkoutItems,
+    };
+
+    APIKit.order
+      .checkout(payload)
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  };
 
   return (
     <>
@@ -58,7 +72,7 @@ export default function CheckOutPage() {
               </div>
             </div>
 
-            <div>
+            {/* <div>
               <CardHeader>
                 <CardTitle>Shipping Address</CardTitle>
               </CardHeader>
@@ -84,7 +98,7 @@ export default function CheckOutPage() {
                   <Input type="text" id="zip" name="zip" placeholder="" />
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div>
               <CardHeader>
@@ -107,7 +121,13 @@ export default function CheckOutPage() {
                 </div>
               </div>
             </div>
-            <Button className="w-full">Continue to Payment</Button>
+            <Button
+              isLoading={loading}
+              onClick={() => handleCheckout()}
+              className="w-full"
+            >
+              Continue to Payment
+            </Button>
           </Card>
         </div>
       </Container>
