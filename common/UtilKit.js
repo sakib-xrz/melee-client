@@ -86,3 +86,16 @@ export const calculateTotal = (data) => {
     total: +total,
   };
 };
+
+export function pickDifference(initialValues, submittedValues) {
+  const keys = Object.keys(initialValues);
+
+  const picked = {};
+
+  for (let key of keys) {
+    if (initialValues[key] !== submittedValues[key]) {
+      picked[key] = submittedValues[key];
+    }
+  }
+  return picked;
+}

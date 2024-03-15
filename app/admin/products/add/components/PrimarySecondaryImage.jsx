@@ -4,7 +4,6 @@ import { X } from "lucide-react";
 import Image from "next/image";
 
 export default function PrimarySecondaryImage({ formik, data }) {
-  console.log(data);
   return (
     <div className="flex flex-col sm:flex-row gap-4 w-full">
       <div className="space-y-2 w-full">
