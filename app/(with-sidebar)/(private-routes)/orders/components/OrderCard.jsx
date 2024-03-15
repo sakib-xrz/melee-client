@@ -2,6 +2,14 @@ import { Card } from "@/components/ui/card";
 import { ClipboardList } from "lucide-react";
 import Link from "next/link";
 
+const statusClasses = {
+  "Order Placed": "bg-gray-600",
+  Processing: "bg-blue-600",
+  "On the Way": "bg-yellow-600",
+  "Out for Delivery": "bg-orange-600",
+  Delivered: "bg-green-600",
+};
+
 export default function OrderCard() {
   return (
     <>
@@ -9,8 +17,10 @@ export default function OrderCard() {
         <div className="px-4 pb-3">
           <div className="flex justify-between">
             <h1 className=" font-semibold">Order #6850031</h1>
-            <small className="bg-green-600 text-white text-xs rounded-full py-0 px-2 flex justify-center items-center">
-              Completed
+            <small
+              className={`${statusClasses["Delivered"]} text-white text-xs rounded-full py-0 px-2 flex justify-center items-center`}
+            >
+              Delivered
             </small>
           </div>
           <p className="pt-4 text-gray-400">March 15, 2024, 7:38 PM</p>
