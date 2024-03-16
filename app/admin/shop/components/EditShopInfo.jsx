@@ -19,6 +19,8 @@ export default function EditShopInfo({ initialValues, refetch, refetchStore }) {
     onSubmit: (values) => {
       setLoading(true);
 
+      values.contact_number = `+${values.contact_number}`;
+
       const promise = APIKit.shop
         .updateShop(values.uid, values)
         .then(() => {

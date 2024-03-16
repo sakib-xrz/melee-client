@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useStore } from "@/context/StoreProvider";
 import { Mails, Phone, Send } from "lucide-react";
+import Link from "next/link";
+import { toast } from "sonner";
 
 export default function ContactPage() {
   const { store } = useStore();
@@ -24,19 +26,25 @@ export default function ContactPage() {
                 information below:`}
               </p>
 
-              <div className="flex items-center mb-4 gap-2">
-                <Mails />
+              <Link
+                href={`mailto:${store?.contact_email}`}
+                className="flex items-center mb-4 gap-2"
+              >
+                <Mails className="w-5 h-5" />
                 <p>Email: {store?.contact_email}</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone />
+              </Link>
+              <Link
+                href={`tel:+${store?.contact_number}`}
+                className="flex items-center gap-2"
+              >
+                <Phone className="w-5 h-5" />
                 <p>Phone: {store?.contact_number}</p>
-              </div>
+              </Link>
             </div>
             {/* Contact Form */}
             <div>
               <h2 className="text-xl font-semibold mb-4">Send Us a Message</h2>
-              <form>
+              <div>
                 <div className="mb-4">
                   <label htmlFor="name" className="block text-sm font-medium">
                     Name
@@ -76,11 +84,14 @@ export default function ContactPage() {
                     className="mt-2"
                   />
                 </div>
-                <Button type="submit" className="gap-2">
+                <Button
+                  onClick={() => toast.success("Message Sent!")}
+                  className="gap-2"
+                >
                   Send Message
                   <Send className="w-4 h-4" />
                 </Button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
