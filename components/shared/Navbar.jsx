@@ -16,11 +16,13 @@ import { Button } from "../ui/button";
 import { useStore } from "@/context/StoreProvider";
 import { GetCart, calculateTotal } from "@/common/UtilKit";
 import { toast } from "sonner";
+import InstaIcon from "./InstaIcon";
+import TikTokIcon from "./TikTokIcon";
 
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, carts, fetchStore } = useStore();
+  const { user, carts, fetchStore, store } = useStore();
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
 
@@ -213,6 +215,21 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
+
+          {store && (
+            <div className="flex gap-2 absolute bottom-20 left-1/2 transform -translate-x-1/2">
+              {store?.contact_website && (
+                <Link href={store?.contact_website || "#"}>
+                  <InstaIcon />
+                </Link>
+              )}
+              {store?.other_website && (
+                <Link href={store?.other_website || "#"}>
+                  <TikTokIcon />
+                </Link>
+              )}
+            </div>
+          )}
 
           {user && (
             <Button

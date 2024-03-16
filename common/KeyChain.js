@@ -27,11 +27,11 @@ export const ProductRoutes = [
     href: "/orders",
     auth: true,
   },
-  {
-    title: "Returns",
-    href: "/returns",
-    auth: true,
-  },
+  // {
+  //   title: "Returns",
+  //   href: "/returns",
+  //   auth: true,
+  // },
 ];
 
 export const SupportRoutes = [

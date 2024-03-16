@@ -7,11 +7,13 @@ import ActiveIcon from "./ActiveIcon";
 import { useStore } from "@/context/StoreProvider";
 import { Button } from "../ui/button";
 import { LogOut } from "lucide-react";
+import InstaIcon from "./InstaIcon";
+import TikTokIcon from "./TikTokIcon";
 
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { user } = useStore();
+  const { user, store } = useStore();
 
   return (
     <div className="sticky top-36 min-h-[calc(100vh-9rem)] border-r-2 border-border bg-background">
@@ -108,6 +110,21 @@ export default function Sidebar() {
             </Link>
           ))}
         </div>
+
+        {store && (
+          <div className="flex gap-2 absolute bottom-20 left-1/2 transform -translate-x-1/2">
+            {store?.contact_website && (
+              <Link href={store?.contact_website || "#"}>
+                <InstaIcon />
+              </Link>
+            )}
+            {store?.other_website && (
+              <Link href={store?.other_website || "#"}>
+                <TikTokIcon />
+              </Link>
+            )}
+          </div>
+        )}
 
         {user && (
           <Button
