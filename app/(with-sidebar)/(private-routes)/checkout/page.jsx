@@ -5,12 +5,13 @@ import { useStore } from "@/context/StoreProvider";
 import { useEffect, useState } from "react";
 import CheckoutCard from "./components/CheckoutCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Loading from "@/components/shared/Loading";
 import APIKit from "@/common/APIkit";
+import { useRouter } from "next/navigation";
 
 export default function CheckOutPage() {
+  const router = useRouter();
   const { getCartItems, carts, cartLoading, user } = useStore();
   const { data: cartData } = GetCart();
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,9 @@ export default function CheckOutPage() {
 
     APIKit.order
       .checkout(payload)
-      .then((data) => console.log(data))
+      .then(({ data }) => {
+        router.push(data);
+      })
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   };
