@@ -149,7 +149,7 @@ export default function EditShopInfo({ initialValues, refetch, refetchStore }) {
               placeholder="Shipping charge here..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.shipping_charges}
+              value={parseFloat(formik.values.shipping_charges).toFixed(2)}
             />
           </div>
         </div>
