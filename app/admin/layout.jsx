@@ -6,7 +6,7 @@ export default function layout({ children }) {
   return (
     <AdminAuthGuardHOC>
       <AdminAuthNavbar />
-      <Container extraClassName={"max-w-[115rem]"}>{children}</Container>
+      <Container>{children}</Container>
     </AdminAuthGuardHOC>
   );
 }

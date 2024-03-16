@@ -25,7 +25,7 @@ export default function DataTable({
               <th
                 key={i}
                 scope="col"
-                className="whitespace-nowrap px-6 py-3 first:sticky first:left-0 first:bg-accent last:text-center"
+                className="whitespace-nowrap px-6 py-3 last:text-center"
               >
                 {col.title}
               </th>

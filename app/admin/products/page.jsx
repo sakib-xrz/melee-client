@@ -22,32 +22,28 @@ export default function AdminProductPage() {
 
   const tableColumns = [
     {
-      title: <p className="text-center">#</p>,
-      renderer: (_, index) => <p className="text-center">{index + 1}</p>,
-    },
-    {
-      title: <p className="text-center">Product Image</p>,
+      title: <p className="text-center">Product</p>,
       dataField: "primary_image_view",
       renderer: (row) => (
-        <div className="flex justify-center">
+        <div className="flex gap-2">
           {row.primary_image_view ? (
-            <Image
-              src={row.primary_image_view.image}
-              alt={row.name}
-              width={40}
-              height={40}
-              className="w-12 h-12 object-cover rounded-md"
-            />
+            <div className="w-12 h-12">
+              <Image
+                src={row.primary_image_view.image}
+                alt={row.name}
+                width={40}
+                height={40}
+                className="w-12 h-12 object-cover rounded-md"
+              />
+            </div>
           ) : (
             <p className="text-center">No Image</p>
           )}
+          <p className="text-left max-w-52 whitespace-break-spaces">
+            {row.name || "N/A"}
+          </p>
         </div>
       ),
-    },
-    {
-      title: <p className="text-left">Product Name</p>,
-      dataField: "name",
-      renderer: (row) => <p className="text-left">{row.name || "N/A"}</p>,
     },
     {
       title: <p className="text-left">Stock Count</p>,

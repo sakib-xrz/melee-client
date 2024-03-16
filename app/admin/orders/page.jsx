@@ -1,3 +1,9 @@
+import OrderCard from "./components/OrderCard";
+
 export default function AdminOrderPage() {
-  return <div>AdminOrderPage</div>;
+  return (
+    <div>
+      <OrderCard />
+    </div>
+  );
 }
