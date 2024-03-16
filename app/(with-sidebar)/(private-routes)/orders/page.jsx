@@ -7,6 +7,7 @@ export default function OrderPage() {
       <title>Orders | MELEE</title>
       <Container>
         <h1 className="text-3xl font-bold">My Orders</h1>
+        <p>You Can View Your All Orders Here. </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
           <OrderCard />
           <OrderCard />
