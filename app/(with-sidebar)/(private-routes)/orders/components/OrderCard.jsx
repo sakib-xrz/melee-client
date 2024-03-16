@@ -20,9 +20,9 @@ export default function OrderCard() {
           <div className="flex justify-between ">
             <h1 className=" font-semibold">Order #6850031</h1>
             <small
-              className={`${statusClasses["Payment Incomplete"]} text-white text-xs rounded-full py-0 px-2 flex justify-center items-center`}
+              className={`${statusClasses["Order Placed"]} text-white text-xs rounded-full py-0 px-2 flex justify-center items-center`}
             >
-              Payment Incomplete
+              Order Placed
             </small>
           </div>
           <p className="pt-4 text-gray-400">March 15, 2024, 7:38 PM</p>
@@ -30,10 +30,10 @@ export default function OrderCard() {
         </div>
         <hr />
 
-        <div className="flex items-center justify-center pb-3 pt-3 gap-3 px-4 hover:bg-accent rounded-b-md cursor-pointer">
+        {/* <div className="flex items-center justify-center pb-3 pt-3 gap-3 px-4 hover:bg-accent rounded-b-md cursor-pointer">
           <CreditCard className="w-5" />
           <p>Pay Now</p>
-        </div>
+        </div> */}
         <Link
           href={"/orders/1"}
           className="flex items-center justify-center pb-3 pt-3 gap-3 px-4 hover:bg-accent rounded-b-md cursor-pointer"

@@ -32,9 +32,9 @@ export default function OrderDetails() {
               <CardDescription>Order date: March 20, 2024</CardDescription>
             </CardHeader>
             <small
-              className={`${statusClasses["Delivered"]} text-white rounded-md px-4 py-2 xs:text-lg flex justify-center items-center`}
+              className={`${statusClasses["Order Placed"]} text-white rounded-md px-4 py-2 xs:text-lg flex justify-center items-center`}
             >
-              Delivered
+              Order Placed
             </small>
           </div>
 
