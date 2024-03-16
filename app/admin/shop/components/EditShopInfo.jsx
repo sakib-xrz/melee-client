@@ -8,12 +8,35 @@ import { useFormik } from "formik";
 
 const DynamicQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import APIKit from "@/common/APIkit";
+import { toast } from "sonner";
+import { useState } from "react";
 
-export default function EditShopInfo({ initialValues, refetch }) {
+export default function EditShopInfo({ initialValues, refetch, refetchStore }) {
+  const [loading, setLoading] = useState(false);
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      console.log(values);
+      setLoading(true);
+
+      const promise = APIKit.shop
+        .updateShop(values.uid, values)
+        .then(() => {
+          refetch();
+          refetchStore();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+
+      toast.promise(promise, {
+        loading: "Updating Shop Info...",
+        success: "Shop Info Updated!",
+        error: "Failed to update Shop Info!",
+      });
     },
   });
 
@@ -201,7 +224,7 @@ export default function EditShopInfo({ initialValues, refetch }) {
         {formik.dirty && (
           <div className="flex gap-3 justify-end">
             <Button
-              //   isLoading={loading}
+              isLoading={loading}
               className="w-fit whitespace-nowrap"
               type="submit"
             >

@@ -76,6 +76,17 @@ const APIKit = {
         },
       },
     },
+    public: {
+      getShop: () => {
+        const url = `/shop/public`;
+        return client.get(url);
+      },
+    },
+
+    updateShop: (uid, payload) => {
+      const url = `/shop/${uid}`;
+      return client.patch(url, payload);
+    },
   },
 
   order: {

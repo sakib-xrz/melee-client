@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import APIKit from "@/common/APIkit";
 import { AUTH_TOKEN_KEY } from "@/common/KeyChain";
 import { setJWTokenAndRedirect } from "@/common/UtilKit";
-import { toast } from "sonner";
 
 const StoreContext = createContext();
 
@@ -14,6 +13,7 @@ export default function StoreProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [carts, setCarts] = useState([]);
+  const [store, setStore] = useState(null);
   const [cartLoading, setCartLoading] = useState(false);
 
   const getCartItems = async (cartData) => {
@@ -29,7 +29,6 @@ export default function StoreProvider({ children }) {
       setUser(data);
     } catch (error) {
       console.error(error?.response?.data?.detail);
-      toast.error(error?.response?.data?.detail);
     }
   };
 
@@ -40,9 +39,21 @@ export default function StoreProvider({ children }) {
         .then(fetchMe())
         .catch((error) => {
           console.error(error?.response?.data?.detail);
-          toast.error(error?.response?.data?.detail);
         });
     }
+  };
+
+  const fetchStore = async () => {
+    try {
+      const { data } = await APIKit.shop.public.getShop();
+      setStore(data);
+    } catch (error) {
+      console.error(error?.response?.data?.detail);
+    }
+  };
+
+  const refetchStore = () => {
+    fetchStore();
   };
 
   const logout = () => {
@@ -60,10 +71,13 @@ export default function StoreProvider({ children }) {
   const userInfo = {
     user,
     carts,
+    store,
     cartLoading,
     getCartItems,
     fetchMe,
     refetchMe,
+    fetchStore,
+    refetchStore,
     logout,
     logoutAdmin,
   };

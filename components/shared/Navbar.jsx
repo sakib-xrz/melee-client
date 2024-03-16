@@ -5,7 +5,7 @@ import Container from "./Container";
 import Logo from "public/images/melee-white-transparent.png";
 import { LogOut, Menu, ShoppingCart } from "lucide-react";
 import RightSideDrawer from "./RightSideDrawer";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { LeftSideDrawer } from "./LeftSideDrawer";
 import Link from "next/link";
 import { AuthRoutes, ProductRoutes, SupportRoutes } from "@/common/KeyChain";
@@ -20,9 +20,13 @@ import { toast } from "sonner";
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, carts } = useStore();
+  const { user, carts, fetchStore } = useStore();
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    fetchStore();
+  }, []);
 
   const { data: cartData, refetch } = GetCart();
 

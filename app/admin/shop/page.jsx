@@ -5,7 +5,7 @@ import EditShopInfo from "./components/EditShopInfo";
 import PageTitleWithButton from "@/components/shared/PageTitleWithButton";
 
 export default function ShopManagement() {
-  const { user, refetchMe } = useStore();
+  const { user, refetchMe, refetchStore } = useStore();
   const { shop } = user;
 
   const initialValues = {
@@ -25,7 +25,11 @@ export default function ShopManagement() {
       <div className="mb-6">
         <PageTitleWithButton title="Shop Management" />
       </div>
-      <EditShopInfo initialValues={initialValues} refetch={refetchMe} />
+      <EditShopInfo
+        initialValues={initialValues}
+        refetch={refetchMe}
+        refetchStore={refetchStore}
+      />
     </div>
   );
 }
