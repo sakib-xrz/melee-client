@@ -61,4 +61,8 @@ export const AdminRoutes = [
     title: "Order Management",
     href: "/admin/orders",
   },
+  {
+    title: "Shop Management",
+    href: "/admin/shop",
+  },
 ];
