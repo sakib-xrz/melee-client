@@ -1,6 +1,5 @@
 import Image from "next/image";
 import ErrorImg from "/public/images/no_results.png";
-import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function ErrorComponent({ status }) {

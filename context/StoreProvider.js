@@ -14,6 +14,7 @@ export default function StoreProvider({ children }) {
   const [user, setUser] = useState(null);
   const [carts, setCarts] = useState([]);
   const [store, setStore] = useState(null);
+  const [storeLoading, setStoreLoading] = useState(false);
   const [cartLoading, setCartLoading] = useState(false);
 
   const getCartItems = async (cartData) => {
@@ -44,12 +45,10 @@ export default function StoreProvider({ children }) {
   };
 
   const fetchStore = async () => {
-    try {
-      const { data } = await APIKit.shop.public.getShop();
-      setStore(data);
-    } catch (error) {
-      console.error(error?.response?.data?.detail);
-    }
+    setStoreLoading(true);
+    const { data } = await APIKit.shop.public.getShop();
+    setStore(data);
+    setStoreLoading(false);
   };
 
   const refetchStore = () => {
@@ -72,6 +71,7 @@ export default function StoreProvider({ children }) {
     user,
     carts,
     store,
+    storeLoading,
     cartLoading,
     getCartItems,
     fetchMe,

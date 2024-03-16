@@ -7,6 +7,7 @@ import ProductCardSkeleton from "./components/ProductCardSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/APIkit";
 import ErrorComponent from "@/components/shared/ErrorComponent";
+import { useStore } from "@/context/StoreProvider";
 
 export default function ProductsPage() {
   const { data, isLoading, isError } = useQuery({
@@ -15,6 +16,8 @@ export default function ProductsPage() {
       APIKit.public.products.getProducts().then(({ data }) => data),
   });
 
+  const { store, storeLoading } = useStore();
+
   if (isError) {
     return <ErrorComponent />;
   }
@@ -22,14 +25,17 @@ export default function ProductsPage() {
   return (
     <div>
       <title>Products | MELEE</title>
-      <div className="lg:sticky lg:top-36 lg:z-50">
-        <Marquee className="bg-white text-black font-bold">
-          NEW DROP! This is your animated alert bar, (Your text here!)
-        </Marquee>
-      </div>
+      {store?.short_pitch && (
+        <div className="lg:sticky lg:top-36 lg:z-50">
+          <Marquee className="bg-white text-black font-bold">
+            {store?.short_pitch}
+          </Marquee>
+        </div>
+      )}
+
       <Container extraClassName={"max-w-[115rem]"}>
         <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-5 lg:gap-8">
-          {isLoading ? (
+          {isLoading || storeLoading ? (
             Array(8)
               .fill(0)
               .map((_, i) => (
