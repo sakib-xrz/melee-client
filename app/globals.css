@@ -153,3 +153,8 @@
 .react-tel-input .country-list .country:hover {
   background-color: rgb(39, 39, 42) !important;
 }
+
+.prose
+  :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: #fff !important;
+}
