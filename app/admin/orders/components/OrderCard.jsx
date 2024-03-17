@@ -1,8 +1,11 @@
 "use client";
 
 import Select from "@/components/form/Select";
+import RightSideDrawer from "@/components/shared/RightSideDrawer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useState } from "react";
+import OrderDetaillsCard from "./OrderDetaillsCard";
 
 // "Payment Incomplete": "bg-red-500",
 // "Order Placed": "bg-gray-600",
@@ -12,6 +15,7 @@ import { Card } from "@/components/ui/card";
 // Delivered: "bg-green-600",
 
 export default function OrderCard() {
+  const [orderDrawerOpen, setOrderDrawerOpen] = useState(false);
   return (
     <Card className="text-sm font-normal flex flex-col lg:flex-row justify-between gap-4">
       {/* Order details */}
@@ -65,9 +69,21 @@ export default function OrderCard() {
               }}
             />
 
-            <Button size="sm" className="w-full h-9">
+            <Button
+              onClick={() => setOrderDrawerOpen(true)}
+              size="sm"
+              className="w-full h-9"
+            >
               View Details
             </Button>
+
+            <RightSideDrawer
+              open={orderDrawerOpen}
+              setOpen={setOrderDrawerOpen}
+              title={"Order Details"}
+            >
+              <OrderDetaillsCard />
+            </RightSideDrawer>
           </div>
         </div>
       </div>
