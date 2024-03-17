@@ -82,7 +82,16 @@ const APIKit = {
         return client.get(url);
       },
     },
-
+    order: {
+      getOrders: () => {
+        const url = "/shop/order";
+        return client.get(url);
+      },
+      getSingleOrder: (uid) => {
+        const url = `/shop/order/${uid}`;
+        return client.get(url);
+      },
+    },
     updateShop: (uid, payload) => {
       const url = `/shop/${uid}`;
       return client.patch(url, payload);
