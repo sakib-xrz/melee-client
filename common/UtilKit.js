@@ -126,8 +126,10 @@ export function formatDateAndTime(data, isTimeRequired = false) {
 export const formatText = (text) => {
   if (text) {
     const textLowerCase = text.split("_").join(" ").toLowerCase();
-    const formattedText =
-      textLowerCase.charAt(0).toUpperCase() + textLowerCase.slice(1);
+    const words = textLowerCase.split(" ");
+    const formattedText = words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
     return formattedText;
   } else {
     return "";
