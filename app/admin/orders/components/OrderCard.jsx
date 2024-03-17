@@ -5,7 +5,7 @@ import RightSideDrawer from "@/components/shared/RightSideDrawer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
-import OrderDetaillsCard from "./OrderDetaillsCard";
+import OrderDetaillsCard from "./OrderDetailsCard";
 
 // "Payment Incomplete": "bg-red-500",
 // "Order Placed": "bg-gray-600",
@@ -38,7 +38,7 @@ export default function OrderCard() {
       {/* Customer details */}
       <div className="flex-1 flex flex-col space-y-2">
         <div className="text-xs text-grey-500 font-bold">
-          <span>Delivery Details</span>
+          <span>Customer Details</span>
         </div>
         <div className="text-grey-700 flex flex-col items-start">
           <p className="font-bold text-base">Md Sakibul Islam</p>
