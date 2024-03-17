@@ -23,6 +23,7 @@ export default function OrderCard({ order }) {
     setLoading(true);
     const payload = {
       order_uid: order.uid,
+      is_first_time_ordered: false,
       products: order?.user_cart_data?.products,
     };
 
@@ -39,12 +40,12 @@ export default function OrderCard({ order }) {
     <>
       <Card className="!p-0 !pt-4">
         <div className="px-4 pb-3">
-          <div className="flex justify-between ">
+          <div className="flex flex-col md:flex-row md:justify-between gap-2">
             <h1 className=" font-semibold">Order {order?.order_id}</h1>
             <small
               className={`${
                 statusClasses[order.status]
-              } text-white text-xs rounded-full py-0 px-2 flex justify-center items-center`}
+              } text-white text-xs rounded-full py-0 px-2 flex justify-center items-center w-fit`}
             >
               {formatText(order.status)}
             </small>
