@@ -99,3 +99,37 @@ export function pickDifference(initialValues, submittedValues) {
   }
   return picked;
 }
+
+export function formatDateAndTime(data, isTimeRequired = false) {
+  const date = new Date(`${data}`);
+
+  const createOptions = () => {
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+
+    if (isTimeRequired) {
+      options.hour = "numeric";
+      options.minute = "numeric";
+    }
+
+    return options;
+  };
+
+  const dateTimeFormat = new Intl.DateTimeFormat("en-US", createOptions());
+
+  return dateTimeFormat.format(date);
+}
+
+export const formatText = (text) => {
+  if (text) {
+    const textLowerCase = text.split("_").join(" ").toLowerCase();
+    const formattedText =
+      textLowerCase.charAt(0).toUpperCase() + textLowerCase.slice(1);
+    return formattedText;
+  } else {
+    return "";
+  }
+};

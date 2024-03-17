@@ -94,6 +94,14 @@ const APIKit = {
       const url = "/order/checkout";
       return client.post(url, payload);
     },
+    getOrders: () => {
+      const url = "/order";
+      return client.get(url);
+    },
+    getSingleOrder: (uid) => {
+      const url = `/order/${uid}`;
+      return client.get(url);
+    },
   },
 };
 
