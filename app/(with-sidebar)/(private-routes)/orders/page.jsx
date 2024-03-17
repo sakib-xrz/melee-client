@@ -19,8 +19,8 @@ export default function OrderPage() {
         <h1 className="text-3xl font-bold">My Orders</h1>
         <p>You Can View Your All Orders Here. </p>
         {isLoading && <Loading />}
-        {isError && <p>Something went wrong</p>}
-        {data && data.length === 0 && <p>No Orders Found</p>}
+        {isError && <p className="my-6">Something went wrong</p>}
+        {data && data.length === 0 && <p className="my-6">No Orders Found</p>}
         {data && data.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
             {data.map((order) => (

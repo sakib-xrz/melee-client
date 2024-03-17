@@ -22,6 +22,7 @@ export default function OrderCard({ order }) {
   const handelPayNow = () => {
     setLoading(true);
     const payload = {
+      order_uid: order.uid,
       products: order?.user_cart_data?.products,
     };
 

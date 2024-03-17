@@ -29,6 +29,7 @@ export default function CheckOutPage() {
   const handleCheckout = () => {
     setLoading(true);
     const payload = {
+      is_first_time_ordered: true,
       products: checkoutItems,
     };
 
