@@ -5,20 +5,12 @@ import RightSideDrawer from "@/components/shared/RightSideDrawer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
-import OrderDetaillsCard from "./OrderDetailsCard";
-
-// "Payment Incomplete": "bg-red-500",
-// "Order Placed": "bg-gray-600",
-// Processing: "bg-blue-600",
-// "On the Way": "bg-yellow-600",
-// "Out for Delivery": "bg-orange-600",
-// Delivered: "bg-green-600",
+import OrderDetailsCard from "./OrderDetailsCard";
 
 export default function OrderCard() {
   const [orderDrawerOpen, setOrderDrawerOpen] = useState(false);
   return (
     <Card className="text-sm font-normal flex flex-col lg:flex-row justify-between gap-4">
-      {/* Order details */}
       <div className="flex-1">
         <div className="text-xs text-grey-500 gap-2 flex flex-col">
           <span className=" text-primary text-base lg:text-lg font-bold">
@@ -35,7 +27,7 @@ export default function OrderCard() {
           </p>
         </div>
       </div>
-      {/* Customer details */}
+
       <div className="flex-1 flex flex-col space-y-2">
         <div className="text-xs text-grey-500 font-bold">
           <span>Customer Details</span>
@@ -50,7 +42,7 @@ export default function OrderCard() {
           </address>
         </div>
       </div>
-      {/* Actions */}
+
       <div className="space-y-2 flex-1">
         <div className="lg:w-7/12 ml-auto  text-xs text-grey-500 font-bold">
           <p className="mb-1">Order status</p>
@@ -82,7 +74,7 @@ export default function OrderCard() {
               setOpen={setOrderDrawerOpen}
               title={"Order Details"}
             >
-              <OrderDetaillsCard />
+              <OrderDetailsCard />
             </RightSideDrawer>
           </div>
         </div>

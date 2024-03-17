@@ -1,3 +1,4 @@
+import Select from "@/components/form/Select";
 import Image from "next/image";
 import shirt from "public/images/dress3.png";
 
@@ -11,7 +12,23 @@ const OrderDetailsCard = () => {
         </div>
       </div>
 
-      <p className="text-sm font-bold mb-2">Total Product: 2 Items</p>
+      <div>
+        <Select
+          options={[
+            { label: "Order Placed", value: "Order Placed" },
+            { label: "Processing", value: "Processing" },
+            { label: "On the Way", value: "On the Way" },
+            { label: "Out for Delivery", value: "Out for Delivery" },
+            { label: "Delivered", value: "Delivered" },
+          ]}
+          value={"Payment Incomplete"}
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        />
+      </div>
+
+      <p className="text-sm font-bold my-3">Total Product: 2 Items</p>
 
       <div className="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col">
         <div className="flex items-start gap-3">
