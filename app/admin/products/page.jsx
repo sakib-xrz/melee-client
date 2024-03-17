@@ -22,7 +22,7 @@ export default function AdminProductPage() {
 
   const tableColumns = [
     {
-      title: <p className="text-center">Product</p>,
+      title: <p>Product</p>,
       dataField: "primary_image_view",
       renderer: (row) => (
         <div className="flex gap-2">
@@ -105,7 +105,7 @@ export default function AdminProductPage() {
       dataField: "unit_price",
       renderer: (row) => (
         <p className="text-center">
-          {parseFloat(row.unit_price).toFixed(2) || "N/A"}
+          {parseFloat(+row.unit_price).toFixed(2) || "N/A"}
         </p>
       ),
     },
@@ -119,7 +119,11 @@ export default function AdminProductPage() {
     {
       title: <p className="text-center">Sold Amount</p>,
       dataField: "total_amount",
-      renderer: (row) => <p className="text-center">{row.total_amount || 0}</p>,
+      renderer: (row) => (
+        <p className="text-center">
+          {parseFloat(+row.total_amount).toFixed(2) || 0}
+        </p>
+      ),
     },
     {
       title: <p className="text-center">Actions</p>,

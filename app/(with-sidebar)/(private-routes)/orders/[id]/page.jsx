@@ -127,7 +127,7 @@ export default function OrderDetails({ params: { id } }) {
                       {(
                         parseFloat(data?.total_price) +
                         parseFloat(data?.order_shipping_charge)
-                      ).toFixed(2)}
+                      ).toFixed(2) || 0}
                     </p>
                   </div>
                 </div>

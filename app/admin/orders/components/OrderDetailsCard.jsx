@@ -1,6 +1,7 @@
 "use client";
 
 import APIKit from "@/common/APIkit";
+import { formatDateAndTime } from "@/common/UtilKit";
 import Select from "@/components/form/Select";
 import Loading from "@/components/shared/Loading";
 import { useQuery } from "@tanstack/react-query";
@@ -8,7 +9,11 @@ import Image from "next/image";
 import shirt from "public/images/dress3.png";
 
 const OrderDetailsCard = ({ uid }) => {
-  const { data, isLoading, isError } = useQuery({
+  const {
+    data: order,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: [`admin/orders/${uid}`],
     queryFn: () =>
       APIKit.shop.order.getSingleOrder(uid).then(({ data }) => data),
@@ -23,20 +28,24 @@ const OrderDetailsCard = ({ uid }) => {
     <div>
       <div>
         <div>
-          <h2 className="text-2xl font-semibold">Order ID: #034278966</h2>
-          <div className="mb-3">Order date: March 17, 2024, 12:49 PM</div>
+          <h2 className="text-2xl font-semibold">
+            Order ID: {order?.order_id}
+          </h2>
+          <div className="mb-3">
+            Order date: {formatDateAndTime(order?.created_at, true)}
+          </div>
         </div>
       </div>
 
       <p className="mb-1 flex items-center gap-2 font-medium">
         Payment status:
-        {false ? (
-          <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
-            Incomplete
-          </span>
-        ) : (
+        {order?.is_paid ? (
           <span className="bg-green-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
             Complete
+          </span>
+        ) : (
+          <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+            Incomplete
           </span>
         )}
       </p>
@@ -57,45 +66,40 @@ const OrderDetailsCard = ({ uid }) => {
         />
       </div>
 
-      <p className="text-sm font-bold my-3">Total Product: 2 Items</p>
+      <p className="text-sm font-bold my-3">
+        Total Product: {order?.products.length}{" "}
+        {order?.products.length > 1 ? "items" : "item"}
+      </p>
 
-      <div className="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col">
-        <div className="flex items-start gap-3">
-          <div className="w-full space-y-1">
-            <p className="line-clamp-1 text-base font-medium">Yellow Shirt</p>
-            <p className="text-xs md:text-sm ">Size: M</p>
-            <p className="text-xs md:text-sm ">Quantity: 2</p>
-            <p className="text-xs md:text-sm ">Price: $54</p>
+      {order?.products.map((product) => (
+        <div
+          key={product?.uid}
+          className="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col"
+        >
+          <div className="flex items-start gap-3">
+            <div className="w-full space-y-1">
+              <p className="line-clamp-1 text-base font-medium">
+                {product?.product?.name}
+              </p>
+              <p className="text-xs md:text-sm ">Size: {product?.size}</p>
+              <p className="text-xs md:text-sm ">
+                Quantity: {product?.quantity}
+              </p>
+              <p className="text-xs md:text-sm ">
+                Price: ${parseFloat(product?.product?.unit_price).toFixed(2)}
+              </p>
+            </div>
+
+            <Image
+              className="w-24 object-cover rounded-md border border-border aspect-square"
+              src={product?.product?.primary_image?.image}
+              width={100}
+              height={100}
+              alt={""}
+            />
           </div>
-
-          <Image
-            className="w-24 object-cover rounded-md border border-border aspect-square"
-            src={shirt || "/images/placeholder-image.png"}
-            width={100}
-            height={100}
-            alt={""}
-          />
         </div>
-      </div>
-
-      <div className="border rounded-md w-full mb-4 p-3 flex justify-center gap-3 flex-col">
-        <div className="flex items-start gap-3">
-          <div className="w-full space-y-1">
-            <p className="line-clamp-1 text-base font-medium">Yellow Shirt</p>
-            <p className="text-xs md:text-sm ">Size: M</p>
-            <p className="text-xs md:text-sm ">Quantity: 2</p>
-            <p className="text-xs md:text-sm ">Price: $54</p>
-          </div>
-
-          <Image
-            className="w-24 object-cover rounded-md border border-border aspect-square"
-            src={shirt || "/images/placeholder-image.png"}
-            width={100}
-            height={100}
-            alt={""}
-          />
-        </div>
-      </div>
+      ))}
 
       <hr />
 
@@ -103,12 +107,16 @@ const OrderDetailsCard = ({ uid }) => {
         <h2 className="text-sm font-bold mb-2">Customer Details</h2>
 
         <div className="flex flex-col items-start">
-          <p className="font-bold text-grey-700">Md Sakibul Islam</p>
-          <p>+8801409029742</p>
+          <p className="font-bold text-grey-700">
+            {order?.user?.first_name && order?.user?.last_name
+              ? `${order?.user.first_name} ${order?.user.last_name}`
+              : "Customer name not provided."}
+          </p>
+          <p>{order?.user?.phone}</p>
         </div>
 
         <address className="text-sm whitespace-pre-wrap">
-          123 Main Street, Anytown, USA 12345
+          {order?.address || "Shipping address not provided."}
         </address>
       </div>
 
@@ -118,15 +126,23 @@ const OrderDetailsCard = ({ uid }) => {
         <h2 className="text-sm font-bold ">Payment Break Down</h2>
         <div className="flex justify-between items-center text-sm font-medium text-grey-700">
           <p>Sub Total</p>
-          <p>${0}</p>
+          <p>${parseFloat(order?.total_price).toFixed(2) || 0}</p>
         </div>
         <div className="flex justify-between items-center text-sm font-medium text-grey-700">
           <p>Shipping Charge</p>
-          <p className="flex items-center gap-1">${0}</p>
+          <p className="flex items-center gap-1">
+            ${parseFloat(order?.order_shipping_charge).toFixed(2) || 0}
+          </p>
         </div>
         <div className="flex justify-between items-center text-sm font-bold text-grey-700">
           <p>Total Cost</p>
-          <p>${0}</p>
+          <p>
+            $
+            {(
+              parseFloat(order?.total_price) +
+              parseFloat(order?.order_shipping_charge)
+            ).toFixed(2) || 0}
+          </p>
         </div>
       </div>
     </div>

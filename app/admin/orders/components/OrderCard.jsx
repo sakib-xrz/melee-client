@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import OrderDetailsCard from "./OrderDetailsCard";
+import { formatDateAndTime } from "@/common/UtilKit";
 
 export default function OrderCard({ order }) {
   const [orderDrawerOpen, setOrderDrawerOpen] = useState(false);
@@ -15,28 +16,34 @@ export default function OrderCard({ order }) {
         <div className="text-xs text-grey-500 gap-2 flex flex-col">
           <div className="flex flex-col xs:flex-row xs:justify-between xs:items-center gap-1">
             <span className=" text-primary text-base lg:text-lg font-bold">
-              Order #6850031
+              Order {order?.order_id}
             </span>
             <p className="mb-1 flex items-center gap-2 font-medium lg:hidden">
-              {false ? (
-                <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
-                  Payment Incomplete
-                </span>
-              ) : (
+              {order?.is_paid ? (
                 <span className="bg-green-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
                   Payment Complete
+                </span>
+              ) : (
+                <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+                  Payment Incomplete
                 </span>
               )}
             </p>
           </div>
-          <span className="text-sm font-normal ">March 15, 2024, 7:38 PM</span>
+          <span className="text-sm font-normal ">
+            {formatDateAndTime(order?.created_at, true)}
+          </span>
         </div>
         <div className="text-xs text-grey-500 flex flex-col">
           <p className="text-sm font-normal text-grey-500 ">
-            Total Product: 2 Items
+            Total Product: {order?.products?.length}{" "}
+            {order?.products?.length > 1 ? "items" : "item"}
           </p>
           <p className="text-sm font-normal ">
-            Total Order: <strong className="font-bold">$799.00</strong>
+            Total Order:{" "}
+            <strong className="font-bold">
+              ${parseFloat(order?.total_price).toFixed(2)}
+            </strong>
           </p>
         </div>
       </div>
@@ -46,12 +53,16 @@ export default function OrderCard({ order }) {
           <span>Customer Details</span>
         </div>
         <div className="text-grey-700 flex flex-col items-start">
-          <p className="font-bold text-base">Md Sakibul Islam</p>
-          <p>+8801409029742</p>
+          <p className="font-bold text-base">
+            {order?.user?.first_name && order?.user?.last_name
+              ? `${order?.user.first_name} ${order?.user.last_name}`
+              : "Customer name not provided."}
+          </p>
+          <p>{order?.user?.phone}</p>
         </div>
         <div className="text-grey-700">
           <address className="text-sm whitespace-pre-wrap">
-            123 Main Street, Anytown, USA 12345
+            {order?.address || "Shipping address not provided."}
           </address>
         </div>
       </div>
@@ -60,13 +71,13 @@ export default function OrderCard({ order }) {
         <div className="lg:w-7/12 ml-auto  text-xs text-grey-500 font-bold">
           <p className="mb-1 lg:flex items-center gap-2 font-medium hidden">
             Payment status:{" "}
-            {false ? (
-              <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
-                Incomplete
-              </span>
-            ) : (
+            {order?.is_paid ? (
               <span className="bg-green-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
                 Complete
+              </span>
+            ) : (
+              <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+                Incomplete
               </span>
             )}
           </p>
