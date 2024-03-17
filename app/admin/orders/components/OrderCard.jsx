@@ -13,9 +13,22 @@ export default function OrderCard() {
     <Card className="text-sm font-normal flex flex-col lg:flex-row justify-between gap-4">
       <div className="flex-1">
         <div className="text-xs text-grey-500 gap-2 flex flex-col">
-          <span className=" text-primary text-base lg:text-lg font-bold">
-            Order #6850031
-          </span>
+          <div className="flex flex-col xs:flex-row xs:justify-between xs:items-center gap-1">
+            <span className=" text-primary text-base lg:text-lg font-bold">
+              Order #6850031
+            </span>
+            <p className="mb-1 flex items-center gap-2 font-medium lg:hidden">
+              {false ? (
+                <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+                  Payment Incomplete
+                </span>
+              ) : (
+                <span className="bg-green-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+                  Payment Complete
+                </span>
+              )}
+            </p>
+          </div>
           <span className="text-sm font-normal ">March 15, 2024, 7:38 PM</span>
         </div>
         <div className="text-xs text-grey-500 flex flex-col">
@@ -45,7 +58,19 @@ export default function OrderCard() {
 
       <div className="space-y-2 flex-1">
         <div className="lg:w-7/12 ml-auto  text-xs text-grey-500 font-bold">
-          <p className="mb-1">Order status</p>
+          <p className="mb-1 lg:flex items-center gap-2 font-medium hidden">
+            Payment status:{" "}
+            {false ? (
+              <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+                Incomplete
+              </span>
+            ) : (
+              <span className="bg-green-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+                Complete
+              </span>
+            )}
+          </p>
+
           <div className="space-y-2">
             <Select
               options={[

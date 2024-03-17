@@ -12,6 +12,19 @@ const OrderDetailsCard = () => {
         </div>
       </div>
 
+      <p className="mb-1 flex items-center gap-2 font-medium">
+        Payment status:
+        {false ? (
+          <span className="bg-red-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+            Incomplete
+          </span>
+        ) : (
+          <span className="bg-green-600 text-xs rounded-full py-0 px-2 flex justify-center items-center">
+            Complete
+          </span>
+        )}
+      </p>
+
       <div>
         <Select
           options={[
