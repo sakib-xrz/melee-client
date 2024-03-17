@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import OrderDetailsCard from "./OrderDetailsCard";
 
-export default function OrderCard() {
+export default function OrderCard({ order }) {
   const [orderDrawerOpen, setOrderDrawerOpen] = useState(false);
   return (
     <Card className="text-sm font-normal flex flex-col lg:flex-row justify-between gap-4">
@@ -99,7 +99,7 @@ export default function OrderCard() {
               setOpen={setOrderDrawerOpen}
               title={"Order Details"}
             >
-              <OrderDetailsCard />
+              <OrderDetailsCard uid={order.uid} />
             </RightSideDrawer>
           </div>
         </div>

@@ -1,8 +1,24 @@
+"use client";
+
+import APIKit from "@/common/APIkit";
 import Select from "@/components/form/Select";
+import Loading from "@/components/shared/Loading";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import shirt from "public/images/dress3.png";
 
-const OrderDetailsCard = () => {
+const OrderDetailsCard = ({ uid }) => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: [`admin/orders/${uid}`],
+    queryFn: () =>
+      APIKit.shop.order.getSingleOrder(uid).then(({ data }) => data),
+    enabled: !!uid,
+  });
+
+  if (isLoading) return <Loading />;
+
+  if (isError) return <p>Something went wrong</p>;
+
   return (
     <div>
       <div>
