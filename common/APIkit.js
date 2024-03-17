@@ -92,6 +92,12 @@ const APIKit = {
         return client.get(url);
       },
     },
+    dashboard: {
+      getDashboard: () => {
+        const url = "/shop/dashboard";
+        return client.get(url);
+      },
+    },
     updateShop: (uid, payload) => {
       const url = `/shop/${uid}`;
       return client.patch(url, payload);
