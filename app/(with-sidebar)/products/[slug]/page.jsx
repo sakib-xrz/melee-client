@@ -57,6 +57,8 @@ export default function ProductDetailsPage({ params: { slug } }) {
 
   const isAlreadyExists = !!cartData?.find((e) => e.slug == data.slug);
 
+  const checkoutUrl = `/checkout?slug=${data.slug}&size=${selectedSize}&quantity=1`;
+
   const handleAddToCart = () => {
     if (!selectedSize) {
       setErrorMessages("Please select a size");
@@ -74,18 +76,15 @@ export default function ProductDetailsPage({ params: { slug } }) {
   };
 
   const handleBuyNow = () => {
-    if (!user) {
-      setAuthModalOpen(true);
-      console.log("open modal");
+    if (!selectedSize) {
+      setErrorMessages("Please select a size");
+      return;
     } else {
-      if (!selectedSize) {
-        setErrorMessages("Please select a size");
+      if (!user) {
+        setAuthModalOpen(true);
         return;
       }
-
-      router.push(
-        `/checkout?slug=${data.slug}&size=${selectedSize}&quantity=1`
-      );
+      router.push(checkoutUrl);
     }
   };
 
@@ -247,7 +246,11 @@ export default function ProductDetailsPage({ params: { slug } }) {
                   </span>
                 </DialogDescription>
               </DialogHeader>
-              <Login />
+              <Login
+                slug={slug}
+                setAuthModalOpen={setAuthModalOpen}
+                checkoutUrl={checkoutUrl}
+              />
             </DialogContent>
           ) : (
             <DialogContent>
