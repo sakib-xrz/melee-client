@@ -27,7 +27,7 @@ export default function EditProduct({ params: { uid } }) {
     secondary_image:
       (data.images.length &&
         data.images.find((image) => image.type === "SECONDARY_PRODUCT_IMAGE")
-          .image) ||
+          ?.image) ||
       "",
     unit_price: data.unit_price ? parseFloat(data.unit_price).toFixed(2) : "",
     stock_s:
