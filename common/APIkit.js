@@ -91,6 +91,10 @@ const APIKit = {
         const url = `/shop/order/${uid}`;
         return client.get(url);
       },
+      updateOrderStatus: (uid, payload) => {
+        const url = `/shop/order/${uid}`;
+        return client.patch(url, payload);
+      },
     },
     dashboard: {
       getDashboard: () => {

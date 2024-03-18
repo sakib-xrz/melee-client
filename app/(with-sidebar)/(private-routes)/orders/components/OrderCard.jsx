@@ -53,7 +53,9 @@ export default function OrderCard({ order }) {
           <p className="pt-4 text-gray-400">
             {formatDateAndTime(order?.created_at, true)}
           </p>
-          <p className="text-xl font-semibold mt-1">$ {order?.total_price}</p>
+          <p className="text-xl font-semibold mt-1">
+            $ {parseFloat(order?.total_price).toFixed(2)}
+          </p>
         </div>
         <hr />
         {order?.status === "PAYMENT_INCOMPLETE" ? (

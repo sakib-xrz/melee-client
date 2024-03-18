@@ -7,7 +7,7 @@ import APIKit from "@/common/APIkit";
 import Loading from "@/components/shared/Loading";
 
 export default function AdminOrderPage() {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["admin/orders"],
     queryFn: () =>
       APIKit.shop.order.getOrders().then(({ data }) => data.results),
@@ -21,7 +21,7 @@ export default function AdminOrderPage() {
       {data && data.length > 0 && (
         <div className="my-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
           {data.map((order) => (
-            <OrderCard key={order.id} order={order} />
+            <OrderCard key={order.id} order={order} refetch={refetch} />
           ))}
         </div>
       )}

@@ -6,19 +6,43 @@ import Select from "@/components/form/Select";
 import Loading from "@/components/shared/Loading";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import shirt from "public/images/dress3.png";
+import { toast } from "sonner";
 
-const OrderDetailsCard = ({ uid }) => {
+const orderStatus = [
+  { label: "Order Placed", value: "ORDER_PLACED" },
+  { label: "Payment Incomplete", value: "PAYMENT_INCOMPLETE" },
+  { label: "Processing", value: "PROCESSING" },
+  { label: "On the Way", value: "ON_THE_WAY" },
+  { label: "Out for Delivery", value: "OUT_FOR_DELIVERY" },
+  { label: "Delivered", value: "DELIVERED" },
+];
+
+const OrderDetailsCard = ({ uid, orderListRefetch }) => {
   const {
     data: order,
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: [`admin/orders/${uid}`],
     queryFn: () =>
       APIKit.shop.order.getSingleOrder(uid).then(({ data }) => data),
     enabled: !!uid,
   });
+
+  const handleStatusChange = (status) => {
+    const promise = APIKit.shop.order
+      .updateOrderStatus(uid, { status })
+      .then(() => {
+        refetch();
+        orderListRefetch();
+      });
+    toast.promise(promise, {
+      loading: "Updating order status...",
+      success: "Order status updated successfully.",
+      error: "Failed to update order status.",
+    });
+  };
 
   if (isLoading) return <Loading />;
 
@@ -52,17 +76,12 @@ const OrderDetailsCard = ({ uid }) => {
 
       <div>
         <Select
-          options={[
-            { label: "Order Placed", value: "Order Placed" },
-            { label: "Processing", value: "Processing" },
-            { label: "On the Way", value: "On the Way" },
-            { label: "Out for Delivery", value: "Out for Delivery" },
-            { label: "Delivered", value: "Delivered" },
-          ]}
-          value={"Payment Incomplete"}
-          onChange={(e) => {
-            console.log(e.target.value);
-          }}
+          disabled={!order?.is_paid}
+          options={orderStatus.filter(
+            (order) => order.value !== "PAYMENT_INCOMPLETE"
+          )}
+          value={order?.status}
+          onChange={(e) => handleStatusChange(e.target.value, order.uid)}
         />
       </div>
 

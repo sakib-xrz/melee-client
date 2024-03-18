@@ -11,6 +11,7 @@ const Select = ({
   value = "",
   options,
   onChange = () => {},
+  disabled,
 }) => {
   return (
     <div className="relative">
@@ -20,6 +21,7 @@ const Select = ({
         className={cn(defaultClassName, extraClassName)}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       >
         {options.map((option) => (
           <option
