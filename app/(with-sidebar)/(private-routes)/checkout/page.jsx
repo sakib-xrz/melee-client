@@ -8,16 +8,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Loading from "@/components/shared/Loading";
 import APIKit from "@/common/APIkit";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function CheckOutPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { getCartItems, carts, cartLoading, user } = useStore();
   const { data: cartData } = GetCart();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getCartItems(cartData || []);
+    const slug = searchParams.get("slug");
+    const size = searchParams.get("size");
+    const quantity = searchParams.get("quantity");
+    getCartItems(cartData || [{ slug, size, quantity }] || []);
   }, [cartData]);
 
   if (cartLoading) return <Loading />;

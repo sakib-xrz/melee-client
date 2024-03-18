@@ -29,6 +29,7 @@ import APIKit from "@/common/APIkit";
 import Loading from "@/components/shared/Loading";
 import { GetCart, setCart } from "@/common/UtilKit";
 import ErrorComponent from "@/components/shared/ErrorComponent";
+import { useRouter } from "next/navigation";
 
 export default function ProductDetailsPage({ params: { slug } }) {
   const { user } = useStore();
@@ -36,6 +37,7 @@ export default function ProductDetailsPage({ params: { slug } }) {
   const [loginModalOpen, setLoginModalOpen] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
   const [errorMessages, setErrorMessages] = useState("");
+  const router = useRouter();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["product", slug],
@@ -76,7 +78,14 @@ export default function ProductDetailsPage({ params: { slug } }) {
       setAuthModalOpen(true);
       console.log("open modal");
     } else {
-      toast.success("Purchase successful!");
+      if (!selectedSize) {
+        setErrorMessages("Please select a size");
+        return;
+      }
+
+      router.push(
+        `/checkout?slug=${data.slug}&size=${selectedSize}&quantity=1`
+      );
     }
   };
 

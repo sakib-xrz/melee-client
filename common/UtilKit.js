@@ -47,6 +47,7 @@ export const setCart = (item) => {
     localStorage.setItem("cart", JSON.stringify(items));
   }
 };
+
 export const GetCart = () => {
   return useQuery({
     queryKey: ["cart"],
