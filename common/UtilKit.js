@@ -135,3 +135,18 @@ export const formatText = (text) => {
     return "";
   }
 };
+
+export function calculateTimeRemaining(targetDate) {
+  const targetTime = new Date(targetDate).getTime();
+  const currentTime = new Date().getTime();
+  const difference = targetTime - currentTime;
+
+  let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  let hours = Math.floor(
+    (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+  return { days, hours, minutes, seconds };
+}
