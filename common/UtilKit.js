@@ -150,3 +150,37 @@ export function calculateTimeRemaining(targetDate) {
 
   return { days, hours, minutes, seconds };
 }
+
+export function formatAddress(addressString) {
+  const components = addressString.split(",");
+
+  const formattedAddress = {};
+
+  components.forEach((component) => {
+    const [key, value] = component.split(":").map((item) => item.trim());
+    formattedAddress[key] = value;
+  });
+
+  let formattedString = "";
+
+  if (formattedAddress.line1) {
+    formattedString += formattedAddress.line1;
+  }
+  if (formattedAddress.line2) {
+    formattedString += formattedAddress.line2;
+  }
+  if (formattedAddress.city) {
+    if (formattedString) formattedString += ", ";
+    formattedString += formattedAddress.city;
+  }
+  if (formattedAddress.country) {
+    if (formattedString) formattedString += ", ";
+    formattedString += formattedAddress.country;
+  }
+  if (formattedAddress.postal_code) {
+    if (formattedString) formattedString += " ";
+    formattedString += formattedAddress.postal_code;
+  }
+
+  return formattedString;
+}

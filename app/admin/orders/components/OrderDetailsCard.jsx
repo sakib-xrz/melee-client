@@ -1,7 +1,7 @@
 "use client";
 
 import APIKit from "@/common/APIkit";
-import { formatDateAndTime } from "@/common/UtilKit";
+import { formatAddress, formatDateAndTime } from "@/common/UtilKit";
 import Select from "@/components/form/Select";
 import Loading from "@/components/shared/Loading";
 import { useQuery } from "@tanstack/react-query";
@@ -135,7 +135,7 @@ const OrderDetailsCard = ({ uid, orderListRefetch }) => {
         </div>
 
         <address className="text-sm whitespace-pre-wrap">
-          {order?.address || "Shipping address not provided."}
+          {formatAddress(order?.address) || "Shipping address not provided."}
         </address>
       </div>
 

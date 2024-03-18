@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import OrderDetailsCard from "./OrderDetailsCard";
-import { formatDateAndTime } from "@/common/UtilKit";
+import { formatAddress, formatDateAndTime } from "@/common/UtilKit";
 import APIKit from "@/common/APIkit";
 import { toast } from "sonner";
 
@@ -38,7 +38,7 @@ export default function OrderCard({ order, refetch }) {
     <Card className="text-sm font-normal flex flex-col lg:flex-row justify-between gap-4">
       <div className="flex-1">
         <div className="text-xs text-grey-500 gap-2 flex flex-col">
-          <div className="flex flex-col xs:flex-row xs:justify-between xs:items-center gap-1">
+          <div className="flex flex-col xs:flex-row xs:justify-between xs:items-center sm:flex-col sm:items-start gap-1">
             <span className=" text-primary text-base lg:text-lg font-bold">
               Order {order?.order_id}
             </span>
@@ -86,7 +86,7 @@ export default function OrderCard({ order, refetch }) {
         </div>
         <div className="text-grey-700">
           <address className="text-sm whitespace-pre-wrap">
-            {order?.address || "Shipping address not provided."}
+            {formatAddress(order?.address) || "Shipping address not provided."}
           </address>
         </div>
       </div>

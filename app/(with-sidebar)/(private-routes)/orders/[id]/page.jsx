@@ -12,7 +12,7 @@ import placeholderImage from "@/public/images/placeholder.png";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/APIkit";
 import Loading from "@/components/shared/Loading";
-import { formatDateAndTime, formatText } from "@/common/UtilKit";
+import { formatAddress, formatDateAndTime, formatText } from "@/common/UtilKit";
 import React from "react";
 
 const statusClasses = {
@@ -112,7 +112,10 @@ export default function OrderDetails({ params: { id } }) {
                   <h3 className="text-lg font-bold">Shipping Address</h3>
                   <p>{`${data?.user.first_name} ${data?.user.last_name}`}</p>
                   <p>Phone: {data?.user?.phone}</p>
-                  <p>{data?.address || "Shipping address not provided."}</p>
+                  <p>
+                    {formatAddress(data?.address) ||
+                      "Shipping address not provided."}
+                  </p>
                 </div>
                 <div>
                   <h2 className="text-lg font-bold">Order Total</h2>
