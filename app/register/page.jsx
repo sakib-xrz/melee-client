@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Password } from "@/components/ui/password";
+import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useFormik } from "formik";
 import Image from "next/image";
@@ -14,7 +15,6 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Logo from "public/images/melee-white-transparent.png";
 import { AUTH_TOKEN_KEY } from "@/common/KeyChain";
-import PhoneInput from "react-phone-input-2";
 import { setJWTokenAndRedirect } from "@/common/UtilKit";
 import APIKit from "@/common/APIkit";
 import { toast } from "sonner";
@@ -48,6 +48,7 @@ export default function RegisterPage() {
       router.push("/products");
     }
   }, []);
+
   const formik = useFormik({
     initialValues,
     validationSchema,

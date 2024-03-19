@@ -27,7 +27,7 @@ const initialValues = {
   password: "123456",
 };
 
-export default function Login({ slug, setAuthModalOpen, checkoutUrl }) {
+export default function Login({ setAuthModalOpen, checkoutUrl }) {
   const { fetchMe } = useStore();
   const router = useRouter();
   const [loading, setLoading] = useState(false);

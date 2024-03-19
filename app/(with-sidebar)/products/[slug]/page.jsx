@@ -247,7 +247,6 @@ export default function ProductDetailsPage({ params: { slug } }) {
                 </DialogDescription>
               </DialogHeader>
               <Login
-                slug={slug}
                 setAuthModalOpen={setAuthModalOpen}
                 checkoutUrl={checkoutUrl}
               />
@@ -268,7 +267,10 @@ export default function ProductDetailsPage({ params: { slug } }) {
                   </span>
                 </DialogDescription>
               </DialogHeader>
-              <Register />
+              <Register
+                setAuthModalOpen={setAuthModalOpen}
+                checkoutUrl={checkoutUrl}
+              />
             </DialogContent>
           )}
         </Dialog>
