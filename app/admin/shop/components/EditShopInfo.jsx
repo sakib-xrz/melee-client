@@ -11,6 +11,8 @@ import "react-quill/dist/quill.snow.css";
 import APIKit from "@/common/APIkit";
 import { toast } from "sonner";
 import { useState } from "react";
+import DatePicker from "@/components/form/DatePicker";
+import TimePicker from "@/components/form/TimePicker";
 
 export default function EditShopInfo({ initialValues, refetch, refetchStore }) {
   const [loading, setLoading] = useState(false);
@@ -45,6 +47,33 @@ export default function EditShopInfo({ initialValues, refetch, refetchStore }) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Card className="space-y-5">
+        <div className="flex w-full flex-col gap-4 md:flex-row">
+          <div className="w-full space-y-2 md:w-1/2">
+            <p className="font-medium text-primary">Set New Drop Date</p>
+            <div>
+              <DatePicker
+                name="drop_date"
+                id="drop_date"
+                value={formik.values.drop_date}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+          </div>
+          <div className="w-full space-y-2 md:w-1/2">
+            <p className="font-medium text-primary">Set New Drop Time</p>
+            <div>
+              <TimePicker
+                name="drop_time"
+                id="drop_time"
+                value={formik.values.drop_time}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="space-y-2 w-full">
           <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
             Animate Alert Bar Texts
