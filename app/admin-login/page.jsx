@@ -29,6 +29,10 @@ const initialValues = {
   phone: "+12403607127",
   password: "admin",
 };
+// const initialValues = {
+//   phone: "",
+//   password: "",
+// };
 
 export default function LoginPage() {
   const router = useRouter();
@@ -44,7 +48,7 @@ export default function LoginPage() {
 
   const formik = useFormik({
     initialValues,
-    // validationSchema,
+    validationSchema,
     onSubmit: (values) => {
       setLoading(true);
       const payload = {
