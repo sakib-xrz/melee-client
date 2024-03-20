@@ -20,9 +20,7 @@ import { AUTH_TOKEN_KEY } from "@/common/KeyChain";
 
 const validationSchema = Yup.object({
   phone: Yup.string().required("Phone is required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const initialValues = {
@@ -124,7 +122,7 @@ export default function LoginPage() {
               <Password
                 id="password"
                 name="password"
-                placeholder="min 6 characters"
+                placeholder="Enter your password"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
