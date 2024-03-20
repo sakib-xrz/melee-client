@@ -23,8 +23,8 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  phone: "+8801409029742",
-  password: "123456",
+  phone: "",
+  password: "",
 };
 
 export default function Login({ setAuthModalOpen, checkoutUrl }) {
@@ -34,7 +34,7 @@ export default function Login({ setAuthModalOpen, checkoutUrl }) {
 
   const formik = useFormik({
     initialValues,
-    // validationSchema,
+    validationSchema,
     onSubmit: (values) => {
       setLoading(true);
       const payload = {
@@ -75,7 +75,7 @@ export default function Login({ setAuthModalOpen, checkoutUrl }) {
       <div>
         <Label htmlFor="phone">Phone</Label>
         <PhoneInput
-          country={"bd"}
+          country={"us"}
           id="phone"
           name="phone"
           placeholder="xxx-xxx-xxxx"

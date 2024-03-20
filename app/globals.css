@@ -158,3 +158,8 @@
   :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   color: #fff !important;
 }
+
+.prose {
+  max-width: 100% !important;
+  text-align: justify !important;
+}
