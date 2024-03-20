@@ -1,10 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import * as Yup from "yup";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useFormik } from "formik";
+import { Form, useFormik } from "formik";
 
 import Link from "next/link";
 import TextEditorFields from "./components/TextEditorFields";
@@ -14,6 +15,16 @@ import APIKit from "@/common/APIkit";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import FormikErrorBox from "@/components/form/FormikErrorBox";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  primary_image: Yup.string().required("Primary image is required"),
+  secondary_image: Yup.string().required("Secondary image is required"),
+  unit_price: Yup.number()
+    .required("Unit price is required")
+    .positive("Unit price must be positive"),
+});
 
 export default function AdminAddProductPage() {
   const router = useRouter();
@@ -39,6 +50,7 @@ export default function AdminAddProductPage() {
       care: "",
       delivery_and_returns: "",
     },
+    validationSchema,
     onSubmit: (values) => {
       setLoading(true);
 
@@ -121,6 +133,7 @@ export default function AdminAddProductPage() {
                   onBlur={formik.handleBlur}
                   value={formik.values.name}
                 />
+                <FormikErrorBox formik={formik} field="name" />
               </div>
             </div>
 
@@ -141,6 +154,7 @@ export default function AdminAddProductPage() {
                   onBlur={formik.handleBlur}
                   value={formik.values.unit_price}
                 />
+                <FormikErrorBox formik={formik} field="unit_price" />
               </div>
             </div>
 

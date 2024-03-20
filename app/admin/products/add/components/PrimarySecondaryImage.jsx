@@ -1,4 +1,5 @@
 import APIKit from "@/common/APIkit";
+import FormikErrorBox from "@/components/form/FormikErrorBox";
 import ImageUploader from "@/components/form/ImageUploader";
 import { X } from "lucide-react";
 import Image from "next/image";
@@ -42,11 +43,14 @@ export default function PrimarySecondaryImage({ formik, data }) {
               </div>
             </div>
           ) : (
-            <ImageUploader
-              formik={formik}
-              id={"primary_image"}
-              name={"primary_image"}
-            />
+            <div className="w-full">
+              <ImageUploader
+                formik={formik}
+                id={"primary_image"}
+                name={"primary_image"}
+              />
+              <FormikErrorBox formik={formik} field="primary_image" />
+            </div>
           )}
         </div>
       </div>
@@ -86,11 +90,14 @@ export default function PrimarySecondaryImage({ formik, data }) {
               </div>
             </div>
           ) : (
-            <ImageUploader
-              formik={formik}
-              id={"secondary_image"}
-              name={"secondary_image"}
-            />
+            <div className="w-full">
+              <ImageUploader
+                formik={formik}
+                id={"secondary_image"}
+                name={"secondary_image"}
+              />
+              <FormikErrorBox formik={formik} field="secondary_image" />
+            </div>
           )}
         </div>
       </div>

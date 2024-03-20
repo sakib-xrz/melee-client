@@ -25,7 +25,7 @@ export default function AdminProductPage() {
       title: <p>Product</p>,
       dataField: "primary_image_view",
       renderer: (row) => (
-        <div className="flex gap-2">
+        <div className="flex items-start gap-2">
           {row.primary_image_view ? (
             <div className="w-12 h-12">
               <Image
@@ -39,9 +39,7 @@ export default function AdminProductPage() {
           ) : (
             <p className="text-center">No Image</p>
           )}
-          <p className="text-left max-w-52 whitespace-break-spaces">
-            {row.name || "N/A"}
-          </p>
+          <p className="text-left ">{row.name || "N/A"}</p>
         </div>
       ),
     },
