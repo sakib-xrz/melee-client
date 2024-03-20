@@ -22,7 +22,7 @@ export default function EditProduct({ params: { uid } }) {
     primary_image:
       (data.images.length &&
         data.images.find((image) => image.type === "PRIMARY_PRODUCT_IMAGE")
-          .image) ||
+          ?.image) ||
       "",
     secondary_image:
       (data.images.length &&

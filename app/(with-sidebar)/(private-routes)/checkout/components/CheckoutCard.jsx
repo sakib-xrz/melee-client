@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import placeholderImage from "public/images/placeholder.png";
 
 const CheckoutCard = ({ product }) => {
   const { name, selected_stock, unit_price, size } = product;
@@ -8,8 +9,8 @@ const CheckoutCard = ({ product }) => {
     <div className="border rounded-md w-full mb-4 p-3 space-y-4 bg-background">
       <div className="flex gap-3">
         <Image
-          className="w-16 h-16 object-cover rounded-md border border-border aspect-square"
-          src={product.primary_image || "/images/placeholder-image.png"}
+          className="w-16 h-16 object-cover rounded-md border border-border aspect-square p-1"
+          src={product.primary_image || placeholderImage}
           alt="cart image"
           width={100}
           height={100}

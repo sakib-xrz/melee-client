@@ -11,6 +11,7 @@ import { Check, Eye, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
+import placeholderImage from "public/images/placeholder.png";
 
 export default function AdminProductPage() {
   const { data, isLoading, refetch } = useQuery({
@@ -37,7 +38,13 @@ export default function AdminProductPage() {
               />
             </div>
           ) : (
-            <p className="text-center">No Image</p>
+            <Image
+              src={placeholderImage}
+              alt={row.name}
+              width={40}
+              height={40}
+              className="w-12 h-12 object-cover rounded-md border p-1"
+            />
           )}
           <p className="text-left ">{row.name || "N/A"}</p>
         </div>

@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { useStore } from "@/context/StoreProvider";
 import { toast } from "sonner";
+import placeholderImage from "public/images/placeholder.png";
 
 export default function CartItem({ cart, refetch }) {
   const { cartLoading } = useStore();
@@ -76,8 +77,8 @@ export default function CartItem({ cart, refetch }) {
         </div>
 
         <Image
-          className="w-16 object-cover rounded-md border border-border aspect-square"
-          src={cart.primary_image || "/images/placeholder-image.png"}
+          className="w-16 object-cover rounded-md border border-border aspect-square p-1"
+          src={cart.primary_image || placeholderImage}
           width={100}
           height={100}
           alt={cart.name}
