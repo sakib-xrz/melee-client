@@ -32,11 +32,11 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  first_name: "Sakibul",
-  last_name: "Islam",
-  phone: "+8801409029742",
-  password: "123456",
-  confirm_password: "123456",
+  first_name: "",
+  last_name: "",
+  phone: "",
+  password: "",
+  confirm_password: "",
 };
 
 export default function RegisterPage() {
@@ -57,7 +57,7 @@ export default function RegisterPage() {
       const payload = {
         first_name: values.first_name,
         last_name: values.last_name,
-        phone: values.phone,
+        phone: `+${values.phone}`,
         password: values.password,
       };
 
@@ -138,7 +138,7 @@ export default function RegisterPage() {
               <div>
                 <Label htmlFor="phone">Phone</Label>
                 <PhoneInput
-                  country={"bd"}
+                  country={"us"}
                   id="phone"
                   name="phone"
                   placeholder="xxx-xxx-xxxx"
