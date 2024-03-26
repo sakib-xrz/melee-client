@@ -1,26 +1,41 @@
 "use client";
 
+import APIKit from "@/common/APIkit";
 import Container from "@/components/shared/Container";
 import CountdownTimer from "@/components/shared/CountdownTimer";
+import Loading from "@/components/shared/Loading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "public/images/melee-white-transparent.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-const targetDate = new Date("2024-03-30T00:00:00");
-
 export default function NewDropPage() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["store", "password"],
+    queryFn: () => APIKit.shop.public.getShop().then(({ data }) => data),
+  });
+
+  if (isLoading) return <Loading />;
+
+  const dropDate = data.drop_date_value || "";
+  const dropTime = data.drop_time_value || "";
+
+  const targetDate = new Date(`${dropDate}T${dropTime}`);
+
   return (
     <>
       <title>New Drops | MELEE</title>
       <Container>
-        <div>
-          <CountdownTimer targetDate={targetDate} />
-        </div>
+        {dropDate && dropTime && (
+          <div>
+            <CountdownTimer targetDate={targetDate} />
+          </div>
+        )}
         <div>
           <Link href={"/products"}>
             <Image

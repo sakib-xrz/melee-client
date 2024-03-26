@@ -18,8 +18,9 @@ export default function ShopManagement() {
     contact_website: shop?.contact_website || "",
     other_website: shop?.other_website || "",
     shipping_charges: shop?.shipping_charges || 0,
-    drop_date: shop?.drop_date || "",
-    drop_time: shop?.drop_time || "",
+    drop_date: shop?.drop_date_value || null,
+    drop_time: shop?.drop_time_value || null,
+    is_drop_stop: shop?.is_drop_stop_value || false,
   };
 
   return (

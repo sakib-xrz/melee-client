@@ -185,3 +185,26 @@ export function formatAddress(addressString) {
 
   return formattedString;
 }
+
+export function getDesiredDateFormat(dropDateValue, dropTimeValue) {
+  // Create Date objects directly (no validation)
+  const dropDate = new Date(dropDateValue);
+  const dropTime = new Date(dropTimeValue);
+
+  // Create a new Date object for the desired date (2022-12-31)
+  const desiredDate = new Date(2022, 11, 31); // Year, month (0-indexed), day
+
+  // Set the desired time (23:59:59) using hours, minutes, seconds, and milliseconds
+  desiredDate.setHours(23, 59, 59, 0); // Hours, minutes, seconds, milliseconds
+
+  // Format the desired date in ISO 8601 format
+  return desiredDate.toISOString();
+}
+
+// Example usage
+try {
+  const desiredDateFormat = getDesiredDateFormat("2024-03-30", "22:00:00"); // Using your original values
+  console.log(desiredDateFormat); // Output: "2022-12-31T23:59:59.000Z"
+} catch (error) {
+  console.error(error.message); // Handle other potential errors
+}

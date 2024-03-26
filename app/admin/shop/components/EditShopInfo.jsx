@@ -13,6 +13,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 import DatePicker from "@/components/form/DatePicker";
 import TimePicker from "@/components/form/TimePicker";
+import { Switch } from "@/components/ui/switch";
+import { useRouter } from "next/navigation";
 
 export default function EditShopInfo({ initialValues, refetch, refetchStore }) {
   const [loading, setLoading] = useState(false);
@@ -47,27 +49,66 @@ export default function EditShopInfo({ initialValues, refetch, refetchStore }) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Card className="space-y-5">
+        {initialValues.is_drop_stop === false && (
+          <div className="space-y-2 w-full">
+            <p className="font-medium text-xs sm:text-sm lg:text-base text-primary">
+              Stop Drop
+            </p>
+            <Switch
+              checked={initialValues.is_drop_stop === true}
+              value={initialValues.is_drop_stop}
+              onCheckedChange={() => {
+                const promise = APIKit.shop
+                  .updateShop(initialValues.uid, {
+                    drop_date: null,
+                    drop_time: null,
+                    is_drop_stop: true,
+                  })
+                  .then(() => {
+                    refetch();
+                    refetchStore();
+                    window.location.reload();
+                  });
+
+                toast.promise(promise, {
+                  loading: "Updating product status...",
+                  success: "Updated product status",
+                  error: "Failed to update product status",
+                });
+              }}
+            />
+          </div>
+        )}
+
         <div className="flex w-full flex-col gap-4 md:flex-row">
           <div className="w-full space-y-2 md:w-1/2">
-            <p className="font-medium text-primary">Set New Drop Date</p>
+            <p className="font-medium text-primary">New Drop Date</p>
             <div>
               <DatePicker
+                disabled={!initialValues.is_drop_stop}
                 name="drop_date"
                 id="drop_date"
                 value={formik.values.drop_date}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.setFieldValue("drop_date", e.target.value);
+                  formik.setFieldValue("is_drop_stop", false);
+                }}
                 onBlur={formik.handleBlur}
               />
             </div>
           </div>
           <div className="w-full space-y-2 md:w-1/2">
-            <p className="font-medium text-primary">Set New Drop Time</p>
+            <p className="font-medium text-primary">New Drop Time</p>
             <div>
               <TimePicker
+                disabled={!initialValues.is_drop_stop}
                 name="drop_time"
                 id="drop_time"
                 value={formik.values.drop_time}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.setFieldValue("drop_time", e.target.value);
+                  formik.setFieldValue("is_drop_stop", false);
+                }}
                 onBlur={formik.handleBlur}
               />
             </div>
