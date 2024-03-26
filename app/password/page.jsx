@@ -8,16 +8,44 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useQuery } from "@tanstack/react-query";
+import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "public/images/melee-white-transparent.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
 
 export default function NewDropPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["store", "password"],
     queryFn: () => APIKit.shop.public.getShop().then(({ data }) => data),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      drop_phone: "",
+    },
+    onSubmit: (values) => {
+      const payload = {
+        drop_phone: `+${values.drop_phone}`,
+      };
+
+      const promise = APIKit.drop
+        .onboarding(payload)
+        .then(() => {
+          formik.resetForm();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      toast.promise(promise, {
+        loading: "Subscribing...",
+        success: "Subscribed!",
+        error: "Failed to subscribe. Please try again.",
+      });
+    },
   });
 
   if (isLoading) return <Loading />;
@@ -72,29 +100,33 @@ export default function NewDropPage() {
               <h1 className="text-3xl text-center mb-2 font-semibold">
                 ACCESS TO DROP
               </h1>
-              <div>
+              <form onSubmit={formik.handleSubmit}>
                 <h1 className="text-lg font-medium text-center mb-2">
                   Sign up to get access to our next drop
                 </h1>
                 <div className="w-10/12 sm:w-7/12 md:w-6/12 lg:w-4/12 mx-auto">
                   <PhoneInput
                     country={"us"}
-                    id="phone"
-                    name="phone"
+                    id="drop_phone"
+                    name="drop_phone"
                     placeholder="xxx-xxx-xxxx"
-                    // onChange={(formattedValue) => {
-                    //   formik.setFieldValue("phone", formattedValue);
-                    // }}
-                    // onBlur={formik.handleBlur}
-                    // value={formik.values.phone}
+                    onChange={(formattedValue) => {
+                      formik.setFieldValue("drop_phone", formattedValue);
+                    }}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.drop_phone}
                   />
                 </div>
                 <div className="flex justify-center mt-4">
-                  <Button className="px-10 rounded-2xl" variant="outline">
+                  <Button
+                    type="submit"
+                    className="px-10 rounded-2xl"
+                    variant="outline"
+                  >
                     SUBSCRIBE
                   </Button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
           <div className="sm:w-8/12 lg:w-6/12 mx-auto mt-5">

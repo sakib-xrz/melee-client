@@ -122,6 +122,13 @@ const APIKit = {
       return client.get(url);
     },
   },
+
+  drop: {
+    onboarding: (payload) => {
+      const url = "/drops/onboarding";
+      return client.post(url, payload);
+    },
+  },
 };
 
 export default APIKit;
