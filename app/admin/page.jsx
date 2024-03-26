@@ -147,7 +147,10 @@ export default function AdminDashboardPage() {
             <div className="py-4 px-6 bg-background border border-border rounded-md">
               <p className="text-base xs:text-lg font-medium">Total Payments</p>
               <p className="text-2xl sm:text-4xl font-medium pt-2">
-                ${parseFloat(data?.total_payment).toFixed(2) || 0}
+                $
+                {data?.total_payment
+                  ? parseFloat(data?.total_payment).toFixed(2)
+                  : 0}
               </p>
             </div>
           </div>

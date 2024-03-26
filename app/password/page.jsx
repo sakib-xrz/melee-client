@@ -11,7 +11,7 @@ import Logo from "public/images/melee-white-transparent.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-const targetDate = new Date("2024-03-22T00:00:00");
+const targetDate = new Date("2024-03-30T00:00:00");
 
 export default function NewDropPage() {
   return (
