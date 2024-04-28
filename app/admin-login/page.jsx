@@ -105,7 +105,7 @@ export default function LoginPage() {
             <div>
               <Label htmlFor="phone">Phone</Label>
               <PhoneInput
-                country={"bd"}
+                country={"us"}
                 id="phone"
                 name="phone"
                 placeholder="xxx-xxx-xxxx"
