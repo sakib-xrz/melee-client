@@ -23,14 +23,14 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Password is required"),
 });
 
-const initialValues = {
-  phone: "+12403607127",
-  password: "admin",
-};
 // const initialValues = {
-//   phone: "",
-//   password: "",
+//   phone: "+12403607127",
+//   password: "admin",
 // };
+const initialValues = {
+  phone: "",
+  password: "",
+};
 
 export default function LoginPage() {
   const router = useRouter();
