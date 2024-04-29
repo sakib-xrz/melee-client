@@ -114,7 +114,7 @@ export default function RegisterPage() {
                     type="text"
                     id="first_name"
                     name="first_name"
-                    placeholder="e.g. Jhon"
+                    placeholder="e.g. John"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.first_name}
