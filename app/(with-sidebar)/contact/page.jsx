@@ -26,20 +26,24 @@ export default function ContactPage() {
                 information below:`}
               </p>
 
-              <Link
-                href={`mailto:${store?.contact_email}`}
-                className="flex items-center mb-4 gap-2"
-              >
-                <Mails className="w-5 h-5" />
-                <p>Email: {store?.contact_email}</p>
-              </Link>
-              <Link
-                href={`tel:+${store?.contact_number}`}
-                className="flex items-center gap-2"
-              >
-                <Phone className="w-5 h-5" />
-                <p>Phone: {store?.contact_number}</p>
-              </Link>
+              {store?.contact_email && (
+                <Link
+                  href={`mailto:${store?.contact_email}`}
+                  className="flex items-center mb-4 gap-2"
+                >
+                  <Mails className="w-5 h-5" />
+                  <p>Email: {store?.contact_email}</p>
+                </Link>
+              )}
+              {store?.contact_number && (
+                <Link
+                  href={`tel:+${store?.contact_number}`}
+                  className="flex items-center gap-2"
+                >
+                  <Phone className="w-5 h-5" />
+                  <p>Phone: {store?.contact_number}</p>
+                </Link>
+              )}
             </div>
             {/* Contact Form */}
             <div>
